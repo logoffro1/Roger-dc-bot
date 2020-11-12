@@ -55,16 +55,21 @@ public class RussianRoulette
                         if (players.size() == 1)
                             gameOver();
                         else
-                            channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
+                        {
+                             channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
+                        }
+
                     } else
                     {
                         currentTurn.addSurvivedShot();
                         channel.sendMessage(String.format("%s gets to fight another day!", currentTurn.getName())).queue();
+
                         changeCurrentPlayer();
                     }
                 } else
                     randomEvent();
             }
+
         }
     }
 
@@ -116,7 +121,9 @@ public class RussianRoulette
             channel.sendMessage(String.format("%s stroke of LUCK!:partying_face: The weapon malfunctioned on the last chamber!\n%s Gets a bonus of $%d from the impressed host :moneybag:", currentTurn.getName(), currentTurn.getName(), amount)).queue();
             currentTurn.setMoney(currentTurn.getMoney() + amount);
         } else
-            channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
+        {
+                channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
+        }
 
 
         changeCurrentPlayer();
@@ -160,7 +167,6 @@ public class RussianRoulette
         currentTurn.setTotalMoneyLost(entryFee);
         currentTurn.setPlayerRank();
         channel.sendMessage(String.format("%s %s", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)])).queue();
-
         players.remove(currentTurn);
 
         currentPlayerIndex++;
