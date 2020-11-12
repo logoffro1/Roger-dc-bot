@@ -41,7 +41,7 @@ public class HighLow
         channel.sendMessage(String.format("%s you decided to leave the game.\nYou leave with $%d", player.getName(), moneyPot)).queue();
         player.setMoney(player.getMoney() + moneyPot);
         Database.savePlayersToFile();
-        player = null;
+        HighLowEvents.removeGame(this);
     }
 
     public void chooseHigh()
@@ -70,7 +70,7 @@ public class HighLow
         channel.sendMessage(String.format("%s you leave with nothing.", player.getName())).queue();
         channel.sendMessage("The game has ended.").queue();
         Database.savePlayersToFile();
-        player = null;
+        HighLowEvents.removeGame(this);
     }
 
     private void goodGuess(int nextNumber)

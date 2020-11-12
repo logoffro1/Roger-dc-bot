@@ -98,4 +98,9 @@ public class HighLowEvents extends ListenerAdapter
         }
         return null;
     }
+
+    public static void removeGame(HighLow highLow)
+    {
+        highLowGames.remove(highLow);
+    }
 }

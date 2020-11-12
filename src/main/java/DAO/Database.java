@@ -25,10 +25,10 @@ add achievements
 maybe add the ability to have extra shots
 make the game more responsive
 
-add highlow game
 add slots game
 gift money to everyone at a specific time/day
 make a !profile command where you can see the profile for all the games at once
+add quizzes to earn money (maybe about programming)
  */
 /*
 Change log:
