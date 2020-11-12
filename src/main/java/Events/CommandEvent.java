@@ -5,7 +5,7 @@ import Games.HighLow.HighLow;
 import Games.HighLow.HighLowEvents;
 import Games.RussianRoulette.RussianRoulette;
 import Games.RussianRoulette.RussianRouletteEvents;
-import Model.Player.Player;
+import Model.Player;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

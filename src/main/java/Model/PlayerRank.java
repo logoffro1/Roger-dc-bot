@@ -1,4 +1,4 @@
-package Model.Player;
+package Model;
 
 public enum PlayerRank
 {

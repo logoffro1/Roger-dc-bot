@@ -1,7 +1,7 @@
 package Games.RussianRoulette;
 
 import DAO.Database;
-import Model.Player.Player;
+import Model.Player;
 import Model.Revolver;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;

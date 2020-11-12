@@ -1,4 +1,4 @@
-package Model.Player;
+package Model;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 package Games.HighLow;
 
 import DAO.Database;
-import Model.Player.Player;
+import Model.Player;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.Random;

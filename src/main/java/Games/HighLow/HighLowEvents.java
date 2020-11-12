@@ -1,8 +1,7 @@
 package Games.HighLow;
 
 import DAO.Database;
-import Games.HighLow.HighLow;
-import Model.Player.Player;
+import Model.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
