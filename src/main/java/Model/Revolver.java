@@ -40,7 +40,7 @@ public class Revolver
             if (i == currentChamber)
                 chambers += String.format(":red_circle: ", i + 1);
             else
-                chambers += ":green_circle: ";
+                chambers += ":white_circle: ";
         }
         return chambers;
     }
