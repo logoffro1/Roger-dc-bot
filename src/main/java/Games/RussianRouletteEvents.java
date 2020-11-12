@@ -27,20 +27,20 @@ public class RussianRouletteEvents extends ListenerAdapter
                     if (this.e.getChannel().getName().equalsIgnoreCase("bottest"))
                     {
 
-                            if (message.length > 1)
-                            {
-                                message[1] = message[1].replace("!", "");
-                                message[1] = message[1].replace("&", "");
-                            }
-                            switch (message[0].toLowerCase())
-                            {
-                                case "!me" -> registerPlayer();
-                                case "!stop" -> stopGame();
-                                case "!start" -> startGame();
-                                case "!shoot" -> russianRoulette.shoot(e.getAuthor().getAsMention());
-                                case "!mix" -> russianRoulette.mix(e);
-                                case "!give" -> giveMoney(message);
-                            }
+                        if (message.length > 1)
+                        {
+                            message[1] = message[1].replace("!", "");
+                            message[1] = message[1].replace("&", "");
+                        }
+                        switch (message[0].toLowerCase())
+                        {
+                            case "!me" -> registerPlayer();
+                            case "!stop" -> stopGame();
+                            case "!start" -> startGame();
+                            case "!shoot" -> russianRoulette.shoot(e.getAuthor().getAsMention());
+                            case "!mix" -> russianRoulette.mix(e);
+                            case "!give" -> giveMoney(message);
+                        }
 
                     } else
                         e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -98,6 +98,7 @@ public class RussianRouletteEvents extends ListenerAdapter
                     {
                         moneyGiver.setMoney(moneyGiver.getMoney() - amount);
                         moneyTaker.setMoney(moneyTaker.getMoney() + amount);
+                        Database.savePlayersToFile();
                         e.getChannel().sendMessage(String.format("%s just transferred $%d to %s", moneyGiver.getName(), amount, moneyTaker.getName())).queue();
                     }
                 }
