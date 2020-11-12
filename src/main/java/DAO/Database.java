@@ -18,8 +18,8 @@ LOTTO every sunday
 Notification when you rank up
 Leaderboard
 Maybe add MMR system
-Make the chambers colored red and white
-tesst
+X - Make the chambers colored red and white
+
  */
 public class Database
 {
