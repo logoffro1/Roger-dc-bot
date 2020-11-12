@@ -70,6 +70,9 @@ public class TalkEvent extends ListenerAdapter
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
 
+       //// Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+      /// p.setMoney(30);
+       // Database.savePlayersToFile();
        /*
        List<Player> players = Database.getAllPlayers();
         for (Player p : players)

@@ -1,12 +1,10 @@
 package DAO;
-
 import Model.Player;
 import Model.Reminder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.*;
 import java.util.*;
 
@@ -20,13 +18,22 @@ Leaderboard
 Maybe add MMR system
 Maybe add a job system
 add more ways to make money
+add achievements
+maybe add the ability to have extra shots
+make the game more responsive
 
+add highlow game
+add slots game
+gift items to everyone at a specific time/day
+make a !profile command where you can see the profile for all the games at once
  */
 /*
 Change log:
 Added !roger (help) command
 Changed the chamber colours from red-green to red-white
 Added a phasmophobia randomizer (with !rnd map and !rnd item)
+Added the !highlow game
+
 
  */
 public class Database

@@ -1,8 +1,10 @@
 package Events;
 
 import DAO.Database;
-import Games.RussianRoulette;
-import Games.RussianRouletteEvents;
+import Games.HighLow.HighLow;
+import Games.HighLow.HighlowEvents;
+import Games.RussianRoulette.RussianRoulette;
+import Games.RussianRoulette.RussianRouletteEvents;
 import Model.Player;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -76,6 +78,8 @@ public class CommandEvent extends ListenerAdapter
                         case "!joke" -> jokeCommand();
                         case "!corona" -> coronaCommand(message);
                         case "!roulette" -> russianRouletteCommand(message);
+                        case "!slots" -> slotsCommand(message);
+                        case "!highlow" -> highLowCommand(message);
                         case "!roger" -> showHelpPanel();
                     }
                 } else
@@ -87,30 +91,55 @@ public class CommandEvent extends ListenerAdapter
 
     }
 
-    private void showHelpPanel()
+    private void highLowCommand(String[] message)
     {
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Roger commands");
-        eb.setColor(Color.CYAN);
-        eb.setThumbnail("https://lh3.googleusercontent.com/proxy/qaQrJQ_rdRTVAIJEIFPJVGOf-QgXokyq15KvkW6-nhkN2F3cjSyXZFAS5-O3elfPU6zgo855-rnmMXvZtua5Eohnx4xB0tJSWCTd1HbFw3dt7lBTVDx2kMiqytTh");
-        eb.addField("Help", "----------" +
-                "\n**!rnd** [min] [max] - get a random number between min and max" +
-                "\n**!rnd** map - gives you a random map from Phasmophobia" +
-                "\n**!rnd** item - gives you a random item from Phasmophobia" +
-                "\n----------" +
-                "\n**!roll** - roll the dice" +
-                "\n----------" +
-                "\n**!remind** [time] [message] - get a reminder in the specified time" +
-                "\n----------" +
-                "\n**!joke** - Roger will tell you a joke" +
-                "\n----------" +
-                "\n**!corona** [country] - get the corona cases for the specified country" +
-                "\n----------" +
-                "\n**!roulette** [entryFee] - start a game of russian roulette" +
-                "\n**!roulette** [player] - check the user's russian roulette profile" +
-                "\n----------", true);
-        eb.setFooter("Made by Cosmin Ilie");
-        e.getChannel().sendMessage(eb.build()).queue();
+        if (message.length == 2)
+        {
+            if (isNumber(message[1]))
+            {
+
+                int entryFee = Integer.parseInt(message[1]);
+                Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+                HighLow highLow;
+                if (player == null)
+                {
+                    player = new Player(e.getAuthor().getAsMention(), e.getAuthor().getAvatarUrl());
+                    Database.addPlayer(player);
+                }
+                if (!HighlowEvents.playerAlreadyPlaying(player))
+                {
+                    if (entryFee <= player.getMoney())
+                    {
+                        if (entryFee >= 5)
+                        {
+                            EmbedBuilder eb = new EmbedBuilder();
+                            eb.setThumbnail("https://www.pinclipart.com/picdir/big/194-1949141_arrow-arrows-direction-down-download-guidance-up-down.png");
+                            eb.setTitle("High-Low");
+                            eb.setDescription("The aim of High-Low is to guess whether the next number is higher or lower than the current card." +
+                                    " Every time you guess correctly, the pot is multiplied by 20% of your entry fee.\nThe numbers are from 1 to 1000\nIf you guess incorrectly, you leave with nothing\n```Entry fee: $" + entryFee + "```");
+                            eb.addField("Commands", "!high - the next number is higher than the current one" +
+                                    "\n!low - the next number is higher than the current one" +
+                                    "\n!out - cash out with the current earned amount", true);
+                            eb.setFooter("Made by Cosmin Ilie");
+                            e.getChannel().sendMessage(eb.build()).queue();
+                            highLow = new HighLow(player, entryFee, e.getChannel());
+                            HighlowEvents.addHighLowGame(highLow);
+                        } else
+                            e.getChannel().sendMessage(String.format("%s minimum entry fee is $5", player.getName())).queue();
+
+                    } else
+                        e.getChannel().sendMessage(String.format("%s you don't have enough money for this.", player.getName())).queue();
+
+                } else
+                    e.getChannel().sendMessage(String.format("%s you are already playing High-Low", player.getName())).queue();
+            }
+        }
+
+    }
+
+    private void slotsCommand(String[] message)
+    {
+
     }
 
     private void russianRouletteCommand(String[] message)
@@ -138,10 +167,7 @@ public class CommandEvent extends ListenerAdapter
                         showLeaderboards();
                         return;
                     }
-
-
                 }
-
             }
             RussianRoulette russianRoulette = new RussianRoulette(entryFee);
             RussianRouletteEvents.setRussianRoulette(russianRoulette);
@@ -159,6 +185,32 @@ public class CommandEvent extends ListenerAdapter
             e.getChannel().sendMessage(String.format("%s a russian roulette game is already in progress.\nType !stop to stop the current game", e.getAuthor().getAsMention())).queue();
         }
 
+    }
+
+    private void showHelpPanel()
+    {
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Roger commands");
+        eb.setColor(Color.CYAN);
+        eb.setThumbnail("https://lh3.googleusercontent.com/proxy/qaQrJQ_rdRTVAIJEIFPJVGOf-QgXokyq15KvkW6-nhkN2F3cjSyXZFAS5-O3elfPU6zgo855-rnmMXvZtua5Eohnx4xB0tJSWCTd1HbFw3dt7lBTVDx2kMiqytTh");
+        eb.addField("Help", "----------" +
+                "\n**!rnd** [min] [max] - get a random number between min and max" +
+                "\n**!rnd** map - gives you a random map from Phasmophobia" +
+                "\n**!rnd** item - gives you a random item from Phasmophobia" +
+                "\n----------" +
+                "\n**!roll** - roll the dice" +
+                "\n----------" +
+                "\n**!remind** [time] [message] - get a reminder in the specified time" +
+                "\n----------" +
+                "\n**!joke** - Roger will tell you a joke" +
+                "\n----------" +
+                "\n**!corona** [country] - get the corona cases for the specified country" +
+                "\n----------" +
+                "\n**!roulette** [entryFee] - start a game of russian roulette" +
+                "\n**!roulette** [player] - check the user's russian roulette profile" +
+                "\n----------", true);
+        eb.setFooter("Made by Cosmin Ilie");
+        e.getChannel().sendMessage(eb.build()).queue();
     }
 
     private void showLeaderboards()
