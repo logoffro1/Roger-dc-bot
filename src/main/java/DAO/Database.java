@@ -18,7 +18,15 @@ LOTTO every sunday
 Notification when you rank up
 Leaderboard
 Maybe add MMR system
-X - Make the chambers colored red and white
+Maybe add a job system
+add more ways to make money
+
+ */
+/*
+Change log:
+Added !roger (help) command
+Changed the chamber colours from red-green to red-white
+Added a phasmophobia randomizer (with !rnd map and !rnd item)
 
  */
 public class Database

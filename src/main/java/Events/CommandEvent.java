@@ -16,6 +16,41 @@ import java.util.List;
 public class CommandEvent extends ListenerAdapter
 {
     GuildMessageReceivedEvent e;
+    private String[] phasmoMaps =
+            {
+                    "Tanglewood Street House",
+                    "Edgefield Street House",
+                    "Ridgeview Street House",
+                    "Grafton Farmhouse",
+                    "Bleasdale Farmhouse",
+                    "Brownstone High school",
+                    "Asylum"
+            };
+    private String[] phasmoItems =
+            {
+                    "Spirit Box",
+                    "Ghost Writing Book",
+                    "Photo Camera",
+                    "EMF reader",
+                    "Video Camera",
+                    "UV Flashlight",
+                    "Basic Flashlight",
+                    "Candle",
+                    "Crucifix",
+                    "Glow Stick",
+                    "Head Mounted Camera",
+                    "Infrared Light Sensor",
+                    "Lighter",
+                    "Motion Sensor",
+                    "Parabolic Microphone",
+                    "Salt",
+                    "Sanity Pills",
+                    "Smudge Sticks",
+                    "Sound Sensor",
+                    "Strong Flashlight",
+                    "Thermometer",
+                    "Tripod"
+            };
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e)
     {
@@ -41,6 +76,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!joke" -> jokeCommand();
                         case "!corona" -> coronaCommand(message);
                         case "!roulette" -> russianRouletteCommand(message);
+                        case "!roger" -> showHelpPanel();
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -49,6 +85,32 @@ public class CommandEvent extends ListenerAdapter
         }
 
 
+    }
+
+    private void showHelpPanel()
+    {
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Roger commands");
+        eb.setColor(Color.CYAN);
+        eb.setThumbnail("https://lh3.googleusercontent.com/proxy/qaQrJQ_rdRTVAIJEIFPJVGOf-QgXokyq15KvkW6-nhkN2F3cjSyXZFAS5-O3elfPU6zgo855-rnmMXvZtua5Eohnx4xB0tJSWCTd1HbFw3dt7lBTVDx2kMiqytTh");
+        eb.addField("Help", "----------" +
+                "\n**!rnd** [min] [max] - get a random number between min and max" +
+                "\n**!rnd** map - gives you a random map from Phasmophobia" +
+                "\n**!rnd** item - gives you a random item from Phasmophobia" +
+                "\n----------" +
+                "\n**!roll** - roll the dice" +
+                "\n----------" +
+                "\n**!remind** [time] [message] - get a reminder in the specified time" +
+                "\n----------" +
+                "\n**!joke** - Roger will tell you a joke" +
+                "\n----------" +
+                "\n**!corona** [country] - get the corona cases for the specified country" +
+                "\n----------" +
+                "\n**!roulette** [entryFee] - start a game of russian roulette" +
+                "\n**!roulette** [player] - check the user's russian roulette profile" +
+                "\n----------", true);
+        eb.setFooter("Made by Cosmin Ilie");
+        e.getChannel().sendMessage(eb.build()).queue();
     }
 
     private void russianRouletteCommand(String[] message)
@@ -135,7 +197,7 @@ public class CommandEvent extends ListenerAdapter
         int count = 1;
         for (Player p : playersTemp)
         {
-            eb.addField(String.format("#%d ", count), String.format("%s - Games won: **%d**\nRank: **%s**\nMoney: **$%d**", p.getName(), p.getGamesWon(),p.getRank(),p.getMoney()), false);
+            eb.addField(String.format("#%d ", count), String.format("%s - Games won: **%d**\nRank: **%s**\nMoney: **$%d**", p.getName(), p.getGamesWon(), p.getRank(), p.getMoney()), false);
             count++;
         }
         eb.setFooter("Made by Cosmin Ilie");
@@ -263,6 +325,17 @@ public class CommandEvent extends ListenerAdapter
         } else if (message.length == 1)
         {
             this.e.getChannel().sendMessage(String.format("%d", getRandomNumber(0, 10000000))).queue();
+        } else if (message.length == 2)
+        {
+            if (message[1].equalsIgnoreCase("map"))
+            {
+                int rnd = getRandomNumber(0, phasmoMaps.length - 1);
+                e.getChannel().sendMessage(String.format("%s %s", e.getAuthor().getAsMention(), phasmoMaps[rnd])).queue();
+            } else if (message[1].equalsIgnoreCase("item"))
+            {
+                int rnd = getRandomNumber(0, phasmoItems.length - 1);
+                e.getChannel().sendMessage(String.format("%s %s", e.getAuthor().getAsMention(), phasmoItems[rnd])).queue();
+            }
         }
 
     }
