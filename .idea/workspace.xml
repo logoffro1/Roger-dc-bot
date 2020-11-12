@@ -25,11 +25,7 @@
     <list default="true" id="7ddb00a6-208b-4b14-9397-0d546bd5b387" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players.dat" beforeDir="false" afterPath="$PROJECT_DIR$/players.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Games/HighLow/HighLow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HighLow/HighLow.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +100,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -172,25 +179,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="154" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605162545193" />
-    <state width="1493" height="187" key="GridCell.Tab.0.bottom" timestamp="1605165801873">
+    <state width="1493" height="195" key="GridCell.Tab.0.bottom" timestamp="1605183448170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605165801873" />
+    <state width="1493" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605183448170" />
     <state width="1493" height="155" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605141828973" />
-    <state width="1493" height="187" key="GridCell.Tab.0.center" timestamp="1605165801873">
+    <state width="1493" height="195" key="GridCell.Tab.0.center" timestamp="1605183448170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605165801873" />
+    <state width="1493" height="195" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605183448170" />
     <state width="1493" height="155" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605141828973" />
-    <state width="1493" height="187" key="GridCell.Tab.0.left" timestamp="1605165801873">
+    <state width="1493" height="195" key="GridCell.Tab.0.left" timestamp="1605183448170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605165801873" />
+    <state width="1493" height="195" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605183448170" />
     <state width="1493" height="155" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605141828972" />
-    <state width="1493" height="187" key="GridCell.Tab.0.right" timestamp="1605165801873">
+    <state width="1493" height="195" key="GridCell.Tab.0.right" timestamp="1605183448170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="187" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605165801873" />
+    <state width="1493" height="195" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605183448170" />
     <state width="1493" height="155" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605141828973" />
     <state x="349" y="155" key="IDE.errors.dialog" timestamp="1605158259768">
       <screen x="0" y="0" width="1536" height="824" />
