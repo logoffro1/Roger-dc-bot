@@ -1,9 +1,7 @@
 package Games.HighLow;
 
 import DAO.Database;
-import Games.RussianRoulette.RussianRoulette;
-import Model.Player;
-import net.dv8tion.jda.api.EmbedBuilder;
+import Model.Player.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HighlowEvents extends ListenerAdapter
+public class HighLowEvents extends ListenerAdapter
 {
     private static List<HighLow> highLowGames = new ArrayList<>();
     private GuildMessageReceivedEvent e;

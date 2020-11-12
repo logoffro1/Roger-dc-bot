@@ -1,11 +1,9 @@
 package Games.HighLow;
 
 import DAO.Database;
-import Model.Player;
+import Model.Player.Player;
 import net.dv8tion.jda.api.entities.TextChannel;
-import org.w3c.dom.Text;
 
-import javax.xml.crypto.Data;
 import java.util.Random;
 
 public class HighLow
@@ -68,7 +66,7 @@ public class HighLow
 
     private void lose(int nextNumber)
     {
-        channel.sendMessage(String.format("%s you guessed wrong! The number was **%d**", player.getName(),nextNumber)).queue();
+        channel.sendMessage(String.format("%s you guessed wrong! The number was **%d**", player.getName(), nextNumber)).queue();
         channel.sendMessage(String.format("%s you leave with nothing.", player.getName())).queue();
         channel.sendMessage("The game has ended.").queue();
         Database.savePlayersToFile();
@@ -78,11 +76,11 @@ public class HighLow
     private void goodGuess(int nextNumber)
     {
         currentNumber = nextNumber;
-        moneyPot += 1;
+        moneyPot += ((Double.valueOf(multiplier) / 100.0) * Double.valueOf(entryFee));
         channel.sendMessage(String.format("%s you guessed right!", player.getName())).queue();
         channel.sendMessage(String.format("%s the current number is **%d**\nChoose !high or !low if you think the next number will be higher or lower" +
                 "\nChoose !out if you want to cash out now." +
-                "\nIf you cash out now, you get $%d", player.getName(), currentNumber,moneyPot)).queue();
+                "\nIf you cash out now, you get $%d", player.getName(), currentNumber, moneyPot)).queue();
 
     }
 

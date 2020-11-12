@@ -1,7 +1,7 @@
 import DAO.Database;
 import Events.CommandEvent;
 import Events.TalkEvent;
-import Games.HighLow.HighlowEvents;
+import Games.HighLow.HighLowEvents;
 import Games.RussianRoulette.RussianRouletteEvents;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -33,7 +33,7 @@ public class Bot
         jda.addEventListener(new TalkEvent());
         jda.addEventListener(new CommandEvent());
         jda.addEventListener(new RussianRouletteEvents());
-        jda.addEventListener(new HighlowEvents());
+        jda.addEventListener(new HighLowEvents());
 
         Thread reminders = new Thread(() ->
                 checkReminders());

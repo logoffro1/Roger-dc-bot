@@ -2,10 +2,10 @@ package Events;
 
 import DAO.Database;
 import Games.HighLow.HighLow;
-import Games.HighLow.HighlowEvents;
+import Games.HighLow.HighLowEvents;
 import Games.RussianRoulette.RussianRoulette;
 import Games.RussianRoulette.RussianRouletteEvents;
-import Model.Player;
+import Model.Player.Player;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -106,7 +106,7 @@ public class CommandEvent extends ListenerAdapter
                     player = new Player(e.getAuthor().getAsMention(), e.getAuthor().getAvatarUrl());
                     Database.addPlayer(player);
                 }
-                if (!HighlowEvents.playerAlreadyPlaying(player))
+                if (!HighLowEvents.playerAlreadyPlaying(player))
                 {
                     if (entryFee <= player.getMoney())
                     {
@@ -123,7 +123,7 @@ public class CommandEvent extends ListenerAdapter
                             eb.setFooter("Made by Cosmin Ilie");
                             e.getChannel().sendMessage(eb.build()).queue();
                             highLow = new HighLow(player, entryFee, e.getChannel());
-                            HighlowEvents.addHighLowGame(highLow);
+                            HighLowEvents.addHighLowGame(highLow);
                         } else
                             e.getChannel().sendMessage(String.format("%s minimum entry fee is $5", player.getName())).queue();
 

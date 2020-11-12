@@ -1,12 +1,8 @@
 package Events;
 
-import DAO.Database;
-import Model.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class TalkEvent extends ListenerAdapter

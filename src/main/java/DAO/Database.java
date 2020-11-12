@@ -1,5 +1,5 @@
 package DAO;
-import Model.Player;
+import Model.Player.Player;
 import Model.Reminder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,7 +24,7 @@ make the game more responsive
 
 add highlow game
 add slots game
-gift items to everyone at a specific time/day
+gift money to everyone at a specific time/day
 make a !profile command where you can see the profile for all the games at once
  */
 /*
