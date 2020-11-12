@@ -1,10 +1,13 @@
 package Games;
 
 import DAO.Database;
+import Model.ChatLog;
 import Model.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+
+import java.time.LocalTime;
 
 
 public class RussianRouletteEvents extends ListenerAdapter
@@ -37,7 +40,7 @@ public class RussianRouletteEvents extends ListenerAdapter
                             case "!me" -> registerPlayer();
                             case "!stop" -> stopGame();
                             case "!start" -> startGame();
-                            case "!shoot" -> russianRoulette.shoot(e.getAuthor().getAsMention());
+                            case "!shoot" -> shoot();
                             case "!mix" -> russianRoulette.mix(e);
                             case "!give" -> giveMoney(message);
                         }
@@ -51,8 +54,28 @@ public class RussianRouletteEvents extends ListenerAdapter
 
     }
 
+    private void shoot()
+    {
+        Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        Database.addLog(new ChatLog(p, e.getMessage().getContentRaw(), LocalTime.now()));
+        Player cheater = Database.getCheater();
+
+        if (cheater == null)
+        {
+            russianRoulette.shoot(e.getAuthor().getAsMention());
+        } else
+        {
+            russianRoulette = null;
+            System.out.println("Cheater found: " + e.getAuthor().getAsMention());
+            e.getChannel().sendMessage(String.format("%s get outta here, you filthy cheater!", e.getAuthor().getAsMention())).queue();
+            Database.getLogs().clear();
+        }
+    }
+
     private void registerPlayer()
     {
+        Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        Database.addLog(new ChatLog(p, e.getMessage().getContentRaw(), LocalTime.now()));
         if (russianRoulette.getCanRegister())
         {
             if (!russianRoulette.checkIfPlayerExists(e.getAuthor().getAsMention()))
@@ -127,6 +150,8 @@ public class RussianRouletteEvents extends ListenerAdapter
 
     private void startGame()
     {
+        Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        Database.addLog(new ChatLog(p, e.getMessage().getContentRaw(), LocalTime.now()));
         if (russianRoulette.getPlayers().size() > 0)
         {
 

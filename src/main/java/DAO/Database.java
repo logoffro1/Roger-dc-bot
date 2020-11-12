@@ -1,5 +1,6 @@
 package DAO;
 
+import Model.ChatLog;
 import Model.Player;
 import Model.Reminder;
 import org.jsoup.Jsoup;
@@ -8,6 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 /*
@@ -27,6 +30,69 @@ public class Database
     private static Map<String, String> jokes = new HashMap<>();
     private static File playersFile = new File("players.dat");
     private static List<Player> allPlayers = new ArrayList<>();
+    private static List<ChatLog> logs = new ArrayList<>();
+
+    public static void addLog(ChatLog log)
+    {
+        logs.add(log);
+    }
+
+    public static List<ChatLog> getLogs()
+    {
+        return logs;
+    }
+
+    public static Player getCheater()
+    {
+        for (int i = 0; i < logs.size(); i++)
+        {
+            Player p = logs.get(i).getPlayer();
+            List<LocalTime> times = new ArrayList<>();
+            for (ChatLog log : logs)
+            {
+                if (log.getPlayer() == p)
+                {
+                    times.add(log.getTme());
+                }
+            }
+            if (times.size() >= 5)
+            {
+                int seconds1 = times.get(0).getMinute() * 60 + times.get(0).getSecond();
+                int seconds2 = times.get(1).getMinute() * 60 + times.get(1).getSecond();
+                int seconds3 = times.get(2).getMinute() * 60 + times.get(2).getSecond();
+                System.out.println(seconds2-seconds1);
+                System.out.println(seconds3-seconds2);
+
+                if (seconds2 - seconds1 == seconds3 - seconds2)
+                {
+
+                    ///  int seconds = times.get(1).getSecond() - times.get(0).getSecond();
+                    ///  if (seconds == times.get(3).getSecond() - times.get(2).getSecond())
+                    return p;
+
+
+///48-45 = 51 - 48 (true)
+
+                    //  45  #1
+                    // 48 #2
+                    ///  51 #3
+                    //// 54 #4
+                    ////  2:57 #5
+                    ///  3:01 #6
+                    //  3:04 #7
+                }
+
+              /*  for (int j = 0; j < times.size(); j++)
+                {
+                    if (times.get(i + 1).getMinute() - times.get(i).getMinute() == times.get(i +))
+                }*/
+            }
+
+        }
+
+        return null;
+    }
+
     public static void initJokes()
     {
         String URL = "https://www.readersdigest.ca/culture/10-short-jokes-anyone-can-remember/";

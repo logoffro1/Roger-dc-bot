@@ -116,10 +116,12 @@ public class CommandEvent extends ListenerAdapter
         {
             if (p.getGamesWon() > nr1.getGamesWon())
                 nr1 = p;
-            else
+        }
+        for (Player p : players)
+        {
+            if (p.getGamesWon() < nr3.getGamesWon())
                 nr3 = p;
         }
-
         for (Player p : players)
         {
             if (p.getGamesWon() > nr2.getGamesWon())

@@ -5,6 +5,7 @@ import Model.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -70,6 +71,7 @@ public class TalkEvent extends ListenerAdapter
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
 
+      //  System.out.println(LocalTime.now());
        // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
           //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();
        /*
