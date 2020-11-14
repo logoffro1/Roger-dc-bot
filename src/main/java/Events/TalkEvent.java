@@ -1,7 +1,5 @@
 package Events;
 
-import DAO.Database;
-import Model.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -68,9 +66,9 @@ public class TalkEvent extends ListenerAdapter
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
 
-         Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
-          p.setMoney(30);
-          Database.savePlayersToFile();
+      ////   Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+         // p.setMoney(30);
+        ///  Database.savePlayersToFile();
 
           /*
        List<Player> players = Database.getAllPlayers();

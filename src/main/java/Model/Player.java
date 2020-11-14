@@ -7,17 +7,22 @@ public class Player implements Serializable
     private static final long serialVersionUID = 1L;
     private transient int survivedShots;
     private transient int timesMixed;
-    private final PlayerStats playerStats;
+    private String name;
+    private String avatarURL;
+    private int money;
+    private final RussianRouletteStats russianStats;
+    private final HighLowStats highLowStats;
 
 
     public Player(String name, String avatarURL)
     {
-        playerStats = new PlayerStats();
+        russianStats = new RussianRouletteStats();
+        highLowStats = new HighLowStats();
         initStats();
 
-        playerStats.setMoney(100);
-        playerStats.setName(name);
-        playerStats.setAvatarURL(avatarURL);
+        money = 100;
+        this.name = name;
+        this.avatarURL = avatarURL;
     }
 
     public void initStats()
@@ -26,96 +31,24 @@ public class Player implements Serializable
         this.timesMixed = 0;
     }
 
-    public int getWinPercentage()
+    public RussianRouletteStats getRussianStats()
     {
-        return playerStats.getWinPercentage();
+        return russianStats;
     }
 
-    public void setPlayerRank()
+    public HighLowStats getHighLowStats()
     {
-        playerStats.setPlayerRank();
-    }
-
-    public int getGamesWon()
-    {
-        return playerStats.getTotalGamesWon();
-    }
-
-    public void addGameWon()
-    {
-        playerStats.addGameWon();
-        playerStats.setWinPercentage();
-    }
-
-    public void addGameLost()
-    {
-        playerStats.addGameLost();
-        playerStats.setWinPercentage();
-    }
-
-    public void addWeaponMalfunction()
-    {
-        playerStats.addWeaponMalfunction();
-    }
-
-    public void addChambersMixed()
-    {
-        playerStats.addChambersMixed();
-    }
-
-    public void setTotalMoneyWon(int money)
-    {
-        playerStats.setTotalMoneyWon(money);
-    }
-
-    public void setTotalMoneyLost(int money)
-    {
-        playerStats.setTotalMoneyLost(money);
-    }
-
-    public int getGamesLost()
-    {
-        return playerStats.getTotalGamesLost();
-    }
-
-    public int getMoneyWon()
-    {
-        return playerStats.getTotalMoneyWon();
-    }
-
-    public int getMoneyLost()
-    {
-        return playerStats.getTotalMoneyLost();
-    }
-
-    public int getWeaponMalfunctions()
-    {
-        return playerStats.getWeaponMalfunctions();
-    }
-
-    public int getChambersMixed()
-    {
-        return playerStats.getChambersMixed();
-    }
-
-    public String getRank()
-    {
-        return playerStats.getPlayerRank().toString();
-    }
-
-    public int getTotalGames()
-    {
-        return playerStats.getTotalGames();
+        return highLowStats;
     }
 
     public int getMoney()
     {
-        return playerStats.getMoney();
+        return money;
     }
 
     public void setMoney(int money)
     {
-        playerStats.setMoney(money);
+        this.money = money;
     }
 
     public int getTimesMixed()
@@ -130,12 +63,12 @@ public class Player implements Serializable
 
     public String getName()
     {
-        return playerStats.getName();
+        return name;
     }
 
     public String getAvatarURL()
     {
-        return playerStats.getAvatarURL();
+        return avatarURL;
     }
 
     public int getSurvivedShots()
@@ -146,6 +79,6 @@ public class Player implements Serializable
     public void addSurvivedShot()
     {
         this.survivedShots++;
-        playerStats.addSurvivedShots();
+        russianStats.addSurvivedShots();
     }
 }

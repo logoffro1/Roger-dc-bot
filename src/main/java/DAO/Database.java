@@ -24,7 +24,7 @@ add more ways to make money
 add achievements
 maybe add the ability to have extra shots
 make the game more responsive
-
+fix the survived shots total
 add slots game
 gift money to everyone at a specific time/day
 make a !profile command where you can see the profile for all the games at once

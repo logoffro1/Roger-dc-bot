@@ -78,7 +78,7 @@ public class RussianRoulette
                 {
                     revolver.initChambers();
                     currentTurn.addTimesMixed();
-                    currentTurn.addChambersMixed();
+                    currentTurn.getRussianStats().addChambersMixed();
                     channel.sendMessage(String.format("%s the chambers have been mixed %s", currentTurn.getName(), revolver.getChambersText())).queue();
                 } else
                     channel.sendMessage(String.format("%s you can't mix anymore :stop_sign:", currentTurn.getName())).queue();
@@ -98,7 +98,7 @@ public class RussianRoulette
 
     private void revolverMisfire()
     {
-        currentTurn.addWeaponMalfunction();
+        currentTurn.getRussianStats().addWeaponMalfunction();
         if (revolver.getCurrentChamber() == 5)
         {
             int rnd = getRandomNumber(0, 100);
@@ -138,10 +138,10 @@ public class RussianRoulette
 
     private void gameOver()
     {
-        currentTurn.addGameWon();
+        currentTurn.getRussianStats().addGameWon();
         currentTurn.setMoney(currentTurn.getMoney() + moneyPot);
-        currentTurn.setTotalMoneyWon(moneyPot - entryFee);
-        currentTurn.setPlayerRank();
+        currentTurn.getRussianStats().setTotalMoneyWon(moneyPot - entryFee);
+        currentTurn.getRussianStats().setPlayerRank();
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Game Over");
         eb.setThumbnail(currentTurn.getAvatarURL());
@@ -156,9 +156,9 @@ public class RussianRoulette
 
     private void death()
     {
-        currentTurn.addGameLost();
-        currentTurn.setTotalMoneyLost(entryFee);
-        currentTurn.setPlayerRank();
+        currentTurn.getRussianStats().addGameLost();
+        currentTurn.getRussianStats().setTotalMoneyLost(entryFee);
+        currentTurn.getRussianStats().setPlayerRank();
         channel.sendMessage(String.format("%s %s", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)])).queue();
 
         players.remove(currentTurn);

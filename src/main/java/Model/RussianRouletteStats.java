@@ -2,11 +2,8 @@ package Model;
 
 import java.io.Serializable;
 
-public class PlayerStats implements Serializable
+public class RussianRouletteStats implements Serializable
 {
-    private String name;
-    private String avatarURL;
-    private int money;
     private int totalSurvivedShots = 0;
     private int totalGamesWon = 0;
     private int totalGamesLost = 0;
@@ -32,110 +29,83 @@ public class PlayerStats implements Serializable
         return totalGamesWon + totalGamesLost;
     }
 
-    protected void addGameWon()
+    public void addGameWon()
     {
         totalGamesWon++;
+        setWinPercentage();
     }
 
-    protected void addGameLost()
+    public void addGameLost()
     {
         totalGamesLost++;
+        setWinPercentage();
     }
 
-    protected void addWeaponMalfunction()
+    public void addWeaponMalfunction()
     {
         weaponMalfunctions++;
     }
 
-    protected void addChambersMixed()
+    public void addChambersMixed()
     {
         chambersMixed++;
     }
 
-    protected void setTotalMoneyWon(int money)
+    public void setTotalMoneyWon(int money)
     {
         totalMoneyWon += money;
     }
 
-    protected void setTotalMoneyLost(int money)
+    public void setTotalMoneyLost(int money)
     {
         totalMoneyLost += money;
     }
 
-    protected void addSurvivedShots()
+    public void addSurvivedShots()
     {
         totalSurvivedShots++;
     }
 
-    protected String getName()
-    {
-        return name;
-    }
 
-    protected String getAvatarURL()
-    {
-        return avatarURL;
-    }
-
-    protected int getMoney()
-    {
-        return money;
-    }
-
-    protected int getTotalSurvivedShots()
+    public int getTotalSurvivedShots()
     {
         return totalSurvivedShots;
     }
 
-    protected int getTotalGamesWon()
+    public int getTotalGamesWon()
     {
         return totalGamesWon;
     }
 
-    protected int getTotalGamesLost()
+    public int getTotalGamesLost()
     {
         return totalGamesLost;
     }
 
-    protected int getWeaponMalfunctions()
+    public int getWeaponMalfunctions()
     {
         return weaponMalfunctions;
     }
 
-    protected int getChambersMixed()
+    public int getChambersMixed()
     {
         return chambersMixed;
     }
 
-    protected int getTotalMoneyWon()
+    public int getTotalMoneyWon()
     {
         return totalMoneyWon;
     }
 
-    protected int getTotalMoneyLost()
+    public int getTotalMoneyLost()
     {
         return totalMoneyLost;
     }
 
-    protected PlayerRank getPlayerRank()
+    public PlayerRank getPlayerRank()
     {
         setPlayerRank();
         return playerRank;
-    }
-
-    protected void setName(String name)
-    {
-        this.name = name;
-    }
-
-    protected void setAvatarURL(String avatarURL)
-    {
-        this.avatarURL = avatarURL;
-    }
-
-    protected void setMoney(int money)
-    {
-        this.money = money;
     }
 
     public void setPlayerRank()

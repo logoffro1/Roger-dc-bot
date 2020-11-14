@@ -117,7 +117,7 @@ public class CommandEvent extends ListenerAdapter
                             eb.setThumbnail("https://www.pinclipart.com/picdir/big/194-1949141_arrow-arrows-direction-down-download-guidance-up-down.png");
                             eb.setTitle("High-Low");
                             eb.setDescription("The aim of High-Low is to guess whether the next number is higher or lower than the current card." +
-                                    " Every time you guess correctly, the pot is multiplied by 20% of your entry fee.\nThe numbers are from 1 to 1000\nIf you guess incorrectly, you leave with nothing\n```Entry fee: $" + entryFee + "```");
+                                    " Every time you guess correctly, the pot is multiplied by 20% of your entry fee.\nThe numbers are from 1 to 100\nIf you guess incorrectly, you leave with nothing\n```Entry fee: $" + entryFee + "```");
                             eb.addField("Commands", "!high - the next number is higher than the current one" +
                                     "\n!low - the next number is higher than the current one" +
                                     "\n!out - cash out with the current earned amount", true);
@@ -207,6 +207,7 @@ public class CommandEvent extends ListenerAdapter
                 "\n----------" +
                 "\n**!corona** [country] - get the corona cases for the specified country" +
                 "\n----------" +
+                "\n**!highlow** [entryFee] - start a game of High-Low" +
                 "\n**!roulette** [entryFee] - start a game of russian roulette" +
                 "\n**!roulette** [player] - check the user's russian roulette profile" +
                 "\n----------", true);
@@ -229,7 +230,7 @@ public class CommandEvent extends ListenerAdapter
 
         for (Player p : players)
         {
-            if (p.getGamesWon() > nr1.getGamesWon())
+            if (p.getRussianStats().getTotalGamesWon() > nr1.getRussianStats().getTotalGamesWon())
                 nr1 = p;
             else
                 nr3 = p;
@@ -237,7 +238,7 @@ public class CommandEvent extends ListenerAdapter
 
         for (Player p : players)
         {
-            if (p.getGamesWon() > nr2.getGamesWon())
+            if (p.getRussianStats().getTotalGamesWon() > nr2.getRussianStats().getTotalGamesWon())
             {
                 if (nr1 == p || nr3 == p) continue;
                 nr2 = p;
@@ -250,7 +251,7 @@ public class CommandEvent extends ListenerAdapter
         int count = 1;
         for (Player p : playersTemp)
         {
-            eb.addField(String.format("#%d ", count), String.format("%s - Games won: **%d**\nRank: **%s**\nMoney: **$%d**", p.getName(), p.getGamesWon(), p.getRank(), p.getMoney()), false);
+            eb.addField(String.format("#%d ", count), String.format("%s - Games won: **%d**\nRank: **%s**\nMoney: **$%d**", p.getName(), p.getRussianStats().getTotalGamesWon(), p.getRussianStats().getPlayerRank().toString(), p.getMoney()), false);
             count++;
         }
         eb.setFooter("Made by Cosmin Ilie");
@@ -264,17 +265,17 @@ public class CommandEvent extends ListenerAdapter
         eb.setDescription("Player " + player.getName());
         eb.setColor(Color.BLUE);
         eb.addField("Stats", String.format("Rank: **%s**\nMoney: $%d\nTotal games played: %d\nGames won: %d\nGames lost: %d\nWin percentage: %d%%\nMoney won: %d\nMoney lost: %d\nSurvived shots: %d\nWeapon malfunctions: %d\nChambers mixed: %d",
-                player.getRank(),
+                player.getRussianStats().getPlayerRank().toString(),
                 player.getMoney(),
-                player.getTotalGames(),
-                player.getGamesWon(),
-                player.getGamesLost(),
-                player.getWinPercentage(),
-                player.getMoneyWon(),
-                player.getMoneyLost(),
+                player.getRussianStats().getTotalGames(),
+                player.getRussianStats().getTotalGamesWon(),
+                player.getRussianStats().getTotalGamesLost(),
+                player.getRussianStats().getWinPercentage(),
+                player.getRussianStats().getTotalMoneyWon(),
+                player.getRussianStats().getTotalMoneyLost(),
                 player.getSurvivedShots(),
-                player.getWeaponMalfunctions(),
-                player.getChambersMixed()), true);
+                player.getRussianStats().getWeaponMalfunctions(),
+                player.getRussianStats().getChambersMixed()), true);
 
         eb.setFooter("Made by Cosmin Ilie");
         e.getChannel().sendMessage(eb.build()).queue();

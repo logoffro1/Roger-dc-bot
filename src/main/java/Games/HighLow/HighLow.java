@@ -15,6 +15,7 @@ public class HighLow
     private int entryFee = 0;
     private int multiplier = 20;
     private int moneyPot = 0;
+    private int streak = 0;
     private TextChannel channel;
 
     public HighLow(Player player, int entryFee, TextChannel channel)
@@ -75,9 +76,16 @@ public class HighLow
 
     private void goodGuess(int nextNumber)
     {
-        currentNumber = nextNumber;
-        moneyPot += ((Double.valueOf(multiplier) / 100.0) * Double.valueOf(entryFee));
         channel.sendMessage(String.format("%s you guessed right!", player.getName())).queue();
+        streak++;
+        if (streak % 5 == 0)
+        {
+            channel.sendMessage(String.format("%s you are on a streak of %d correct guess! Money pot doubled.", player.getName(), streak)).queue();
+            moneyPot *= 2;
+        } else
+            moneyPot += ((Double.valueOf(multiplier) / 100.0) * Double.valueOf(entryFee));
+
+        currentNumber = nextNumber;
         channel.sendMessage(String.format("%s the current number is **%d**\nChoose !high or !low if you think the next number will be higher or lower" +
                 "\nChoose !out if you want to cash out now." +
                 "\nIf you cash out now, you get $%d", player.getName(), currentNumber, moneyPot)).queue();
