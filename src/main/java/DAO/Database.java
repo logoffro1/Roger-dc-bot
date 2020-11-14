@@ -24,10 +24,8 @@ add more ways to make money
 add achievements
 maybe add the ability to have extra shots
 make the game more responsive
-fix the survived shots total
 add slots game
 gift money to everyone at a specific time/day
-make a !profile command where you can see the profile for all the games at once
 add quizzes to earn money (maybe about programming)
  */
 /*
@@ -36,6 +34,9 @@ Added !roger (help) command
 Changed the chamber colours from red-green to red-white
 Added a phasmophobia randomizer (with !rnd map and !rnd item)
 Added the !highlow game
+added High-Low permanent stats
+Fixed a bug where the total survived shots was incorrect
+Added the !profile [user] command to see the user's complete profile
 
 
  */

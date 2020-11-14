@@ -82,6 +82,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!slots" -> slotsCommand(message);
                         case "!highlow" -> highLowCommand(message);
                         case "!roger" -> showHelpPanel();
+                        case "!profile" -> showPlayerProfile(message);
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -155,15 +156,7 @@ public class CommandEvent extends ListenerAdapter
                     entryFee = Integer.parseInt(message[1]);
                 else
                 {
-                    if (!(message[1].equalsIgnoreCase("leaders") || message[1].equalsIgnoreCase("leader")))
-                    {
-                        Player player = Database.getPlayerByName(message[1]);
-                        if (player != null)
-                        {
-                            showPlayerProfile(player);
-                            return;
-                        }
-                    } else
+                    if ((message[1].equalsIgnoreCase("leaders") || message[1].equalsIgnoreCase("leader")))
                     {
                         showLeaderboards();
                         return;
@@ -193,8 +186,10 @@ public class CommandEvent extends ListenerAdapter
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Roger commands");
         eb.setColor(Color.CYAN);
-        eb.setThumbnail("https://lh3.googleusercontent.com/proxy/qaQrJQ_rdRTVAIJEIFPJVGOf-QgXokyq15KvkW6-nhkN2F3cjSyXZFAS5-O3elfPU6zgo855-rnmMXvZtua5Eohnx4xB0tJSWCTd1HbFw3dt7lBTVDx2kMiqytTh");
+      ///  eb.setThumbnail("");
         eb.addField("Help", "----------" +
+                "\n**!profile** [user] - check a user's complete profile" +
+                "\n----------" +
                 "\n**!rnd** [min] [max] - get a random number between min and max" +
                 "\n**!rnd** map - gives you a random map from Phasmophobia" +
                 "\n**!rnd** item - gives you a random item from Phasmophobia" +
@@ -209,7 +204,6 @@ public class CommandEvent extends ListenerAdapter
                 "\n----------" +
                 "\n**!highlow** [entryFee] - start a game of High-Low" +
                 "\n**!roulette** [entryFee] - start a game of russian roulette" +
-                "\n**!roulette** [player] - check the user's russian roulette profile" +
                 "\n----------", true);
         eb.setFooter("Made by Cosmin Ilie");
         e.getChannel().sendMessage(eb.build()).queue();
@@ -258,28 +252,47 @@ public class CommandEvent extends ListenerAdapter
         e.getChannel().sendMessage(eb.build()).queue();
     }
 
-    private void showPlayerProfile(Player player)
+    private void showPlayerProfile(String[] message)
     {
-        EmbedBuilder eb = new EmbedBuilder();
-        eb.setThumbnail(player.getAvatarURL());
-        eb.setDescription("Player " + player.getName());
-        eb.setColor(Color.BLUE);
-        eb.addField("Stats", String.format("Rank: **%s**\nMoney: $%d\nTotal games played: %d\nGames won: %d\nGames lost: %d\nWin percentage: %d%%\nMoney won: %d\nMoney lost: %d\nSurvived shots: %d\nWeapon malfunctions: %d\nChambers mixed: %d",
-                player.getRussianStats().getPlayerRank().toString(),
-                player.getMoney(),
-                player.getRussianStats().getTotalGames(),
-                player.getRussianStats().getTotalGamesWon(),
-                player.getRussianStats().getTotalGamesLost(),
-                player.getRussianStats().getWinPercentage(),
-                player.getRussianStats().getTotalMoneyWon(),
-                player.getRussianStats().getTotalMoneyLost(),
-                player.getSurvivedShots(),
-                player.getRussianStats().getWeaponMalfunctions(),
-                player.getRussianStats().getChambersMixed()), true);
+        Player player = null;
+        if (message.length == 2)
+            player = Database.getPlayerByName(message[1]);
+        else if (message.length == 1)
+            player = Database.getPlayerByName(e.getAuthor().getAsMention());
 
-        eb.setFooter("Made by Cosmin Ilie");
-        e.getChannel().sendMessage(eb.build()).queue();
+        if (player != null)
+        {
+
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setThumbnail(player.getAvatarURL());
+            eb.setDescription(String.format("Player %s\nMoney: **$%d**", player.getName(), player.getMoney()));
+            eb.setColor(Color.BLUE);
+            eb.addField("Russian Roulette", String.format("Rank: **%s**\nTotal games played: %d\nGames won: %d\nGames lost: %d\nWin percentage: %d%%\nMoney won: %d\nMoney lost: %d\nSurvived shots: %d\nWeapon malfunctions: %d\nChambers mixed: %d",
+                    player.getRussianStats().getPlayerRank().toString(),
+                    player.getRussianStats().getTotalGames(),
+                    player.getRussianStats().getTotalGamesWon(),
+                    player.getRussianStats().getTotalGamesLost(),
+                    player.getRussianStats().getWinPercentage(),
+                    player.getRussianStats().getTotalMoneyWon(),
+                    player.getRussianStats().getTotalMoneyLost(),
+                    player.getRussianStats().getTotalSurvivedShots(),
+                    player.getRussianStats().getWeaponMalfunctions(),
+                    player.getRussianStats().getChambersMixed()), true);
+
+            eb.addField("High-Low", String.format("Best streak: %d\nTotal games played: %d\nCorrect guesses: %d\nWrong guesses: %d\nMoney won: %d\nMoney lost: %d",
+                    player.getHighLowStats().getBestStreak(),
+                    player.getHighLowStats().getTotalGamesPlayed(),
+                    player.getHighLowStats().getCorrectGuesses(),
+                    player.getHighLowStats().getWrongGuesses(),
+                    player.getHighLowStats().getMoneyWon(),
+                    player.getHighLowStats().getMoneyLost()
+            ), true);
+
+            eb.setFooter("Made by Cosmin Ilie");
+            e.getChannel().sendMessage(eb.build()).queue();
+        }
     }
+
 
     private void coronaCommand(String[] message)
     {

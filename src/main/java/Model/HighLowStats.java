@@ -9,6 +9,17 @@ public class HighLowStats implements Serializable
     private int moneyLost;
     private int correctGuesses;
     private int wrongGuesses;
+    private int totalGamesPlayed;
+
+    public int getTotalGamesPlayed()
+    {
+        return totalGamesPlayed;
+    }
+
+    public void addTotalGamesPlayed()
+    {
+        this.totalGamesPlayed++;
+    }
 
     public int getBestStreak()
     {
@@ -45,9 +56,9 @@ public class HighLowStats implements Serializable
         return correctGuesses;
     }
 
-    public void setCorrectGuesses(int correctGuesses)
+    public void addCorrectGuess()
     {
-        this.correctGuesses = correctGuesses;
+        correctGuesses++;
     }
 
     public int getWrongGuesses()
@@ -55,8 +66,8 @@ public class HighLowStats implements Serializable
         return wrongGuesses;
     }
 
-    public void setWrongGuesses(int wrongGuesses)
+    public void addWrongGuess()
     {
-        this.wrongGuesses = wrongGuesses;
+        this.wrongGuesses++;
     }
 }

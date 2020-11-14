@@ -24,6 +24,7 @@ public class HighLow
         this.entryFee = entryFee;
         this.channel = channel;
         player.setMoney(player.getMoney() - entryFee);
+        player.getHighLowStats().addTotalGamesPlayed();
     }
 
     public Player getPlayer()
@@ -39,6 +40,7 @@ public class HighLow
 
     public void leaveGame()
     {
+        player.getHighLowStats().setMoneyWon(player.getHighLowStats().getMoneyWon() + moneyPot);
         channel.sendMessage(String.format("%s you decided to leave the game.\nYou leave with $%d", player.getName(), moneyPot)).queue();
         player.setMoney(player.getMoney() + moneyPot);
         Database.savePlayersToFile();
@@ -67,6 +69,8 @@ public class HighLow
 
     private void lose(int nextNumber)
     {
+        player.getHighLowStats().addWrongGuess();
+        player.getHighLowStats().setMoneyLost(player.getHighLowStats().getMoneyLost() + entryFee);
         channel.sendMessage(String.format("%s you guessed wrong! The number was **%d**", player.getName(), nextNumber)).queue();
         channel.sendMessage(String.format("%s you leave with nothing.", player.getName())).queue();
         channel.sendMessage("The game has ended.").queue();
@@ -76,8 +80,12 @@ public class HighLow
 
     private void goodGuess(int nextNumber)
     {
+        player.getHighLowStats().addCorrectGuess();
         channel.sendMessage(String.format("%s you guessed right!", player.getName())).queue();
         streak++;
+        if (streak > player.getHighLowStats().getBestStreak())
+            player.getHighLowStats().setBestStreak(streak);
+
         if (streak % 5 == 0)
         {
             channel.sendMessage(String.format("%s you are on a streak of %d correct guess! Money pot doubled.", player.getName(), streak)).queue();
