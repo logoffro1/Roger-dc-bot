@@ -1,4 +1,5 @@
 package DAO;
+///import Model.Player;
 
 import Model.ChatLog;
 import Model.Player;
@@ -21,7 +22,29 @@ LOTTO every sunday
 Notification when you rank up
 Leaderboard
 Maybe add MMR system
+<<<<<<< HEAD
 X - Make the chambers colored red and white
+=======
+Maybe add a job system
+add more ways to make money
+add achievements
+maybe add the ability to have extra shots
+make the game more responsive
+add slots game
+gift money to everyone at a specific time/day
+add quizzes to earn money (maybe about programming)
+ */
+/*
+Change log:
+Added !roger (help) command
+Changed the chamber colours from red-green to red-white
+Added a phasmophobia randomizer (with !rnd map and !rnd item)
+Added the !highlow game
+added High-Low permanent stats
+Fixed a bug where the total survived shots was incorrect
+Added the !profile [user] command to see the user's complete profile
+
+>>>>>>> betas
 
  */
 public class Database

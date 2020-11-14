@@ -9,9 +9,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="openjdk-15" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="module-library">
+=======
+    <orderEntry type="module-library" exported="">
+>>>>>>> betas
       <library>
         <CLASSES>
           <root url="file://$USER_HOME$/Downloads/jsoup-1.13.1" />

@@ -1,4 +1,4 @@
-package Games;
+package Games.RussianRoulette;
 
 import DAO.Database;
 import Model.ChatLog;
