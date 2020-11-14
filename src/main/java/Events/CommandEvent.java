@@ -5,7 +5,7 @@ import Games.HighLow.HighLow;
 import Games.HighLow.HighLowEvents;
 import Games.RussianRoulette.RussianRoulette;
 import Games.RussianRoulette.RussianRouletteEvents;
-import Model.Player;
+import Model.Player.Player;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -83,6 +83,8 @@ public class CommandEvent extends ListenerAdapter
                         case "!highlow" -> highLowCommand(message);
                         case "!roger" -> showHelpPanel();
                         case "!profile" -> showPlayerProfile(message);
+                        case "!shop" -> shopCommand();
+                        case "!buy" -> buyItem(message);
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -90,6 +92,82 @@ public class CommandEvent extends ListenerAdapter
             }
         }
 
+
+    }
+
+    private void shopCommand()
+    {
+        EmbedBuilder eb = new EmbedBuilder();
+        eb.setTitle("Roger's SHOP :shopping_cart:");
+        eb.setDescription("Use **!buy** [item] to buy an item!");
+        eb.setColor(Color.ORANGE);
+        eb.setThumbnail("https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-11/512/shop-icon.png");
+        eb.addField("Items", ":coffee: coffee - $10\n\n:smoking: cigarette - $12\n\n:beer: beer - $20\n\n:banana: banana - $5\n\n:roll_of_paper: paper - $50", true);
+        eb.setFooter("Made by Cosmin Ilie");
+        e.getChannel().sendMessage(eb.build()).queue();
+    }
+
+    private void buyItem(String[] message)
+    {
+        if (message.length == 2)
+        {
+            Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+            if (player != null)
+            {
+                switch (message[1])
+                {
+                    case "coffee":
+                        if (player.getMoney() >= 10)
+                        {
+                            player.getInventory().addCoffee();
+                            player.setMoney(player.getMoney() - 10);
+                            e.getChannel().sendMessage(String.format("%s you purchased a coffee for $10", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
+                    case "beer":
+                        if (player.getMoney() >= 20)
+                        {
+                            player.getInventory().addBeer();
+                            player.setMoney(player.getMoney() - 20);
+                            e.getChannel().sendMessage(String.format("%s you purchased a beer for $20", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
+                    case "cigarette":
+                        if (player.getMoney() >= 12)
+                        {
+                            player.getInventory().addCigarette();
+                            player.setMoney(player.getMoney() - 12);
+                            e.getChannel().sendMessage(String.format("%s you purchased a cigarette for $12", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
+                    case "banana":
+                        if (player.getMoney() >= 5)
+                        {
+                            player.getInventory().addBanana();
+                            player.setMoney(player.getMoney() - 5);
+                            e.getChannel().sendMessage(String.format("%s you purchased a banana for $5", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
+                    case "paper":
+                        if (player.getMoney() >= 50)
+                        {
+                            player.getInventory().addToiletPaper();
+                            player.setMoney(player.getMoney() - 50);
+                            e.getChannel().sendMessage(String.format("%s you purchased a roll of toilet paper for $50", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
+                    default:
+                        e.getChannel().sendMessage(String.format("%s we don't sell this at the moment!", player.getName())).queue();
+                        break;
+                }
+                Database.savePlayersToFile();
+            }
+        }
 
     }
 
@@ -114,6 +192,7 @@ public class CommandEvent extends ListenerAdapter
                     {
                         if (entryFee >= 5)
                         {
+                            //  e.getGuild().createTextChannel("High-Low " + e.getAuthor().getName()).queue();
                             EmbedBuilder eb = new EmbedBuilder();
                             eb.setThumbnail("https://www.pinclipart.com/picdir/big/194-1949141_arrow-arrows-direction-down-download-guidance-up-down.png");
                             eb.setTitle("High-Low");
@@ -186,9 +265,12 @@ public class CommandEvent extends ListenerAdapter
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Roger commands");
         eb.setColor(Color.CYAN);
-      ///  eb.setThumbnail("");
+        ///  eb.setThumbnail("");
         eb.addField("Help", "----------" +
                 "\n**!profile** [user] - check a user's complete profile" +
+                "\n----------" +
+                "\n**!shop** - check the shop"+
+                "\n**!buy** [item] - buy the specified item"+
                 "\n----------" +
                 "\n**!rnd** [min] [max] - get a random number between min and max" +
                 "\n**!rnd** map - gives you a random map from Phasmophobia" +
@@ -289,6 +371,13 @@ public class CommandEvent extends ListenerAdapter
                     player.getHighLowStats().getMoneyWon(),
                     player.getHighLowStats().getMoneyLost()
             ), true);
+            eb.addField("Inventory", String.format(":coffee: - **%d**\n:beer: - **%d**\n:smoking: - **%d**\n:banana: - **%d**\n:roll_of_paper: - **%d**",
+                    player.getInventory().getCoffee(),
+                    player.getInventory().getBeers(),
+                    player.getInventory().getCigarettes(),
+                    player.getInventory().getBananas(),
+                    player.getInventory().getToiletPaper()
+            ), false);
 
             eb.setFooter("Made by Cosmin Ilie");
             e.getChannel().sendMessage(eb.build()).queue();

@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.entities.Activity;
 import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +35,6 @@ public class Bot
         jda.addEventListener(new CommandEvent());
         jda.addEventListener(new RussianRouletteEvents());
         jda.addEventListener(new HighLowEvents());
-
         Thread reminders = new Thread(() ->
                 checkReminders());
 
@@ -71,9 +71,12 @@ public class Bot
             if (reminder != null)
                 Database.deleteReminder(reminder);
 
+            if (LocalTime.now().getHour() == 20 && LocalTime.now().getMinute() == 0 && LocalDateTime.now().getSecond() == 0)
+                Database.giveEveryoneMoney(50);
+
             try
             {
-                TimeUnit.MILLISECONDS.sleep(600);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (Exception e)
             {
                 e.printStackTrace();

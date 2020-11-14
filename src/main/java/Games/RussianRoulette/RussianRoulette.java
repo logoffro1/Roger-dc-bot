@@ -1,7 +1,7 @@
 package Games.RussianRoulette;
 
 import DAO.Database;
-import Model.Player;
+import Model.Player.Player;
 import Model.Revolver;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -146,6 +146,7 @@ public class RussianRoulette
     private void gameOver()
     {
         currentTurn.getRussianStats().addGameWon();
+        moneyPot+=5;
         currentTurn.setMoney(currentTurn.getMoney() + moneyPot);
         currentTurn.getRussianStats().setTotalMoneyWon(moneyPot - entryFee);
         currentTurn.getRussianStats().setPlayerRank();

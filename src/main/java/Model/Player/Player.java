@@ -1,4 +1,4 @@
-package Model;
+package Model.Player;
 
 import java.io.Serializable;
 
@@ -12,17 +12,24 @@ public class Player implements Serializable
     private int money;
     private final RussianRouletteStats russianStats;
     private final HighLowStats highLowStats;
+    private final PlayerInventory inventory;
 
 
     public Player(String name, String avatarURL)
     {
         russianStats = new RussianRouletteStats();
         highLowStats = new HighLowStats();
+        inventory = new PlayerInventory();
         initStats();
 
         money = 100;
         this.name = name;
         this.avatarURL = avatarURL;
+    }
+
+    public PlayerInventory getInventory()
+    {
+        return inventory;
     }
 
     public void initStats()

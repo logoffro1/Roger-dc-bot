@@ -1,7 +1,7 @@
 package Events;
 
 import DAO.Database;
-import Model.Player;
+import Model.Player.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -68,17 +68,21 @@ public class TalkEvent extends ListenerAdapter
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
 
-      //  System.out.println(LocalTime.now());
-       // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
-          //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();
-       /*
-=======
-      ////   Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
-         // p.setMoney(30);
-        ///  Database.savePlayersToFile();
+        //  System.out.println(LocalTime.now());
+        // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
+        //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();
 
-          /*
->>>>>>> betas
+
+      /*  Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        if (p != null)
+        {
+
+            p.setMoney(30);
+            Database.savePlayersToFile();
+        }*/
+
+
+/*
        List<Player> players = Database.getAllPlayers();
         for (Player p : players)
         {
@@ -92,12 +96,10 @@ public class TalkEvent extends ListenerAdapter
             System.out.println(p.getSurvivedShots());
             System.out.println(p.getChambersMixed());
             System.out.println(p.getWeaponMalfunctions());
-
-
         }
 
         */
-      /*  Player ege = new Player("<@619990218501652511>", "https://cdn.discordapp.com/avatars/619990218501652511/33392dd4f0519935a630126f66f49a98.png");
+    /*    Player ege = new Player("<@619990218501652511>", "https://cdn.discordapp.com/avatars/619990218501652511/33392dd4f0519935a630126f66f49a98.png");
         ege.setMoney(351);
         for (int i = 0; i <32; i++)
             ege.getRussianStats().addGameLost();

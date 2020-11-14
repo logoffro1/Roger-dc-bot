@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Player.Player;
+
 import java.time.LocalTime;
 
 public class ChatLog

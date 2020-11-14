@@ -1,8 +1,8 @@
 package DAO;
-///import Model.Player;
+///import Model.Player.Player;
 
 import Model.ChatLog;
-import Model.Player;
+import Model.Player.Player;
 import Model.Reminder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,7 +10,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -22,30 +21,30 @@ LOTTO every sunday
 Notification when you rank up
 Leaderboard
 Maybe add MMR system
-<<<<<<< HEAD
-X - Make the chambers colored red and white
-=======
 Maybe add a job system
 add more ways to make money
 add achievements
 maybe add the ability to have extra shots
 make the game more responsive
 add slots game
-gift money to everyone at a specific time/day
 add quizzes to earn money (maybe about programming)
+ Make highlow game to create a new channel for each game
  */
 /*
 Change log:
 Added !roger (help) command
 Changed the chamber colours from red-green to red-white
-Added a phasmophobia randomizer (with !rnd map and !rnd item)
+Added a Phasmophobia randomizer (with !rnd map and !rnd item)
 Added the !highlow game
+Added !shop command
+Added !buy command
+Added inventory
 added High-Low permanent stats
-Fixed a bug where the total survived shots was incorrect
 Added the !profile [user] command to see the user's complete profile
-
->>>>>>> betas
-
+From now on, every day at 20:00 everyone will get $50
+Added a bonus of $5 whenever you win a game of russian roulette (even if the entry fee was 0)
+Fixed a bug where the total survived shots was incorrect
+Other minor bug fixes
  */
 public class Database
 {
@@ -83,8 +82,8 @@ public class Database
                 int seconds1 = times.get(0).getMinute() * 60 + times.get(0).getSecond();
                 int seconds2 = times.get(1).getMinute() * 60 + times.get(1).getSecond();
                 int seconds3 = times.get(2).getMinute() * 60 + times.get(2).getSecond();
-                System.out.println(seconds2-seconds1);
-                System.out.println(seconds3-seconds2);
+               // System.out.println(seconds2 - seconds1);
+               // System.out.println(seconds3 - seconds2);
 
                 if (seconds2 - seconds1 == seconds3 - seconds2)
                 {
@@ -94,26 +93,20 @@ public class Database
                     return p;
 
 
-///48-45 = 51 - 48 (true)
-
-                    //  45  #1
-                    // 48 #2
-                    ///  51 #3
-                    //// 54 #4
-                    ////  2:57 #5
-                    ///  3:01 #6
-                    //  3:04 #7
                 }
-
-              /*  for (int j = 0; j < times.size(); j++)
-                {
-                    if (times.get(i + 1).getMinute() - times.get(i).getMinute() == times.get(i +))
-                }*/
             }
 
         }
 
         return null;
+    }
+
+    public static void giveEveryoneMoney(int money)
+    {
+        for (Player p : allPlayers)
+            p.setMoney(p.getMoney() + money);
+
+        Database.savePlayersToFile();
     }
 
     public static void initJokes()
