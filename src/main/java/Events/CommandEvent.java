@@ -229,7 +229,7 @@ public class CommandEvent extends ListenerAdapter
         }
         for (Player p : players)
         {
-            if (p.getGamesWon() < nr3.getGamesWon())
+            if (p.getRussianStats().getTotalGamesWon() < nr3.getRussianStats().getTotalGamesWon())
                 nr3 = p;
         }
         for (Player p : players)

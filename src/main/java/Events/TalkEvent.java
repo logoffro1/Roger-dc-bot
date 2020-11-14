@@ -1,5 +1,7 @@
 package Events;
 
+import DAO.Database;
+import Model.Player;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -66,7 +68,6 @@ public class TalkEvent extends ListenerAdapter
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
 
-<<<<<<< HEAD
       //  System.out.println(LocalTime.now());
        // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
           //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();
@@ -94,66 +95,68 @@ public class TalkEvent extends ListenerAdapter
 
 
         }
-        Player ege = new Player("<@619990218501652511>", "https://cdn.discordapp.com/avatars/619990218501652511/33392dd4f0519935a630126f66f49a98.png");
-        ege.setMoney(420);
-        for (int i = 0; i < 19; i++)
-            ege.addGameLost();
-        for (int i = 0; i < 21; i++)
-            ege.addGameWon();
 
-        ege.setTotalMoneyLost(341);
-        ege.setTotalMoneyWon(531);
-        ege.setPlayerRank();
+        */
+      /*  Player ege = new Player("<@619990218501652511>", "https://cdn.discordapp.com/avatars/619990218501652511/33392dd4f0519935a630126f66f49a98.png");
+        ege.setMoney(351);
+        for (int i = 0; i <32; i++)
+            ege.getRussianStats().addGameLost();
+        for (int i = 0; i < 31; i++)
+            ege.getRussianStats().addGameWon();
+
+        ege.getRussianStats().setTotalMoneyLost(410);
+        ege.getRussianStats().setTotalMoneyWon(531);
+        ege.getRussianStats().setPlayerRank();
 
         for (int i = 0; i < 1; i++)
             ege.addSurvivedShot();
 
-        for (int i = 0; i < 11; i++)
-            ege.addChambersMixed();
+        for (int i = 0; i < 24; i++)
+            ege.getRussianStats().addChambersMixed();
 
-        for (int i = 0; i < 8; i++)
-            ege.addWeaponMalfunction();
+        for (int i = 0; i < 16; i++)
+            ege.getRussianStats().addWeaponMalfunction();
 
 
         Player emre = new Player("<@466934252416532483>", "https://cdn.discordapp.com/avatars/466934252416532483/6cbe8c59980473d2b0fb7f5cf6f78c10.png");
-        emre.setMoney(0);
-        for (int i = 0; i < 26; i++)
-            emre.addGameLost();
-        for (int i = 0; i < 14; i++)
-            emre.addGameWon();
+        emre.setMoney(380);
+        for (int i = 0; i < 77; i++)
+            emre.getRussianStats().addGameLost();
+        for (int i = 0; i < 82; i++)
+            emre.getRussianStats().addGameWon();
 
-        emre.setTotalMoneyLost(532);
-        emre.setTotalMoneyWon(362);
-        emre.setPlayerRank();
+        emre.getRussianStats().setTotalMoneyLost(582);
+        emre.getRussianStats().setTotalMoneyWon(502);
+        emre.getRussianStats().setPlayerRank();
 
         for (int i = 0; i < 1; i++)
             emre.addSurvivedShot();
 
         for (int i = 0; i < 7; i++)
-            emre.addChambersMixed();
+            emre.getRussianStats().addChambersMixed();
 
-        for (int i = 0; i < 9; i++)
-            emre.addWeaponMalfunction();
+        for (int i = 0; i < 38; i++)
+            emre.getRussianStats().addWeaponMalfunction();
 
         Player eu = new Player("<@178585741260095489>", "https://cdn.discordapp.com/avatars/178585741260095489/0bf24ccc5227b1a215f109fb23dc1cc6.png");
-        eu.setMoney(0);
-        for (int i = 0; i < 20; i++)
-            eu.addGameLost();
-        for (int i = 0; i < 19; i++)
-            eu.addGameWon();
+        eu.setMoney(139);
+        for (int i = 0; i < 139; i++)
+            eu.getRussianStats().addGameLost();
+        for (int i = 0; i < 116; i++)
+            eu.getRussianStats().addGameWon();
 
-        eu.setTotalMoneyLost(469);
-        eu.setTotalMoneyWon(449);
-        eu.setPlayerRank();
+        eu.getRussianStats().setTotalMoneyLost(499);
+        eu.getRussianStats().setTotalMoneyWon(548);
+        eu.getRussianStats().setPlayerRank();
 
         for (int i = 0; i < 1; i++)
             eu.addSurvivedShot();
 
-        for (int i = 0; i < 9; i++)
-            eu.addChambersMixed();
+        for (int i = 0; i < 42; i++)
+            eu.getRussianStats().addChambersMixed();
 
-        for (int i = 0; i < 9; i++)
-            eu.addWeaponMalfunction();
+        for (int i = 0; i < 49; i++)
+            eu.getRussianStats().addWeaponMalfunction();
 
         Database.getAllPlayers().clear();
         Database.addPlayer(eu);
