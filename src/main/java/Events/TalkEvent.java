@@ -167,7 +167,6 @@ public class TalkEvent extends ListenerAdapter
 
         Database.savePlayersToFile();
 */
-
     }
 
     private void fuckGroovy()

@@ -16,7 +16,6 @@ import java.util.*;
 /*
 IDEAS
 Maybe while in a round, give players roles with different colors to see who's dead and who's alive (or just a way to see better who dead)
-You can buy stuff with money (like cigs, beer, coffee, drugs, maybe real estate)
 LOTTO every sunday
 Notification when you rank up
 Leaderboard
@@ -29,6 +28,8 @@ make the game more responsive
 add slots game
 add quizzes to earn money (maybe about programming)
  Make highlow game to create a new channel for each game
+ make it possible sso you can buy stuff for other people
+ maybe pet store?
  */
 /*
 Change log:

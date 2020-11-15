@@ -53,8 +53,14 @@ public class HighLow
 
         if (nextNumber > currentNumber)
             goodGuess(nextNumber);
-        else
+        else if (nextNumber < currentNumber)
             lose(nextNumber);
+        else
+        {
+            moneyPot += (entryFee * 3);
+            goodGuess(nextNumber);
+            channel.sendMessage(String.format("%s WOW! The new number is the same as the last number, you get a nice bonus!:partying_face:", player.getName())).queue();
+        }
     }
 
     public void chooseLow()
@@ -63,8 +69,15 @@ public class HighLow
 
         if (nextNumber < currentNumber)
             goodGuess(nextNumber);
-        else
+        else if (nextNumber > currentNumber)
+        {
             lose(nextNumber);
+        } else
+        {
+            moneyPot += (entryFee * 3);
+            goodGuess(nextNumber);
+            channel.sendMessage(String.format("%s WOW! The new number is the same as the last number, you get a nice bonus!:partying_face:", player.getName())).queue();
+        }
     }
 
     private void lose(int nextNumber)

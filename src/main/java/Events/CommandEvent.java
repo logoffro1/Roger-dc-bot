@@ -85,6 +85,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!profile" -> showPlayerProfile(message);
                         case "!shop" -> shopCommand();
                         case "!buy" -> buyItem(message);
+                        case "!give" -> giveMoney(message);
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -94,7 +95,30 @@ public class CommandEvent extends ListenerAdapter
 
 
     }
+    private void giveMoney(String[] message)
+    {
+        if (message.length == 3)
+        {
+            Player moneyGiver = Database.getPlayerByName(e.getAuthor().getAsMention());
+            Player moneyTaker = Database.getPlayerByName(message[1]);
+            if (moneyGiver != null && moneyTaker != null)
+            {
+                if (isNumber(message[2]))
+                {
 
+                    int amount = Integer.parseInt(message[2]);
+                    if (amount <= moneyGiver.getMoney())
+                    {
+                        moneyGiver.setMoney(moneyGiver.getMoney() - amount);
+                        moneyTaker.setMoney(moneyTaker.getMoney() + amount);
+                        Database.savePlayersToFile();
+                        e.getChannel().sendMessage(String.format("%s just transferred $%d to %s", moneyGiver.getName(), amount, moneyTaker.getName())).queue();
+                    }
+                }
+            }
+        }
+
+    }
     private void shopCommand()
     {
         EmbedBuilder eb = new EmbedBuilder();
@@ -197,7 +221,7 @@ public class CommandEvent extends ListenerAdapter
                             eb.setThumbnail("https://www.pinclipart.com/picdir/big/194-1949141_arrow-arrows-direction-down-download-guidance-up-down.png");
                             eb.setTitle("High-Low");
                             eb.setDescription("The aim of High-Low is to guess whether the next number is higher or lower than the current card." +
-                                    " Every time you guess correctly, the pot is multiplied by 20% of your entry fee.\nThe numbers are from 1 to 100\nIf you guess incorrectly, you leave with nothing\n```Entry fee: $" + entryFee + "```");
+                                    " Every time you guess correctly, the pot is increased by 20% of your entry fee.\nThe numbers are from 1 to 100\nIf you guess incorrectly, you leave with nothing\n```Entry fee: $" + entryFee + "```");
                             eb.addField("Commands", "!high - the next number is higher than the current one" +
                                     "\n!low - the next number is higher than the current one" +
                                     "\n!out - cash out with the current earned amount", true);
@@ -269,8 +293,8 @@ public class CommandEvent extends ListenerAdapter
         eb.addField("Help", "----------" +
                 "\n**!profile** [user] - check a user's complete profile" +
                 "\n----------" +
-                "\n**!shop** - check the shop"+
-                "\n**!buy** [item] - buy the specified item"+
+                "\n**!shop** - check the shop" +
+                "\n**!buy** [item] - buy the specified item" +
                 "\n----------" +
                 "\n**!rnd** [min] [max] - get a random number between min and max" +
                 "\n**!rnd** map - gives you a random map from Phasmophobia" +
@@ -468,7 +492,7 @@ public class CommandEvent extends ListenerAdapter
 
     private void randomCommand(String[] message)
     {
-        if (message.length == 3)
+        if (message.length == 3 && !message[1].equalsIgnoreCase("item"))
         {
             if (isNumber(message[1]) && isNumber(message[2]))
             {
@@ -483,7 +507,7 @@ public class CommandEvent extends ListenerAdapter
         } else if (message.length == 1)
         {
             this.e.getChannel().sendMessage(String.format("%d", getRandomNumber(0, 10000000))).queue();
-        } else if (message.length == 2)
+        } else if (message.length >= 2)
         {
             if (message[1].equalsIgnoreCase("map"))
             {
@@ -491,8 +515,26 @@ public class CommandEvent extends ListenerAdapter
                 e.getChannel().sendMessage(String.format("%s %s", e.getAuthor().getAsMention(), phasmoMaps[rnd])).queue();
             } else if (message[1].equalsIgnoreCase("item"))
             {
-                int rnd = getRandomNumber(0, phasmoItems.length - 1);
-                e.getChannel().sendMessage(String.format("%s %s", e.getAuthor().getAsMention(), phasmoItems[rnd])).queue();
+                if (message.length == 3)
+                {
+                    if (isNumber(message[2]))
+                    {
+                        int nr = Integer.parseInt(message[2]);
+                        if (nr > 1)
+                        {
+
+                            for (int i = 0; i < nr; i++)
+                            {
+                                int rnd = getRandomNumber(0, phasmoItems.length - 1);
+                                e.getChannel().sendMessage(String.format("%s %s", e.getAuthor().getAsMention(), phasmoItems[rnd])).queue();
+                            }
+                        }
+                    }
+                } else
+                {
+                    int rnd = getRandomNumber(0, phasmoItems.length - 1);
+                    e.getChannel().sendMessage(String.format("%s %s", e.getAuthor().getAsMention(), phasmoItems[rnd])).queue();
+                }
             }
         }
 

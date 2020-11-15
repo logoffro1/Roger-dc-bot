@@ -42,7 +42,6 @@ public class RussianRouletteEvents extends ListenerAdapter
                             case "!start" -> startGame();
                             case "!shoot" -> shoot();
                             case "!mix" -> russianRoulette.mix(e);
-                            case "!give" -> giveMoney(message);
                         }
 
                     } else
@@ -103,31 +102,6 @@ public class RussianRouletteEvents extends ListenerAdapter
         Player newPlayer = new Player("<@774159565507919873>", "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/553790/b408661ef1867375b47972783f223336302460a4.jpg");
         russianRoulette.addPlayer(newPlayer, e);
         Database.addPlayer(newPlayer);
-    }
-
-    private void giveMoney(String[] message)
-    {
-        if (message.length == 3)
-        {
-            Player moneyGiver = Database.getPlayerByName(e.getAuthor().getAsMention());
-            Player moneyTaker = Database.getPlayerByName(message[1]);
-            if (moneyGiver != null && moneyTaker != null)
-            {
-                if (isNumber(message[2]))
-                {
-
-                    int amount = Integer.parseInt(message[2]);
-                    if (amount <= moneyGiver.getMoney())
-                    {
-                        moneyGiver.setMoney(moneyGiver.getMoney() - amount);
-                        moneyTaker.setMoney(moneyTaker.getMoney() + amount);
-                        Database.savePlayersToFile();
-                        e.getChannel().sendMessage(String.format("%s just transferred $%d to %s", moneyGiver.getName(), amount, moneyTaker.getName())).queue();
-                    }
-                }
-            }
-        }
-
     }
 
     private boolean isNumber(String text)
