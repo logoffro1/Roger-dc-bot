@@ -95,6 +95,7 @@ public class CommandEvent extends ListenerAdapter
 
 
     }
+
     private void giveMoney(String[] message)
     {
         if (message.length == 3)
@@ -107,7 +108,7 @@ public class CommandEvent extends ListenerAdapter
                 {
 
                     int amount = Integer.parseInt(message[2]);
-                    if (amount <= moneyGiver.getMoney())
+                    if (amount <= moneyGiver.getMoney() && amount > 0)
                     {
                         moneyGiver.setMoney(moneyGiver.getMoney() - amount);
                         moneyTaker.setMoney(moneyTaker.getMoney() + amount);
@@ -119,6 +120,7 @@ public class CommandEvent extends ListenerAdapter
         }
 
     }
+
     private void shopCommand()
     {
         EmbedBuilder eb = new EmbedBuilder();
@@ -256,8 +258,11 @@ public class CommandEvent extends ListenerAdapter
             if (message.length == 2)
             {
                 if (isNumber(message[1]))
+                {
                     entryFee = Integer.parseInt(message[1]);
-                else
+                    if (entryFee <= 0)
+                        return;
+                } else
                 {
                     if ((message[1].equalsIgnoreCase("leaders") || message[1].equalsIgnoreCase("leader")))
                     {
