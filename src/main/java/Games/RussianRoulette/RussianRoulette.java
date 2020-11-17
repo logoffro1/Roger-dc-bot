@@ -29,7 +29,14 @@ public class RussianRoulette
     private int moneyPot = 0;
     private TextChannel channel;
 
-    private String[] deathText = {"blew his brains out :brain::gun:", "ate some lead, he's out :frowning::gun:", "was shot :frowning::gun:", "took the room temperature challenge :skull::gun:", "died with a smile :upside_down::gun:", "is fucking gone :poo::gun:"};
+    private String[] deathText =
+            {"DIE, TRASH! :gun:",
+                    "blew his brains out :brain::gun:",
+                    "ate some lead, he's out :frowning::gun:",
+                    "was shot :frowning::gun:",
+                    "took the room temperature challenge :skull::gun:",
+                    "died with a smile :upside_down::gun:",
+                    "is fucking gone :poo::gun:"};
 
     private boolean canRegister = true;
 
@@ -56,7 +63,7 @@ public class RussianRoulette
                             gameOver();
                         else
                         {
-                             channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
+                            channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
                         }
 
                     } else
@@ -122,7 +129,7 @@ public class RussianRoulette
             currentTurn.setMoney(currentTurn.getMoney() + amount);
         } else
         {
-                channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
+            channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
         }
 
 
@@ -143,10 +150,15 @@ public class RussianRoulette
 
     }
 
+    public int getEntryFee()
+    {
+        return entryFee;
+    }
+
     private void gameOver()
     {
         currentTurn.getRussianStats().addGameWon();
-        moneyPot+=5;
+        moneyPot += 5;
         currentTurn.setMoney(currentTurn.getMoney() + moneyPot);
         currentTurn.getRussianStats().setTotalMoneyWon(moneyPot - entryFee);
         currentTurn.getRussianStats().setPlayerRank();

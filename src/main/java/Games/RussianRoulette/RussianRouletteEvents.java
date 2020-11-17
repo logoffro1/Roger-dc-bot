@@ -100,6 +100,7 @@ public class RussianRouletteEvents extends ListenerAdapter
     private void addRogerToPlay()
     {
         Player newPlayer = new Player("<@774159565507919873>", "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/553790/b408661ef1867375b47972783f223336302460a4.jpg");
+        newPlayer.setMoney(9999999);
         russianRoulette.addPlayer(newPlayer, e);
         Database.addPlayer(newPlayer);
     }
@@ -118,8 +119,20 @@ public class RussianRouletteEvents extends ListenerAdapter
 
     private void stopGame()
     {
-        russianRoulette = null;
-        e.getChannel().sendMessage(String.format("%s stopped the game.", e.getAuthor().getAsMention())).queue();
+        Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+        if (player != null)
+        {
+            if (russianRoulette.getPlayers().contains(player))
+            {
+                for (Player p : russianRoulette.getPlayers())
+                    p.setMoney(p.getMoney() + russianRoulette.getEntryFee());
+
+                russianRoulette = null;
+                e.getChannel().sendMessage(String.format("%s stopped the game.", e.getAuthor().getAsMention())).queue();
+
+                Database.savePlayersToFile();
+            }
+        }
     }
 
     private void startGame()

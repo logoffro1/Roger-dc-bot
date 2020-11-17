@@ -86,6 +86,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!shop" -> shopCommand();
                         case "!buy" -> buyItem(message);
                         case "!give" -> giveMoney(message);
+                        case "!admingive" -> adminGive(message);
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -94,6 +95,27 @@ public class CommandEvent extends ListenerAdapter
         }
 
 
+    }
+
+    private void adminGive(String[] message)
+    {
+        if (message.length == 3 && e.getAuthor().getAsMention().equalsIgnoreCase("<@178585741260095489>"))
+        {
+            Player moneyGiver = Database.getPlayerByName(e.getAuthor().getAsMention());
+            Player moneyTaker = Database.getPlayerByName(message[1]);
+            if (moneyGiver != null && moneyTaker != null)
+            {
+                if (isNumber(message[2]))
+                {
+
+                    int amount = Integer.parseInt(message[2]);
+                        moneyTaker.setMoney(moneyTaker.getMoney() + amount);
+                        Database.savePlayersToFile();
+                        e.getChannel().sendMessage(String.format("%s just transferred $%d to %s", moneyGiver.getName(), amount, moneyTaker.getName())).queue();
+
+                }
+            }
+        }
     }
 
     private void giveMoney(String[] message)

@@ -67,7 +67,7 @@ public class Database
 
     public static Player getCheater()
     {
-        for (int i = 0; i < logs.size(); i++)
+      /*  for (int i = 0; i < logs.size(); i++)
         {
             Player p = logs.get(i).getPlayer();
             List<LocalTime> times = new ArrayList<>();
@@ -99,6 +99,7 @@ public class Database
 
         }
 
+        return null;*/
         return null;
     }
 
