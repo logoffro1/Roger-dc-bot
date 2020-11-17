@@ -20,6 +20,7 @@ public class RussianRoulette
     private boolean gameStarted = false;
     private int currentPlayerIndex = 0;
     private int entryFee = 0;
+    private String message = "";
 
     public boolean hasGameStarted()
     {
@@ -53,6 +54,7 @@ public class RussianRoulette
 
             if (currentTurn.getName().equals(player))
             {
+                EmbedBuilder ebDeath = null;
                 int rnd = getRandomNumber(0, 100); //random chance for other event
                 if (rnd >= 10)
                 {
@@ -60,21 +62,28 @@ public class RussianRoulette
                     {
                         death();
                         if (players.size() == 1)
-                            gameOver();
+                            ebDeath = gameOver();
                         else
                         {
-                            channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
+                            // channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
+                            message += String.format("%s is your turn now %s\n", currentTurn.getName(), revolver.getChambersText());
                         }
 
                     } else
                     {
                         currentTurn.addSurvivedShot();
-                        channel.sendMessage(String.format("%s gets to fight another day!", currentTurn.getName())).queue();
-
+                        //channel.sendMessage(String.format("%s gets to fight another day!", currentTurn.getName())).queue();
+                        message += String.format("%s gets to fight another day!\n", currentTurn.getName());
                         changeCurrentPlayer();
                     }
                 } else
                     randomEvent();
+                if (message != "")
+                    channel.sendMessage(message).queue();
+
+                if (ebDeath != null)
+                    channel.sendMessage(ebDeath.build()).queue();
+                message = "";
             }
 
         }
@@ -125,11 +134,13 @@ public class RussianRoulette
             else
                 amount += 300;
 
-            channel.sendMessage(String.format("%s stroke of LUCK!:partying_face: The weapon malfunctioned on the last chamber!\n%s Gets a bonus of $%d from the impressed host :moneybag:", currentTurn.getName(), currentTurn.getName(), amount)).queue();
+            //  channel.sendMessage(String.format("%s stroke of LUCK!:partying_face: The weapon malfunctioned on the last chamber!\n%s Gets a bonus of $%d from the impressed host :moneybag:", currentTurn.getName(), currentTurn.getName(), amount)).queue();
+            message += String.format("%s stroke of LUCK!:partying_face: The weapon malfunctioned on the last chamber!\n%s Gets a bonus of $%d from the impressed host :moneybag:\n", currentTurn.getName(), currentTurn.getName(), amount);
             currentTurn.setMoney(currentTurn.getMoney() + amount);
         } else
         {
-            channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
+            // channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
+            message += String.format("%s gets lucky! The weapon malfunctioned!\n", currentTurn.getName());
         }
 
 
@@ -143,8 +154,8 @@ public class RussianRoulette
             currentPlayerIndex = 0;
 
         currentTurn = players.get(currentPlayerIndex);
-        channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
-
+        /// channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
+        message += String.format("%s is your turn now %s\n", currentTurn.getName(), revolver.getChambersText());
         if (currentTurn.getName().equalsIgnoreCase("<@774159565507919873>"))
             shoot("<@774159565507919873>");
 
@@ -155,7 +166,7 @@ public class RussianRoulette
         return entryFee;
     }
 
-    private void gameOver()
+    private EmbedBuilder gameOver()
     {
         currentTurn.getRussianStats().addGameWon();
         moneyPot += 5;
@@ -169,9 +180,10 @@ public class RussianRoulette
         eb.addField("Winner", String.format("The winner is %s :partying_face: :partying_face:\nYou win: $%d\nSurvived shots: %d", currentTurn.getName(), moneyPot, currentTurn.getSurvivedShots()), true);
         eb.addField("Congratulations!", "You are one step closer to becoming a true russian!", false);
         eb.setFooter("Made by Cosmin Ilie");
-        channel.sendMessage(eb.build()).queue();
+        /// channel.sendMessage(eb.build()).queue();
         RussianRouletteEvents.setRussianRoulette(null);
         Database.savePlayersToFile();
+        return eb;
     }
 
     private void death()
@@ -179,7 +191,8 @@ public class RussianRoulette
         currentTurn.getRussianStats().addGameLost();
         currentTurn.getRussianStats().setTotalMoneyLost(entryFee);
         currentTurn.getRussianStats().setPlayerRank();
-        channel.sendMessage(String.format("%s %s", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)])).queue();
+        //  channel.sendMessage(String.format("%s %s", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)])).queue();
+        message += String.format("%s %s\n", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)]);
         players.remove(currentTurn);
 
         currentPlayerIndex++;

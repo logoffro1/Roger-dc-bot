@@ -30,6 +30,7 @@ add quizzes to earn money (maybe about programming)
  Make highlow game to create a new channel for each game
  make it possible sso you can buy stuff for other people
  maybe pet store?
+ maybe add a bank
  */
 /*
 Change log:

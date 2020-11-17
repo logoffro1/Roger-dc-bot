@@ -1,7 +1,6 @@
 package Events;
 
-import DAO.Database;
-import Model.Player.Player;
+import Model.PlayingCards.CardDeck;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -68,6 +67,7 @@ public class TalkEvent extends ListenerAdapter
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
 
+        new CardDeck();
         //  System.out.println(LocalTime.now());
         // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
         //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();

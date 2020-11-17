@@ -30,7 +30,7 @@ public class Bot
         final String TOKEN = "Nzc0MTU5NTY1NTA3OTE5ODcz.X6TuRw.zjfCA9qQcCR9BNRMllUmLuVRNo8";
         JDA jda = JDABuilder.createDefault(TOKEN).build();
 
-        jda.getPresence().setPresence(Activity.playing("russian roulette"), true);
+        jda.getPresence().setPresence(Activity.playing("Blackjack"), true);
         jda.addEventListener(new TalkEvent());
         jda.addEventListener(new CommandEvent());
         jda.addEventListener(new RussianRouletteEvents());
