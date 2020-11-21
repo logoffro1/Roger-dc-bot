@@ -23,34 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877f2f21-1dbb-498b-b034-7bc0f96640ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Music/AudioPlayerSendHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Music/GuildMusicManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Music/TrackScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiscordAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordAPI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/players.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRoulette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRoulette.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRouletteEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRouletteEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerInventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/CardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/CardDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DAO/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DAO/Database.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Games/HighLow/HighlowEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HighLow/HighlowEvents.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRoulette.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRoulette.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRouletteEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRouletteEvents.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/PlayerInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/PlayerInventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/PlayingCards/CardDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PlayingCards/CardDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Music/PlayerManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Music/PlayerManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Music/PlayerManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Music/PlayerManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +109,7 @@
       <workItem from="1605532671390" duration="16058000" />
       <workItem from="1605694183876" duration="15795000" />
       <workItem from="1605887035156" duration="6030000" />
-      <workItem from="1605951062707" duration="766000" />
+      <workItem from="1605951062707" duration="1570000" />
     </task>
     <servers />
   </component>
@@ -166,22 +145,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="473" y="154" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605329384887" />
-    <state width="1493" height="149" key="GridCell.Tab.0.bottom" timestamp="1605951694036">
+    <state width="1493" height="149" key="GridCell.Tab.0.bottom" timestamp="1605952578735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="149" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605951694036" />
-    <state width="1493" height="149" key="GridCell.Tab.0.center" timestamp="1605951694036">
+    <state width="1493" height="149" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605952578735" />
+    <state width="1493" height="149" key="GridCell.Tab.0.center" timestamp="1605952578734">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="149" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605951694036" />
-    <state width="1493" height="149" key="GridCell.Tab.0.left" timestamp="1605951694035">
+    <state width="1493" height="149" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605952578734" />
+    <state width="1493" height="149" key="GridCell.Tab.0.left" timestamp="1605952578734">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="149" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605951694035" />
-    <state width="1493" height="149" key="GridCell.Tab.0.right" timestamp="1605951694036">
+    <state width="1493" height="149" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605952578734" />
+    <state width="1493" height="149" key="GridCell.Tab.0.right" timestamp="1605952578735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="149" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605951694036" />
+    <state width="1493" height="149" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605952578735" />
     <state x="349" y="155" key="IDE.errors.dialog" timestamp="1605519402637">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

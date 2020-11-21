@@ -92,8 +92,9 @@ public class CommandEvent extends ListenerAdapter
                         case "!give" -> giveMoney(message);
                         case "!admingive" -> adminGive(message);
                         case "!opengift" -> openGift();
-                        case "!play" -> playMusic(message);
+                        case "!play", "!p" -> playMusic(message);
                         case "!skip" -> skipMusic();
+                        case "!stop" -> stopMusic();
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -104,10 +105,15 @@ public class CommandEvent extends ListenerAdapter
 
     }
 
+    private void stopMusic()
+    {
+        PlayerManager manager = PlayerManager.getINSTANCE();
+        manager.stopMusic(e.getChannel());
+        manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
+    }
+
     private void skipMusic()
     {
-        VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
-        e.getGuild().getAudioManager().openAudioConnection(channel);
         PlayerManager manager = PlayerManager.getINSTANCE();
         manager.playNextTrack(e.getChannel());
         manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
