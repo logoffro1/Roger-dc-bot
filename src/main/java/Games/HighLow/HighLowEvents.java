@@ -26,7 +26,6 @@ public class HighLowEvents extends ListenerAdapter
             {
                 if (e.getChannel().getName().equalsIgnoreCase("bottest"))
                 {
-
                     if (message.length > 1)
                     {
                         message[1] = message[1].replace("!", "");

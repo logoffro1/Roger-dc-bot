@@ -3,6 +3,8 @@ package Games.RussianRoulette;
 import DAO.Database;
 import Model.ChatLog;
 import Model.Player.Player;
+import Music.PlayerManager;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -137,6 +139,7 @@ public class RussianRouletteEvents extends ListenerAdapter
 
     private void startGame()
     {
+
         Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
         Database.addLog(new ChatLog(p, e.getMessage().getContentRaw(), LocalTime.now()));
         if (russianRoulette.getPlayers().size() > 0)
@@ -151,7 +154,15 @@ public class RussianRouletteEvents extends ListenerAdapter
                 e.getChannel().sendMessage(String.format("%s started the game.\nGood luck everyone!", e.getAuthor().getAsMention())).queue();
                 russianRoulette.play(e);
 
+                VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
 
+                if(channel.getMembers().size() > 0){
+
+                    e.getGuild().getAudioManager().openAudioConnection(channel);
+                    PlayerManager manager = PlayerManager.getINSTANCE();
+                    manager.loadAndPlay(e.getChannel(), "https://www.youtube.com/watch?v=AFa1-kciCb4",false);
+                    manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
+                }
             }
         } else
         {

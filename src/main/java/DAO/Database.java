@@ -5,12 +5,12 @@ import Model.ChatLog;
 import Model.Player.Player;
 import Model.Reminder;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
-import java.time.LocalTime;
 import java.util.*;
 
 /*
@@ -34,27 +34,14 @@ add quizzes to earn money (maybe about programming)
  */
 /*
 Change log:
-Added !roger (help) command
-Changed the chamber colours from red-green to red-white
-Added a Phasmophobia randomizer (with !rnd map and !rnd item)
-Added the !highlow game
-Added !shop command
-Added !buy command
-Added inventory
-added High-Low permanent stats
-Added the !profile [user] command to see the user's complete profile
-From now on, every day at 20:00 everyone will get $50
-Added a bonus of $5 whenever you win a game of russian roulette (even if the entry fee was 0)
-Fixed a bug where the total survived shots was incorrect
-Other minor bug fixes
  */
 public class Database
 {
-    private static List<Reminder> reminders = new ArrayList<>();
-    private static Map<String, String> jokes = new HashMap<>();
-    private static File playersFile = new File("players.dat");
-    private static List<Player> allPlayers = new ArrayList<>();
-    private static List<ChatLog> logs = new ArrayList<>();
+    private static final List<Reminder> reminders = new ArrayList<>();
+    private static final Map<String, String> jokes = new HashMap<>();
+    private static final File playersFile = new File("players.dat");
+    private static final List<Player> allPlayers = new ArrayList<>();
+    private static final List<ChatLog> logs = new ArrayList<>();
 
     public static void addLog(ChatLog log)
     {
@@ -108,6 +95,57 @@ public class Database
     {
         for (Player p : allPlayers)
             p.setMoney(p.getMoney() + money);
+
+        Database.savePlayersToFile();
+    }
+
+    public static String getYoutubeURL(List<String> title)
+    {
+
+        StringBuilder youtubeQuery = new StringBuilder("https://www.youtube.com/results?search_query=");
+        StringBuilder videoURL = new StringBuilder("https://www.youtube.com");
+        for (int i = 0; i < title.size(); i++)
+        {
+            youtubeQuery.append(title.get(i));
+            if (i == title.size() - 1)
+                continue;
+            youtubeQuery.append("+");
+        }
+        try
+        {
+            final Document document = Jsoup.connect(youtubeQuery.toString()).get();
+            Elements scripts = document.getElementsByTag("script");
+
+            for (Element s : scripts)
+            {
+                for (DataNode node : s.dataNodes())
+                {
+                    if (node.toString().contains("scraper_data_begin"))
+                    {
+                        int watchIndex = node.toString().indexOf("/watch");
+                        for (int i = watchIndex; i < node.toString().length(); i++)
+                        {
+                            if (node.toString().charAt(i) == '"') break;
+
+                            videoURL.append(node.toString().charAt(i));
+                        }
+                        break;
+                    }
+                }
+            }
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return videoURL.toString();
+    }
+
+    public static void giveEveryoneGift()
+    {
+        for (Player p : allPlayers)
+            p.getInventory().addGift();
 
         Database.savePlayersToFile();
     }

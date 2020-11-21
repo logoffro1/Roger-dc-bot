@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class CardDeck
 {
-    private Card[] deck = new Card[52];
+    private List<Card> deck = new ArrayList<>();
 
     public CardDeck()
     {
         initDeck();
-    /*    for (Card c : deck)
+   /*    for (Card c : deck)
             System.out.println(c.toString());
 
         System.out.println("--BREAKK--");
@@ -23,16 +23,21 @@ public class CardDeck
 
     }
 
+    public Card takeCard()
+    {
+        Card card = deck.get(deck.size()-1);
+        deck.remove(card);
+        return card;
+    }
+
     private void initDeck()
     {
-
-        int count = 0;
+        deck.clear();
         for (int i = 0; i < 13; i++)
         {
             for (CardSuit suit : CardSuit.values())
             {
-                deck[count] = new Card(CardSign.values()[i], suit);
-                count++;
+                deck.add(new Card(CardSign.values()[i], suit));
             }
         }
     }
@@ -41,14 +46,14 @@ public class CardDeck
     {
 
         Card[] tempDeck = new Card[52];
-        List<Card> tempList = new ArrayList<>(Arrays.asList(deck));
+        List<Card> tempList = deck;
         for (int i = 0; i < 52; i++)
         {
             int rnd = getRandomNumber(0, tempList.size() - 1);
             tempDeck[i] = tempList.get(rnd);
             tempList.remove(rnd);
         }
-        deck = tempDeck;
+        deck = Arrays.asList(tempDeck);
     }
 
     private int getRandomNumber(int min, int max)

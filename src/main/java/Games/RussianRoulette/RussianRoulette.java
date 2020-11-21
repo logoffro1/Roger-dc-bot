@@ -15,11 +15,11 @@ import java.util.Random;
 public class RussianRoulette
 {
     private List<Player> players = new ArrayList<>();
-    private Revolver revolver = new Revolver();
+    private final Revolver revolver = new Revolver();
     private Player currentTurn = null;
     private boolean gameStarted = false;
     private int currentPlayerIndex = 0;
-    private int entryFee = 0;
+    private final int entryFee;
     private String message = "";
 
     public boolean hasGameStarted()
@@ -30,7 +30,7 @@ public class RussianRoulette
     private int moneyPot = 0;
     private TextChannel channel;
 
-    private String[] deathText =
+    private final String[] deathText =
             {"DIE, TRASH! :gun:",
                     "blew his brains out :brain::gun:",
                     "ate some lead, he's out :frowning::gun:",
@@ -65,20 +65,18 @@ public class RussianRoulette
                             ebDeath = gameOver();
                         else
                         {
-                            // channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
                             message += String.format("%s is your turn now %s\n", currentTurn.getName(), revolver.getChambersText());
                         }
 
                     } else
                     {
                         currentTurn.addSurvivedShot();
-                        //channel.sendMessage(String.format("%s gets to fight another day!", currentTurn.getName())).queue();
                         message += String.format("%s gets to fight another day!\n", currentTurn.getName());
                         changeCurrentPlayer();
                     }
                 } else
                     randomEvent();
-                if (message != "")
+                if (!message.equals(""))
                     channel.sendMessage(message).queue();
 
                 if (ebDeath != null)
@@ -110,11 +108,19 @@ public class RussianRoulette
 
     private void randomEvent()
     {
-        int rnd = 1;
-        switch (rnd)
-        {
-            case 1 -> revolverMisfire();
-        }
+        int rnd = getRandomNumber(1, 100);
+        if (rnd <= 30)
+            giveGift();
+        else
+            revolverMisfire();
+
+        changeCurrentPlayer();
+    }
+
+    private void giveGift()
+    {
+        message += String.format("%s found a GIFT down the barrel of the gun :gift:\n", currentTurn.getName());
+        currentTurn.getInventory().addGift();
     }
 
     private void revolverMisfire()
@@ -125,26 +131,21 @@ public class RussianRoulette
             int rnd = getRandomNumber(0, 100);
             int amount = 0;
             if (rnd >= 50)
-            {
                 amount += 70;
-            } else if (rnd < 50 && rnd >= 20)
+            else if (rnd >= 20)
                 amount += 90;
-            else if (rnd < 20 && amount >= 5)
+            else if (rnd >= 5)
                 amount += 120;
             else
                 amount += 300;
 
-            //  channel.sendMessage(String.format("%s stroke of LUCK!:partying_face: The weapon malfunctioned on the last chamber!\n%s Gets a bonus of $%d from the impressed host :moneybag:", currentTurn.getName(), currentTurn.getName(), amount)).queue();
             message += String.format("%s stroke of LUCK!:partying_face: The weapon malfunctioned on the last chamber!\n%s Gets a bonus of $%d from the impressed host :moneybag:\n", currentTurn.getName(), currentTurn.getName(), amount);
             currentTurn.setMoney(currentTurn.getMoney() + amount);
         } else
         {
-            // channel.sendMessage(String.format("%s gets lucky! The weapon malfunctioned!", currentTurn.getName())).queue();
             message += String.format("%s gets lucky! The weapon malfunctioned!\n", currentTurn.getName());
         }
 
-
-        changeCurrentPlayer();
     }
 
     private void changeCurrentPlayer()
@@ -154,7 +155,6 @@ public class RussianRoulette
             currentPlayerIndex = 0;
 
         currentTurn = players.get(currentPlayerIndex);
-        /// channel.sendMessage(String.format("%s is your turn now %s", currentTurn.getName(), revolver.getChambersText())).queue();
         message += String.format("%s is your turn now %s\n", currentTurn.getName(), revolver.getChambersText());
         if (currentTurn.getName().equalsIgnoreCase("<@774159565507919873>"))
             shoot("<@774159565507919873>");
@@ -180,7 +180,6 @@ public class RussianRoulette
         eb.addField("Winner", String.format("The winner is %s :partying_face: :partying_face:\nYou win: $%d\nSurvived shots: %d", currentTurn.getName(), moneyPot, currentTurn.getSurvivedShots()), true);
         eb.addField("Congratulations!", "You are one step closer to becoming a true russian!", false);
         eb.setFooter("Made by Cosmin Ilie");
-        /// channel.sendMessage(eb.build()).queue();
         RussianRouletteEvents.setRussianRoulette(null);
         Database.savePlayersToFile();
         return eb;
@@ -191,7 +190,6 @@ public class RussianRoulette
         currentTurn.getRussianStats().addGameLost();
         currentTurn.getRussianStats().setTotalMoneyLost(entryFee);
         currentTurn.getRussianStats().setPlayerRank();
-        //  channel.sendMessage(String.format("%s %s", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)])).queue();
         message += String.format("%s %s\n", currentTurn.getName(), deathText[getRandomNumber(0, deathText.length - 2)]);
         players.remove(currentTurn);
 
@@ -267,11 +265,6 @@ public class RussianRoulette
     public boolean getCanRegister()
     {
         return canRegister;
-    }
-
-    public void setCanRegister(boolean canRegister)
-    {
-        this.canRegister = canRegister;
     }
 
     private int getRandomNumber(int min, int max)

@@ -7,10 +7,13 @@ import Games.RussianRoulette.RussianRoulette;
 import Games.RussianRoulette.RussianRouletteEvents;
 import Model.Player.Player;
 import Model.Reminder;
+import Music.PlayerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,8 +88,12 @@ public class CommandEvent extends ListenerAdapter
                         case "!profile" -> showPlayerProfile(message);
                         case "!shop" -> shopCommand();
                         case "!buy" -> buyItem(message);
+                        case "!sell" -> sellItem(message);
                         case "!give" -> giveMoney(message);
                         case "!admingive" -> adminGive(message);
+                        case "!opengift" -> openGift();
+                        case "!play" -> playMusic(message);
+                        case "!skip" -> skipMusic();
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -95,6 +102,212 @@ public class CommandEvent extends ListenerAdapter
         }
 
 
+    }
+
+    private void skipMusic()
+    {
+        VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
+        e.getGuild().getAudioManager().openAudioConnection(channel);
+        PlayerManager manager = PlayerManager.getINSTANCE();
+        manager.playNextTrack(e.getChannel());
+        manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
+    }
+
+    private void playMusic(String[] message)
+    {
+        if (message.length > 1)
+        {
+
+            List<String> titleWords = new ArrayList<>();
+            for (String s : message)
+            {
+                if (s.equals("!play")) continue;
+                titleWords.add(s);
+            }
+            String youtubeURL = Database.getYoutubeURL(titleWords);
+            VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
+            if (channel.getMembers().size() > 0)
+            {
+
+                e.getGuild().getAudioManager().openAudioConnection(channel);
+
+                PlayerManager manager = PlayerManager.getINSTANCE();
+                manager.loadAndPlay(e.getChannel(), youtubeURL, true);
+                manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
+            }
+        }
+    }
+
+    private void sellItem(String[] message)
+    {
+        if (message.length == 2)
+        {
+            Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+            if (player != null)
+            {
+                switch (message[1])
+                {
+                    case "coffee":
+                        if (player.getInventory().getCoffee() > 0)
+                        {
+                            player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                            player.setMoney(player.getMoney() + 5);
+                            e.getChannel().sendMessage(String.format("%s you sold a coffee for $5", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have this product.", player.getName())).queue();
+                        break;
+                    case "beer":
+                        if (player.getInventory().getBeers() > 0)
+                        {
+                            player.getInventory().setBeers(player.getInventory().getBeers() - 1);
+                            player.setMoney(player.getMoney() + 10);
+                            e.getChannel().sendMessage(String.format("%s you sold a beer for $10", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have this product.", player.getName())).queue();
+                        break;
+                    case "cigarette":
+                        if (player.getInventory().getCigarettes() > 0)
+                        {
+                            player.getInventory().setCigarettes(player.getInventory().getCigarettes() - 1);
+                            player.setMoney(player.getMoney() + 6);
+                            e.getChannel().sendMessage(String.format("%s you sold a cigarette for $6", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have this product.", player.getName())).queue();
+                        break;
+                    case "banana":
+                        if (player.getInventory().getBananas() > 0)
+                        {
+                            player.getInventory().setBananas(player.getInventory().getBananas() - 1);
+                            player.setMoney(player.getMoney() + 3);
+                            e.getChannel().sendMessage(String.format("%s you sold a banana for $3", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have this product.", player.getName())).queue();
+                        break;
+                    case "paper":
+                        if (player.getInventory().getToiletPaper() > 0)
+                        {
+                            player.getInventory().setToiletPaper(player.getInventory().getToiletPaper() - 1);
+                            player.setMoney(player.getMoney() + 25);
+                            e.getChannel().sendMessage(String.format("%s you sold a roll of toilet paper for $25", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have this product.", player.getName())).queue();
+                        break;
+                    case "gift":
+                        if (player.getInventory().getGifts() > 0)
+                        {
+                            player.getInventory().setGifts(player.getInventory().getGifts() - 1);
+                            player.setMoney(player.getMoney() + 38);
+                            e.getChannel().sendMessage(String.format("%s you sold a gift for $38", player.getName())).queue();
+
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have this product.", player.getName())).queue();
+                        break;
+                }
+                Database.savePlayersToFile();
+            }
+        }
+    }
+
+    private void openGift()
+    {
+        Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+        if (player != null)
+        {
+            if (player.getInventory().getGifts() > 0)
+            {
+
+                int rnd = getRandomNumber(1, 100);
+                if (rnd >= 50)
+                {
+                    int rndMoney = getRandomNumber(1, 10);
+
+                    switch (rndMoney)
+                    {
+                        case 1:
+                            giftMoney(100);
+                            break;
+                        case 2:
+                            giftMoney(40);
+                            break;
+                        case 3:
+                            giftMoney(300);
+                            break;
+                        case 4:
+                            giftMoney(200);
+                            break;
+                        case 5:
+                            giftMoney(20);
+                            break;
+                        case 6:
+                            giftMoney(10);
+                            break;
+                        case 7:
+                            giftMoney(60);
+                            break;
+                        case 8:
+                            giftMoney(80);
+                            break;
+                        case 9:
+                            giftMoney(150);
+                            break;
+                        case 10:
+                            giftMoney(55);
+                            break;
+
+                    }
+                } else
+                {
+                    int rndItem = getRandomNumber(1, 5);
+                    int rndAmount = getRandomNumber(1, 3);
+                    switch (rndItem)
+                    {
+
+                        case 1:
+                            for (int i = 0; i < rndAmount; i++)
+                                player.getInventory().addCoffee();
+
+                            e.getChannel().sendMessage(String.format("%s opened the gift and got %d cups of coffee. :coffee:", player.getName(), rndAmount)).queue();
+                            break;
+                        case 2:
+                            for (int i = 0; i < rndAmount; i++)
+                                player.getInventory().addCigarette();
+
+                            e.getChannel().sendMessage(String.format("%s opened the gift and got %d cigarettes. :smoking:", player.getName(), rndAmount)).queue();
+                            break;
+                        case 3:
+                            for (int i = 0; i < rndAmount; i++)
+                                player.getInventory().addBeer();
+
+                            e.getChannel().sendMessage(String.format("%s opened the gift and got %d beers. :beer:", player.getName(), rndAmount)).queue();
+                            break;
+                        case 4:
+                            for (int i = 0; i < rndAmount; i++)
+                                player.getInventory().addBanana();
+
+                            e.getChannel().sendMessage(String.format("%s opened the gift and got %d bananas. :banana:", player.getName(), rndAmount)).queue();
+                            break;
+                        case 5:
+                            for (int i = 0; i < rndAmount; i++)
+                                player.getInventory().addToiletPaper();
+
+                            e.getChannel().sendMessage(String.format("%s opened the gift and got %d rolls of toilet paper. :roll_of_paper:", player.getName(), rndAmount)).queue();
+                            break;
+                    }
+                }
+                player.getInventory().setGifts(player.getInventory().getGifts() - 1);
+                Database.savePlayersToFile();
+            }
+        }
+    }
+
+    private void giftMoney(int amount)
+    {
+        Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+        if (player != null)
+        {
+            player.setMoney(player.getMoney() + amount);
+            e.getChannel().sendMessage(String.format("%s opened the gift and got $%d. :money_with_wings:", player.getName(), amount)).queue();
+        }
     }
 
     private void adminGive(String[] message)
@@ -109,9 +322,9 @@ public class CommandEvent extends ListenerAdapter
                 {
 
                     int amount = Integer.parseInt(message[2]);
-                        moneyTaker.setMoney(moneyTaker.getMoney() + amount);
-                        Database.savePlayersToFile();
-                        e.getChannel().sendMessage(String.format("%s just transferred $%d to %s", moneyGiver.getName(), amount, moneyTaker.getName())).queue();
+                    moneyTaker.setMoney(moneyTaker.getMoney() + amount);
+                    Database.savePlayersToFile();
+                    e.getChannel().sendMessage(String.format("%s just transferred $%d to %s", moneyGiver.getName(), amount, moneyTaker.getName())).queue();
 
                 }
             }
@@ -150,7 +363,7 @@ public class CommandEvent extends ListenerAdapter
         eb.setDescription("Use **!buy** [item] to buy an item!");
         eb.setColor(Color.ORANGE);
         eb.setThumbnail("https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-11/512/shop-icon.png");
-        eb.addField("Items", ":coffee: coffee - $10\n\n:smoking: cigarette - $12\n\n:beer: beer - $20\n\n:banana: banana - $5\n\n:roll_of_paper: paper - $50", true);
+        eb.addField("Items", ":coffee: coffee - $10\n\n:smoking: cigarette - $12\n\n:beer: beer - $20\n\n:banana: banana - $5\n\n:roll_of_paper: paper - $50\n\n:gift: gift - $75", true);
         eb.setFooter("Made by Cosmin Ilie");
         e.getChannel().sendMessage(eb.build()).queue();
     }
@@ -206,6 +419,16 @@ public class CommandEvent extends ListenerAdapter
                             player.getInventory().addToiletPaper();
                             player.setMoney(player.getMoney() - 50);
                             e.getChannel().sendMessage(String.format("%s you purchased a roll of toilet paper for $50", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
+                    case "gift":
+                        if (player.getMoney() >= 75)
+                        {
+                            player.getInventory().addGift();
+                            player.setMoney(player.getMoney() - 75);
+                            e.getChannel().sendMessage(String.format("%s you purchased a gift for $75\nTo open a gift use !opengift", player.getName())).queue();
+
                         } else
                             e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
                         break;
@@ -422,12 +645,13 @@ public class CommandEvent extends ListenerAdapter
                     player.getHighLowStats().getMoneyWon(),
                     player.getHighLowStats().getMoneyLost()
             ), true);
-            eb.addField("Inventory", String.format(":coffee: - **%d**\n:beer: - **%d**\n:smoking: - **%d**\n:banana: - **%d**\n:roll_of_paper: - **%d**",
+            eb.addField("Inventory", String.format(":coffee: - **%d**\n:beer: - **%d**\n:smoking: - **%d**\n:banana: - **%d**\n:roll_of_paper: - **%d**\n:gift: - **%d**",
                     player.getInventory().getCoffee(),
                     player.getInventory().getBeers(),
                     player.getInventory().getCigarettes(),
                     player.getInventory().getBananas(),
-                    player.getInventory().getToiletPaper()
+                    player.getInventory().getToiletPaper(),
+                    player.getInventory().getGifts()
             ), false);
 
             eb.setFooter("Made by Cosmin Ilie");

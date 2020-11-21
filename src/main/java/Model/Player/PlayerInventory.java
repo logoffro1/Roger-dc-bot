@@ -9,6 +9,47 @@ public class PlayerInventory implements Serializable
     private int beers = 0;
     private int bananas = 0;
     private int toiletPaper = 0;
+    private int gifts = 0;
+
+    public int getGifts()
+    {
+        return gifts;
+    }
+
+    public void setGifts(int gifts)
+    {
+        this.gifts = gifts;
+    }
+
+    public void setCoffee(int coffee)
+    {
+        this.coffee = coffee;
+    }
+
+    public void setCigarettes(int cigarettes)
+    {
+        this.cigarettes = cigarettes;
+    }
+
+    public void setBeers(int beers)
+    {
+        this.beers = beers;
+    }
+
+    public void setBananas(int bananas)
+    {
+        this.bananas = bananas;
+    }
+
+    public void setToiletPaper(int toiletPaper)
+    {
+        this.toiletPaper = toiletPaper;
+    }
+
+    public void addGift()
+    {
+        this.gifts++;
+    }
 
     public int getCoffee()
     {
