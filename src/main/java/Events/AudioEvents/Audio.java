@@ -18,7 +18,7 @@ public class Audio extends ListenerAdapter
 
             PlayerManager manager = PlayerManager.getINSTANCE();
             manager.loadAndPlay(e.getChannel(), trackURL, showMsg);
-            manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
+            manager.getGuildMusicManager(e.getGuild()).player.setVolume(20);
         }
     }
 }

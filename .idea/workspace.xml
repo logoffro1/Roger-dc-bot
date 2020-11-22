@@ -23,19 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877f2f21-1dbb-498b-b034-7bc0f96640ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/Audio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/MusicEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/SoundEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players.dat" beforeDir="false" afterPath="$PROJECT_DIR$/players.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAO/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DAO/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DAO/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +109,7 @@
       <workItem from="1605887035156" duration="6030000" />
       <workItem from="1605951062707" duration="3740000" />
       <workItem from="1606012765724" duration="4939000" />
-      <workItem from="1606019080274" duration="5064000" />
+      <workItem from="1606019080274" duration="6989000" />
     </task>
     <servers />
   </component>

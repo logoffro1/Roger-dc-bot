@@ -25,13 +25,14 @@ Maybe add a job system
 add more ways to make money
 add achievements
 maybe add the ability to have extra shots
-make the game more responsive
+add blackjack
 add slots game
 add quizzes to earn money (maybe about programming)
  Make highlow game to create a new channel for each game
- make it possible sso you can buy stuff for other people
+ make it possible so you can buy stuff for other people
  maybe pet store?
  maybe add a bank
+ add !sellall command
  */
 /*
 Change log:

@@ -312,10 +312,9 @@ public class CommandEvent extends ListenerAdapter
     }
 
     private void buyItem(String[] message)
-    {
+    {Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
         if (message.length == 2)
         {
-            Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
             if (player != null)
             {
                 switch (message[1])
