@@ -1,10 +1,10 @@
 import DAO.Database;
+import Events.AudioEvents.MusicEvents;
+import Events.AudioEvents.SoundEvents;
 import Events.CommandEvent;
 import Events.TalkEvent;
 import Games.HighLow.HighLowEvents;
 import Games.RussianRoulette.RussianRouletteEvents;
-import Model.PlayingCards.Card;
-import Model.PlayingCards.CardDeck;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -31,12 +31,13 @@ public class Bot
         Database.initPlayers();
         final String TOKEN = "Nzc0MTU5NTY1NTA3OTE5ODcz.X6TuRw.zjfCA9qQcCR9BNRMllUmLuVRNo8";
         JDA jda = JDABuilder.createDefault(TOKEN).build();
-
         jda.getPresence().setPresence(Activity.playing("Blackjack"), true);
         jda.addEventListener(new TalkEvent());
         jda.addEventListener(new CommandEvent());
         jda.addEventListener(new RussianRouletteEvents());
         jda.addEventListener(new HighLowEvents());
+        jda.addEventListener(new MusicEvents());
+        jda.addEventListener(new SoundEvents());
         Thread reminders = new Thread(() ->
                 checkReminders());
 

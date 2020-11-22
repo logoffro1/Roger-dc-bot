@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.swing.text.AbstractDocument;
 import java.io.*;
 import java.util.*;
 
@@ -140,6 +141,44 @@ public class Database
         }
 
         return videoURL.toString();
+    }
+
+    public static String getSongLyrics(List<String> title)
+    {
+        String lyrics = "";
+
+        StringBuilder googleQuery = new StringBuilder("https://www.google.com/search?q=");
+        for (int i = 0; i < title.size(); i++)
+        {
+            googleQuery.append(title.get(i));
+            if (i == title.size() - 1)
+                continue;
+            googleQuery.append("+");
+        }
+
+        try
+        {
+            final Document document = Jsoup.connect(googleQuery.toString()).get();
+            Element div = document.select("div.ujudUb.WRZytc").last();
+            Elements divs = document.select("div");
+            Elements spans = document.select("span");
+
+            /*for (Element span : divs.getElementsByTag("span"))
+                lyrics += span.ownText() + "\n";*/
+
+            System.out.println(document.selectFirst("div").text());
+           // for(Element e : spans)
+           // System.out.println(e.outerHtml());
+
+           /// System.out.println(lyrics);
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return lyrics;
     }
 
     public static void giveEveryoneGift()

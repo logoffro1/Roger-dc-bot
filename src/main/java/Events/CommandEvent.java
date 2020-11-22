@@ -7,13 +7,10 @@ import Games.RussianRoulette.RussianRoulette;
 import Games.RussianRoulette.RussianRouletteEvents;
 import Model.Player.Player;
 import Model.Reminder;
-import Music.PlayerManager;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.Random;
 public class CommandEvent extends ListenerAdapter
 {
     GuildMessageReceivedEvent e;
-    private String[] phasmoMaps =
+    private final String[] phasmoMaps =
             {
                     "Tanglewood Street House",
                     "Edgefield Street House",
@@ -33,7 +30,7 @@ public class CommandEvent extends ListenerAdapter
                     "Brownstone High school",
                     "Asylum"
             };
-    private String[] phasmoItems =
+    private final String[] phasmoItems =
             {
                     "Spirit Box",
                     "Ghost Writing Book",
@@ -81,7 +78,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!remind" -> remindCommand(message);
                         case "!joke" -> jokeCommand();
                         case "!corona" -> coronaCommand(message);
-                        case "!roulette" -> russianRouletteCommand(message);
+                        case "!roulette","!rr" -> russianRouletteCommand(message);
                         case "!slots" -> slotsCommand(message);
                         case "!highlow" -> highLowCommand(message);
                         case "!roger" -> showHelpPanel();
@@ -92,9 +89,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!give" -> giveMoney(message);
                         case "!admingive" -> adminGive(message);
                         case "!opengift" -> openGift();
-                        case "!play", "!p" -> playMusic(message);
-                        case "!skip" -> skipMusic();
-                        case "!stop" -> stopMusic();
+                        case "!ping" -> getPing();
                     }
                 } else
                     this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
@@ -105,44 +100,13 @@ public class CommandEvent extends ListenerAdapter
 
     }
 
-    private void stopMusic()
+
+    private void getPing()
     {
-        PlayerManager manager = PlayerManager.getINSTANCE();
-        manager.stopMusic(e.getChannel());
-        manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
+        JDA jda = e.getJDA();
+        jda.getRestPing().queue((time) -> e.getChannel().sendMessageFormat("Ping: %d ms", time).queue());
     }
 
-    private void skipMusic()
-    {
-        PlayerManager manager = PlayerManager.getINSTANCE();
-        manager.playNextTrack(e.getChannel());
-        manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
-    }
-
-    private void playMusic(String[] message)
-    {
-        if (message.length > 1)
-        {
-
-            List<String> titleWords = new ArrayList<>();
-            for (String s : message)
-            {
-                if (s.equals("!play")) continue;
-                titleWords.add(s);
-            }
-            String youtubeURL = Database.getYoutubeURL(titleWords);
-            VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
-            if (channel.getMembers().size() > 0)
-            {
-
-                e.getGuild().getAudioManager().openAudioConnection(channel);
-
-                PlayerManager manager = PlayerManager.getINSTANCE();
-                manager.loadAndPlay(e.getChannel(), youtubeURL, true);
-                manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
-            }
-        }
-    }
 
     private void sellItem(String[] message)
     {
@@ -229,37 +193,16 @@ public class CommandEvent extends ListenerAdapter
 
                     switch (rndMoney)
                     {
-                        case 1:
-                            giftMoney(100);
-                            break;
-                        case 2:
-                            giftMoney(40);
-                            break;
-                        case 3:
-                            giftMoney(300);
-                            break;
-                        case 4:
-                            giftMoney(200);
-                            break;
-                        case 5:
-                            giftMoney(20);
-                            break;
-                        case 6:
-                            giftMoney(10);
-                            break;
-                        case 7:
-                            giftMoney(60);
-                            break;
-                        case 8:
-                            giftMoney(80);
-                            break;
-                        case 9:
-                            giftMoney(150);
-                            break;
-                        case 10:
-                            giftMoney(55);
-                            break;
-
+                        case 1 -> giftMoney(100);
+                        case 2 -> giftMoney(40);
+                        case 3 -> giftMoney(300);
+                        case 4 -> giftMoney(200);
+                        case 5 -> giftMoney(20);
+                        case 6 -> giftMoney(10);
+                        case 7 -> giftMoney(60);
+                        case 8 -> giftMoney(80);
+                        case 9 -> giftMoney(150);
+                        case 10 -> giftMoney(55);
                     }
                 } else
                 {
@@ -267,37 +210,31 @@ public class CommandEvent extends ListenerAdapter
                     int rndAmount = getRandomNumber(1, 3);
                     switch (rndItem)
                     {
-
-                        case 1:
+                        case 1 -> {
                             for (int i = 0; i < rndAmount; i++)
                                 player.getInventory().addCoffee();
-
                             e.getChannel().sendMessage(String.format("%s opened the gift and got %d cups of coffee. :coffee:", player.getName(), rndAmount)).queue();
-                            break;
-                        case 2:
+                        }
+                        case 2 -> {
                             for (int i = 0; i < rndAmount; i++)
                                 player.getInventory().addCigarette();
-
                             e.getChannel().sendMessage(String.format("%s opened the gift and got %d cigarettes. :smoking:", player.getName(), rndAmount)).queue();
-                            break;
-                        case 3:
+                        }
+                        case 3 -> {
                             for (int i = 0; i < rndAmount; i++)
                                 player.getInventory().addBeer();
-
                             e.getChannel().sendMessage(String.format("%s opened the gift and got %d beers. :beer:", player.getName(), rndAmount)).queue();
-                            break;
-                        case 4:
+                        }
+                        case 4 -> {
                             for (int i = 0; i < rndAmount; i++)
                                 player.getInventory().addBanana();
-
                             e.getChannel().sendMessage(String.format("%s opened the gift and got %d bananas. :banana:", player.getName(), rndAmount)).queue();
-                            break;
-                        case 5:
+                        }
+                        case 5 -> {
                             for (int i = 0; i < rndAmount; i++)
                                 player.getInventory().addToiletPaper();
-
                             e.getChannel().sendMessage(String.format("%s opened the gift and got %d rolls of toilet paper. :roll_of_paper:", player.getName(), rndAmount)).queue();
-                            break;
+                        }
                     }
                 }
                 player.getInventory().setGifts(player.getInventory().getGifts() - 1);

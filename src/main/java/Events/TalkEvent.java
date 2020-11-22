@@ -68,8 +68,7 @@ public class TalkEvent extends ListenerAdapter
             fuckGroovy();
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
-
-        new CardDeck();
+        
         //  System.out.println(LocalTime.now());
         // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
         //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();
