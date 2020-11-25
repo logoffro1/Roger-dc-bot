@@ -1,5 +1,7 @@
 package Events.AudioEvents;
+
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
 import java.util.concurrent.TimeUnit;
 
 public class SoundEvents extends Audio
@@ -12,7 +14,6 @@ public class SoundEvents extends Audio
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (!e.getMessage().getAuthor().isBot())
         {
-
             if (message[0].charAt(0) == '!')
             {
                 if (this.e.getChannel().getName().equalsIgnoreCase("bottest"))
@@ -40,16 +41,41 @@ public class SoundEvents extends Audio
                         case "!sad" -> sadMusic();
                         case "!passed" -> passed();
                         case "!leave" -> discordLeave();
+                        case "!cena" -> johnCena();
+                        case "!cheer" -> cheering();
+                        case "!hello" -> indianHello();
+                        case "!boo" -> booing();
                     }
-                }
-            } else
-                this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
+                } else
+                    this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
+            }
+
         }
     }
 
     private void sadMusic()
     {
         playAudio("https://www.youtube.com/watch?v=i3MJ5loj0Bg&list=RDCMUCi-xN4ZB6e-0JcXzvBEomlw&index=4", false);
+    }
+
+    private void booing()
+    {
+        playAudio("https://www.youtube.com/watch?v=PfriI_DDifE", false);
+    }
+
+    private void indianHello()
+    {
+        playAudio("https://www.youtube.com/watch?v=P45cmvvAO2Q", false);
+    }
+
+    private void cheering()
+    {
+        playAudio("https://www.youtube.com/watch?v=barWV7RWkq0", false);
+    }
+
+    private void johnCena()
+    {
+        playAudio("https://www.youtube.com/watch?v=2D-ZO2rGcSA", false);
     }
 
     private void discordLeave()

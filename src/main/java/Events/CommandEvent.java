@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!remind" -> remindCommand(message);
                         case "!joke" -> jokeCommand();
                         case "!corona" -> coronaCommand(message);
-                        case "!roulette","!rr" -> russianRouletteCommand(message);
+                        case "!roulette", "!rr" -> russianRouletteCommand(message);
                         case "!slots" -> slotsCommand(message);
                         case "!highlow" -> highLowCommand(message);
                         case "!roger" -> showHelpPanel();
@@ -86,6 +87,7 @@ public class CommandEvent extends ListenerAdapter
                         case "!shop" -> shopCommand();
                         case "!buy" -> buyItem(message);
                         case "!sell" -> sellItem(message);
+                        case "!sellall" -> sellAll();
                         case "!give" -> giveMoney(message);
                         case "!admingive" -> adminGive(message);
                         case "!opengift" -> openGift();
@@ -107,6 +109,50 @@ public class CommandEvent extends ListenerAdapter
         jda.getRestPing().queue((time) -> e.getChannel().sendMessageFormat("Ping: %d ms", time).queue());
     }
 
+    private void sellAll()
+    {
+        Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+
+        if (player != null)
+        {
+            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+            for (int i = 0; i < player.getInventory().getBananas(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getBananas() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
+            {
+                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
+                player.setMoney(player.getMoney() + 5);
+            }
+        }
+
+    }
 
     private void sellItem(String[] message)
     {
@@ -312,7 +358,8 @@ public class CommandEvent extends ListenerAdapter
     }
 
     private void buyItem(String[] message)
-    {Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+    {
+        Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
         if (message.length == 2)
         {
             if (player != null)
@@ -438,6 +485,7 @@ public class CommandEvent extends ListenerAdapter
 
     private void russianRouletteCommand(String[] message)
     {
+        int x = getRandomNumber(1,100);
         if (RussianRouletteEvents.getRussianRoulette() == null)
         {
             int entryFee = 0;
@@ -458,14 +506,14 @@ public class CommandEvent extends ListenerAdapter
                     }
                 }
             }
-            RussianRoulette russianRoulette = new RussianRoulette(entryFee);
+            RussianRoulette russianRoulette = new RussianRoulette(entryFee,x);
             RussianRouletteEvents.setRussianRoulette(russianRoulette);
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Russian Roulette");
             eb.setThumbnail("https://pngimg.com/uploads/gun/gun_PNG1354.png");
             eb.setColor(Color.BLACK);
-            eb.addField(String.format("%s started a new game of russian roulette!\n```Entry fee: $%d```", e.getAuthor().getAsTag(), entryFee), "Below you can find information about how to play", true);
-            eb.addField("Commands", "```!me - register to play\n!stop - stop the current game\n!start - start the game\n!shoot - fire the weapon\n!mix - mix the chambers\n!give [player] [amount] - transfer a player money```", false);
+            eb.addField(String.format("%s started a new game of russian roulette!\n```Entry fee: $%d```\nThe answer is: **%d**", e.getAuthor().getAsTag(), entryFee,x), "Below you can find information about how to play", true);
+            eb.addField("Commands", "```!me [answer]- register to play\n!stop - stop the current game\n!start - start the game\n!shoot - fire the weapon\n!mix - mix the chambers\n!give [player] [amount] - transfer a player money```", false);
             eb.appendDescription("There are 6 chambers, one of them has a bullet in it, the other 5 are empty, shoot and try to outlive your friends!\n **Each player can only mix the chambers once per game**");
             eb.setFooter("Good luck everyone, may the luckiest one survive!\nMade by Cosmin Ilie");
             e.getChannel().sendMessage(eb.build()).queue();

@@ -21,6 +21,7 @@ public class RussianRoulette
     private int currentPlayerIndex = 0;
     private final int entryFee;
     private String message = "";
+    private int x;
 
     public boolean hasGameStarted()
     {
@@ -42,9 +43,15 @@ public class RussianRoulette
     private boolean canRegister = true;
 
 
-    public RussianRoulette(int entryFee)
+    public RussianRoulette(int entryFee, int x)
     {
+        this.x = x;
         this.entryFee = entryFee;
+    }
+
+    public int getX()
+    {
+        return x;
     }
 
     public void shoot(String player)
