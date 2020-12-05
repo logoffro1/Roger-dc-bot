@@ -94,6 +94,7 @@ public class PlayerManager
             @Override
             public void loadFailed(FriendlyException e)
             {
+                e.printStackTrace();
                 if (showMessages)
                     channel.sendMessage("Could not play: " + e.getMessage()).queue();
             }

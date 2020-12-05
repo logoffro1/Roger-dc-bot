@@ -3,18 +3,21 @@ package Games.RussianRoulette;
 import DAO.Database;
 import Model.ChatLog;
 import Model.Player.Player;
-import Music.PlayerManager;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RussianRouletteEvents extends ListenerAdapter
 {
     private static RussianRoulette russianRoulette;
+    private static Message rouletteMessage;
+    private static List<Player> reactedPlayers = new ArrayList<>();
     private GuildMessageReceivedEvent e;
 
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent e)
@@ -55,6 +58,45 @@ public class RussianRouletteEvents extends ListenerAdapter
 
     }
 
+    private void setReactedPlayers()
+    {
+       reactedPlayers.clear();
+        long msgId = rouletteMessage.getIdLong();
+
+        e.getChannel().retrieveMessageById(msgId).queue((message) ->
+        {
+
+            for (MessageReaction r : message.getReactions())
+            {
+                for (User u : r.getJDA().getUsers())
+                {
+
+                    Player p = Database.getPlayerByName(u.getAsMention());
+                    if (p != null)
+                    {
+                     //   System.out.println(p.getName());
+                        if (!reactedPlayers.contains(p))
+                            reactedPlayers.add(p);
+
+                      //  System.out.println(reactedPlayers.size());
+
+                    }
+                }
+            }
+        });
+        System.out.println(reactedPlayers.size());
+    }
+
+    private List<Player> getReactedPlayers()
+    {
+        return reactedPlayers;
+    }
+
+    public static void setRouletteMessage(Message rouletteMessage)
+    {
+        RussianRouletteEvents.rouletteMessage = rouletteMessage;
+    }
+
     private void shoot()
     {
         Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
@@ -75,46 +117,40 @@ public class RussianRouletteEvents extends ListenerAdapter
 
     private void registerPlayer(String[] message)
     {
-        if (message.length == 2)
+      ///  System.out.println(reactedPlayers.size());
+        setReactedPlayers();
+      //  System.out.println(reactedPlayers.size());
+
+        Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        if (russianRoulette.getCanRegister())
         {
-            if (isNumber(message[1]))
+            if (reactedPlayers.contains(p))
             {
-                int answer = Integer.parseInt(message[1]);
-
-                Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
-                Database.addLog(new ChatLog(p, e.getMessage().getContentRaw(), LocalTime.now()));
-                if (russianRoulette.getCanRegister())
+                System.out.println("Reacted player contains");
+                if (!russianRoulette.checkIfPlayerExists(e.getAuthor().getAsMention()))
                 {
-                    if (answer == russianRoulette.getX())
+
+                    Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+                    if (player != null)
+                        russianRoulette.addPlayer(player, e);
+                    else
                     {
-
-                        if (!russianRoulette.checkIfPlayerExists(e.getAuthor().getAsMention()))
-                        {
-
-                            Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
-                            if (player != null)
-                                russianRoulette.addPlayer(player, e);
-                            else
-                            {
-                                Player newPlayer = new Player(e.getAuthor().getAsMention(), e.getAuthor().getAvatarUrl());
-                                russianRoulette.addPlayer(newPlayer, e);
-                                Database.addPlayer(newPlayer);
-                            }
-                        } else
-                        {
-                            e.getChannel().sendMessage(String.format("%s you are already registered.", e.getAuthor().getAsMention())).queue();
-                        }
-
-                    } else
-                    {
-                        e.getChannel().sendMessage(String.format("%s wrong answer.", e.getAuthor().getAsMention())).queue();
+                        Player newPlayer = new Player(e.getAuthor().getAsMention(), e.getAuthor().getAvatarUrl());
+                        russianRoulette.addPlayer(newPlayer, e);
+                        Database.addPlayer(newPlayer);
                     }
+                } else
+                {
+                    e.getChannel().sendMessage(String.format("%s you are already registered.", e.getAuthor().getAsMention())).queue();
                 }
+            } else
+            {
+                e.getChannel().sendMessage(String.format("%s you must react to the message first.", e.getAuthor().getAsMention())).queue();
             }
-        } else{
-            e.getChannel().sendMessage(String.format("%s correct format: !me [answer]", e.getAuthor().getAsMention())).queue();
+
         }
     }
+
 
     private void addRogerToPlay()
     {
@@ -171,7 +207,7 @@ public class RussianRouletteEvents extends ListenerAdapter
                 e.getChannel().sendMessage(String.format("%s started the game.\nGood luck everyone!", e.getAuthor().getAsMention())).queue();
                 russianRoulette.play(e);
 
-                VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
+               /* VoiceChannel channel = e.getGuild().getVoiceChannels().get(0);
 
                 if (channel.getMembers().size() > 0)
                 {
@@ -180,7 +216,7 @@ public class RussianRouletteEvents extends ListenerAdapter
                     PlayerManager manager = PlayerManager.getINSTANCE();
                     manager.loadAndPlay(e.getChannel(), "https://www.youtube.com/watch?v=AFa1-kciCb4", false);
                     manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
-                }
+                }*/
             }
         } else
         {

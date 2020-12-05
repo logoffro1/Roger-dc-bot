@@ -49,10 +49,6 @@ public class RussianRoulette
         this.entryFee = entryFee;
     }
 
-    public int getX()
-    {
-        return x;
-    }
 
     public void shoot(String player)
     {

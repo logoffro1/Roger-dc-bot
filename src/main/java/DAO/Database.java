@@ -122,9 +122,9 @@ public class Database
             {
                 for (DataNode node : s.dataNodes())
                 {
-                    if (node.toString().contains("scraper_data_begin"))
-                    {
-                        int watchIndex = node.toString().indexOf("/watch");
+                    int watchIndex = node.toString().indexOf("/watch?");
+                    if(watchIndex > 0){
+
                         for (int i = watchIndex; i < node.toString().length(); i++)
                         {
                             if (node.toString().charAt(i) == '"') break;

@@ -9,8 +9,12 @@ import Model.Player.Player;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.RestAction;
+import org.apache.commons.io.input.ObservableInputStream;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -485,7 +489,7 @@ public class CommandEvent extends ListenerAdapter
 
     private void russianRouletteCommand(String[] message)
     {
-        int x = getRandomNumber(1,100);
+        int x = getRandomNumber(1, 100);
         if (RussianRouletteEvents.getRussianRoulette() == null)
         {
             int entryFee = 0;
@@ -506,17 +510,23 @@ public class CommandEvent extends ListenerAdapter
                     }
                 }
             }
-            RussianRoulette russianRoulette = new RussianRoulette(entryFee,x);
+            RussianRoulette russianRoulette = new RussianRoulette(entryFee, x);
             RussianRouletteEvents.setRussianRoulette(russianRoulette);
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Russian Roulette");
             eb.setThumbnail("https://pngimg.com/uploads/gun/gun_PNG1354.png");
             eb.setColor(Color.BLACK);
-            eb.addField(String.format("%s started a new game of russian roulette!\n```Entry fee: $%d```\nThe answer is: **%d**", e.getAuthor().getAsTag(), entryFee,x), "Below you can find information about how to play", true);
+            eb.addField(String.format("%s started a new game of russian roulette!\n```Entry fee: $%d```\nThe answer is: **%d**", e.getAuthor().getAsTag(), entryFee, x), "Below you can find information about how to play", true);
             eb.addField("Commands", "```!me [answer]- register to play\n!stop - stop the current game\n!start - start the game\n!shoot - fire the weapon\n!mix - mix the chambers\n!give [player] [amount] - transfer a player money```", false);
             eb.appendDescription("There are 6 chambers, one of them has a bullet in it, the other 5 are empty, shoot and try to outlive your friends!\n **Each player can only mix the chambers once per game**");
             eb.setFooter("Good luck everyone, may the luckiest one survive!\nMade by Cosmin Ilie");
-            e.getChannel().sendMessage(eb.build()).queue();
+
+            MessageEmbed msgEmbed = eb.build();
+            RestAction<Message> ra = e.getChannel().sendMessage(msgEmbed);
+            Message msg = ra.complete();
+            RussianRouletteEvents.setRouletteMessage(msg);
+
+
         } else
         {
             e.getChannel().sendMessage(String.format("%s a russian roulette game is already in progress.\nType !stop to stop the current game", e.getAuthor().getAsMention())).queue();
