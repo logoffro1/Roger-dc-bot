@@ -23,21 +23,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877f2f21-1dbb-498b-b034-7bc0f96640ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/HorseStats.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacing.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacingEvents.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/HorseRacing/Horse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Model/HorseRacing/PlayerBet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiscordAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordAPI.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players.dat" beforeDir="false" afterPath="$PROJECT_DIR$/players.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAO/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/MusicEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/MusicEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/SoundEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/SoundEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRoulette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRoulette.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRouletteEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRouletteEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerRank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerRank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/RussianRouletteStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/RussianRouletteStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/CardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/CardDeck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DAO/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DAO/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Events/AudioEvents/MusicEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/AudioEvents/MusicEvents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Events/AudioEvents/SoundEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/AudioEvents/SoundEvents.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/HighLow/HighLow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HighLow/HighLow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/HighLow/HighlowEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HighLow/HighlowEvents.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRoulette.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRoulette.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRouletteEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRouletteEvents.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Music/PlayerManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Music/PlayerManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Music/PlayerManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Music/PlayerManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/PlayerInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/PlayerInventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/PlayerRank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/PlayerRank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/RussianRouletteStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/RussianRouletteStats.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/PlayingCards/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PlayingCards/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/PlayingCards/CardDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PlayingCards/CardDeck.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +80,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -63,30 +90,37 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="1kGaGQ5OQ675cviHT37OByCnq9g" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jsoup-1.13.1" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cosmin/Downloads/poi-bin-5.2.3-20220909/poi-bin-5.2.3/poi-scratchpad-5.2.3.jar&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Cosmin\Desktop\ROGER BOT\Roger-dc-bot\src" />
+      <recent name="C:\Users\Cosmin\Desktop\ROGER BOT\Roger-dc-bot\src\main\java\Games\HorseRacing" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Cosmin\Desktop\ROGER BOT\Roger-dc-bot" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="Bot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Bot" />
-      <module name="DiscordAPI" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -94,6 +128,13 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Bot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Bot" />
+      <module name="DiscordAPI" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,6 +169,13 @@
       <workItem from="1606680376133" duration="425000" />
       <workItem from="1606745662468" duration="6081000" />
       <workItem from="1606940831766" duration="1821000" />
+      <workItem from="1667290930948" duration="6483000" />
+      <workItem from="1667307181620" duration="18844000" />
+      <workItem from="1667386968600" duration="1897000" />
+      <workItem from="1667759969520" duration="7914000" />
+      <workItem from="1667817300955" duration="5669000" />
+      <workItem from="1667851897870" duration="3413000" />
+      <workItem from="1668019469576" duration="3211000" />
     </task>
     <servers />
   </component>
@@ -144,72 +192,15 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605329324021">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605329324021" />
-    <state x="524" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605802769026">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="524" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605802769026" />
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1606772284492">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606772284492" />
-    <state x="473" y="154" key="FileChooserDialogImpl" timestamp="1605329384887">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="473" y="154" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605329384887" />
-    <state width="1493" height="233" key="GridCell.Tab.0.bottom" timestamp="1606775120643">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="181" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1606404800583" />
-    <state width="1493" height="233" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606775120643" />
-    <state width="1493" height="180" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606167799876" />
-    <state width="1493" height="233" key="GridCell.Tab.0.center" timestamp="1606775120643">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="181" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1606404800582" />
-    <state width="1493" height="233" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606775120643" />
-    <state width="1493" height="180" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606167799875" />
-    <state width="1493" height="233" key="GridCell.Tab.0.left" timestamp="1606775120643">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="181" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1606404800582" />
-    <state width="1493" height="233" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606775120643" />
-    <state width="1493" height="180" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606167799875" />
-    <state width="1493" height="233" key="GridCell.Tab.0.right" timestamp="1606775120643">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="181" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@-1920.0.1536.824" timestamp="1606404800582" />
-    <state width="1493" height="233" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606775120643" />
-    <state width="1493" height="180" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606167799876" />
-    <state x="349" y="155" key="IDE.errors.dialog" timestamp="1605519402637">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="349" y="155" key="IDE.errors.dialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605519402637" />
-    <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1605795853507">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="299" y="67" key="Maven.ArtifactSearchDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605795853507" />
-    <state x="537" y="115" key="RollbackChangesDialog" timestamp="1606775417078">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="537" y="115" key="RollbackChangesDialog/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606775417078" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1605329387203">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1605329387203" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1606019023977">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606019023977" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606771924642">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1536.824@0.0.1536.824" timestamp="1606771924642" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NoSuchMethodError" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

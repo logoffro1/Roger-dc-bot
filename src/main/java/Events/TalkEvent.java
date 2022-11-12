@@ -6,6 +6,7 @@ import Model.PlayingCards.CardDeck;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.List;
 import java.util.Random;
 
 public class TalkEvent extends ListenerAdapter
@@ -64,7 +65,7 @@ public class TalkEvent extends ListenerAdapter
         }
         */
 
-        if (e.getMessage().getAuthor().getName().equalsIgnoreCase("groovy"))
+        if (e.getMessage().getAuthor().getName().equalsIgnoreCase("magica"))
             fuckGroovy();
         if (e.getMessage().getContentRaw().equalsIgnoreCase("bi"))
             e.getChannel().sendMessage("Den").queue();
@@ -73,19 +74,20 @@ public class TalkEvent extends ListenerAdapter
         // if(e.getMessage().getContentRaw().equalsIgnoreCase("Roger, apologise!"))
         //  e.getChannel().sendMessage("Emre, i do apologise for my stupidity!").queue();
 
+/*
 
-      /*  Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
         if (p != null)
         {
 
             p.setMoney(30);
             Database.savePlayersToFile();
-        }*/
+        }
+*/
 
 
-/*
        List<Player> players = Database.getAllPlayers();
-        for (Player p : players)
+/*        for (Player p : players)
         {
             System.out.println(p.getName());
             System.out.println(p.getAvatarURL());
@@ -97,134 +99,122 @@ public class TalkEvent extends ListenerAdapter
             System.out.println(p.getSurvivedShots());
             System.out.println(p.getChambersMixed());
             System.out.println(p.getWeaponMalfunctions());
-        }
+        }*/
+/*
 
-        */
-     /*   Player ege = new Player("<@619990218501652511>", "https://cdn.discordapp.com/avatars/619990218501652511/33392dd4f0519935a630126f66f49a98.png");
-        ege.setMoney(100);
-        for (int i = 0; i < 48; i++)
+        Player ege = new Player("<@619990218501652511>", "https://cdn.discordapp.com/avatars/619990218501652511/33392dd4f0519935a630126f66f49a98.png");
+        ege.setMoney(50);
+        for (int i = 0; i < 153; i++)
             ege.getRussianStats().addGameLost();
-        for (int i = 0; i < 42; i++)
+        for (int i = 0; i < 136; i++)
             ege.getRussianStats().addGameWon();
 
-        ege.getRussianStats().setTotalMoneyLost(918);
-        ege.getRussianStats().setTotalMoneyWon(628);
+        ege.getRussianStats().setTotalMoneyLost(1075);
+        ege.getRussianStats().setTotalMoneyWon(1228);
         ege.getRussianStats().setPlayerRank();
 
 
-        for (int i = 0; i < 33; i++)
+        for (int i = 0; i < 38; i++)
             ege.getRussianStats().addChambersMixed();
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 54; i++)
             ege.getRussianStats().addWeaponMalfunction();
 
-        ege.getHighLowStats().setBestStreak(9);
-        ege.getHighLowStats().setMoneyLost(627);
-        ege.getHighLowStats().setMoneyWon(1036);
+        ege.getHighLowStats().setBestStreak(14);
+        ege.getHighLowStats().setMoneyLost(6457);
+        ege.getHighLowStats().setMoneyWon(3483);
 
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 68; i++)
         {
             ege.getHighLowStats().addTotalGamesPlayed();
         }
-        for (int i = 0; i < 64; i++)
+        for (int i = 0; i < 236; i++)
         {
             ege.getHighLowStats().addCorrectGuess();
         }
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 49; i++)
             ege.getHighLowStats().addWrongGuess();
 
-        ege.getInventory().addCigarette();
-        ege.getInventory().addCigarette();
-        ege.getInventory().addCigarette();
-        ege.getInventory().addCigarette();
+        ege.getInventory().addBeer();
+        ege.getInventory().addBeer();
         ege.getInventory().addCoffee();
         ege.getInventory().addCoffee();
-        ege.getInventory().addCoffee();
-        for (int i = 0; i < 53; i++)
+        ege.getInventory().setWands(1);
+        for (int i = 0; i < 298; i++)
             ege.getRussianStats().addSurvivedShots();
 
         Player emre = new Player("<@466934252416532483>", "https://cdn.discordapp.com/avatars/466934252416532483/6cbe8c59980473d2b0fb7f5cf6f78c10.png");
-        emre.setMoney(55);
-        for (int i = 0; i < 101; i++)
+        emre.setMoney(125);
+        for (int i = 0; i < 307; i++)
             emre.getRussianStats().addGameLost();
-        for (int i = 0; i < 108; i++)
+        for (int i = 0; i < 309; i++)
             emre.getRussianStats().addGameWon();
 
-        emre.getRussianStats().setTotalMoneyLost(1749);
-        emre.getRussianStats().setTotalMoneyWon(1590);
+        emre.getRussianStats().setTotalMoneyLost(3220);
+        emre.getRussianStats().setTotalMoneyWon(3347);
         emre.getRussianStats().setPlayerRank();
 
 
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 22; i++)
             emre.getRussianStats().addChambersMixed();
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 104; i++)
             emre.getRussianStats().addWeaponMalfunction();
 
-        emre.getHighLowStats().setBestStreak(2);
-        emre.getHighLowStats().setMoneyLost(0);
-        emre.getHighLowStats().setMoneyWon(2);
+        emre.getHighLowStats().setBestStreak(8);
+        emre.getHighLowStats().setMoneyLost(5451);
+        emre.getHighLowStats().setMoneyWon(2767);
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 30; i++)
         {
             emre.getHighLowStats().addTotalGamesPlayed();
         }
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 80; i++)
         {
             emre.getHighLowStats().addCorrectGuess();
         }
-        for (int i = 0; i < 0; i++)
+        for (int i = 0; i < 21; i++)
             emre.getHighLowStats().addWrongGuess();
 
-        for (int i = 0; i < 79; i++)
+        for (int i = 0; i < 591; i++)
             emre.getRussianStats().addSurvivedShots();
 
-        emre.getInventory().addCigarette();
-        emre.getInventory().addCoffee();
-        emre.getInventory().addBanana();
-        emre.getInventory().addBeer();
-        emre.getInventory().addToiletPaper();
-        emre.getInventory().addToiletPaper();
-        emre.getInventory().addToiletPaper();
-        emre.getInventory().addToiletPaper();
-        emre.getInventory().addToiletPaper();
-
-
+        emre.getInventory().setWands(1);
         Player eu = new Player("<@178585741260095489>", "https://cdn.discordapp.com/avatars/178585741260095489/0bf24ccc5227b1a215f109fb23dc1cc6.png");
-        eu.setMoney(15);
-        for (int i = 0; i < 275; i++)
+        eu.setMoney(75);
+        for (int i = 0; i < 373; i++)
             eu.getRussianStats().addGameLost();
-        for (int i = 0; i < 228; i++)
+        for (int i = 0; i < 338; i++)
             eu.getRussianStats().addGameWon();
 
-        eu.getRussianStats().setTotalMoneyLost(1220);
-        eu.getRussianStats().setTotalMoneyWon(1348);
+        eu.getRussianStats().setTotalMoneyLost(2525);
+        eu.getRussianStats().setTotalMoneyWon(2460);
         eu.getRussianStats().setPlayerRank();
 
 
-        for (int i = 0; i < 296; i++)
+        for (int i = 0; i < 574; i++)
             eu.getRussianStats().addSurvivedShots();
 
-        for (int i = 0; i < 62; i++)
+        for (int i = 0; i < 71; i++)
             eu.getRussianStats().addChambersMixed();
 
-        for (int i = 0; i < 96; i++)
+        for (int i = 0; i < 123; i++)
             eu.getRussianStats().addWeaponMalfunction();
 
 
-        eu.getHighLowStats().setBestStreak(8);
-        eu.getHighLowStats().setMoneyLost(782);
-        eu.getHighLowStats().setMoneyWon(324);
+        eu.getHighLowStats().setBestStreak(11);
+        eu.getHighLowStats().setMoneyLost(32610);
+        eu.getHighLowStats().setMoneyWon(32495);
 
-        for (int i = 0; i < 36; i++)
+        for (int i = 0; i < 78; i++)
         {
             eu.getHighLowStats().addTotalGamesPlayed();
         }
-        for (int i = 0; i < 124; i++)
+        for (int i = 0; i < 262; i++)
         {
             eu.getHighLowStats().addCorrectGuess();
         }
-        for (int i = 0; i < 29; i++)
+        for (int i = 0; i < 60; i++)
             eu.getHighLowStats().addWrongGuess();
 
         eu.getInventory().addCigarette();
@@ -236,26 +226,28 @@ public class TalkEvent extends ListenerAdapter
         eu.getInventory().addCoffee();
         eu.getInventory().addCoffee();
         eu.getInventory().addCoffee();
-        eu.getInventory().addCoffee();
-        eu.getInventory().addToiletPaper();
-        eu.getInventory().addToiletPaper();
-        eu.getInventory().addToiletPaper();
-        eu.getInventory().addToiletPaper();
-        eu.getInventory().addToiletPaper();
-        eu.getInventory().addToiletPaper();
-        eu.getInventory().addToiletPaper();
+        eu.getInventory().addBanana();
+        eu.getInventory().addBanana();
+        eu.getInventory().addBanana();
+        eu.getInventory().addBanana();
+        eu.getInventory().addBeer();
+        eu.getInventory().addBeer();
+        eu.getInventory().addBeer();
+        eu.getInventory().setWands(1);
         Database.getAllPlayers().clear();
         Database.addPlayer(eu);
         Database.addPlayer(ege);
         Database.addPlayer(emre);
 
-        Database.savePlayersToFile();*/
+        Database.savePlayersToFile();
+*/
 
     }
 
     private void fuckGroovy()
     {
-        String[] phrases =
+        return;
+/*        String[] phrases =
                 {
                         "beep boop nobody cares",
                         "fuck off",
@@ -269,7 +261,7 @@ public class TalkEvent extends ListenerAdapter
         if (!e.getChannel().getName().equalsIgnoreCase("bottest"))
             e.getChannel().sendMessage(String.format("%s %s", e.getMessage().getAuthor().getAsMention(), phrases[getRandomNumber(0, phrases.length - 1)])).queue();
         else
-            e.getChannel().sendMessage(String.format("%s get your own channel, bitch.", e.getMessage().getAuthor().getAsMention())).queue();
+            e.getChannel().sendMessage(String.format("%s get your own channel, bitch.", e.getMessage().getAuthor().getAsMention())).queue();*/
 
 
     }

@@ -10,6 +10,12 @@ public class PlayerInventory implements Serializable
     private int bananas = 0;
     private int toiletPaper = 0;
     private int gifts = 0;
+    private int wands = 0;
+
+    public int getWands() {
+        return wands;
+    }
+    public void setWands(int wands){this.wands=wands;}
 
     public int getGifts()
     {

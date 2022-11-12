@@ -59,6 +59,29 @@ public class RussianRoulette
             {
                 EmbedBuilder ebDeath = null;
                 int rnd = getRandomNumber(0, 100); //random chance for other event
+                if(currentTurn.getInventory().getWands() > 0)
+                {
+                    if (rnd >= 45)
+                    {
+                        if (revolver.shoot())
+                        {
+                            death();
+                            if (players.size() == 1)
+                                ebDeath = gameOver();
+                            else
+                            {
+                                message += String.format("%s is your turn now %s\n", currentTurn.getName(), revolver.getChambersText());
+                            }
+
+                        } else
+                        {
+                            currentTurn.addSurvivedShot();
+                            message += String.format("%s gets to fight another day!\n", currentTurn.getName());
+                            changeCurrentPlayer();
+                        }
+                    } else
+                        randomEvent();
+                } else
                 if (rnd >= 10)
                 {
                     if (revolver.shoot())
@@ -96,7 +119,7 @@ public class RussianRoulette
         {
             if (e.getAuthor().getAsMention().equalsIgnoreCase(currentTurn.getName()))
             {
-                if (currentTurn.getTimesMixed() < 2)
+                if (currentTurn.getTimesMixed() < 1)
                 {
                     revolver.initChambers();
                     currentTurn.addTimesMixed();
@@ -112,6 +135,13 @@ public class RussianRoulette
     private void randomEvent()
     {
         int rnd = getRandomNumber(1, 100);
+if(currentTurn.getInventory().getWands() > 0){
+    if (rnd <= 80)
+        giveGift();
+    else
+        revolverMisfire();
+
+} else
         if (rnd <= 30)
             giveGift();
         else
@@ -171,6 +201,17 @@ public class RussianRoulette
 
     private EmbedBuilder gameOver()
     {
+        for (Player p : players){
+            if(p.getInventory().getWands() <= 0)
+            {
+                p.getInventory().setWands(0);
+                break;
+            }
+            System.out.println(p.getInventory().getWands());
+            p.getInventory().setWands(p.getInventory().getWands()-1);
+        }
+
+
         currentTurn.getRussianStats().addGameWon();
         moneyPot += 5;
         currentTurn.setMoney(currentTurn.getMoney() + moneyPot);
@@ -182,7 +223,8 @@ public class RussianRoulette
         eb.setColor(Color.GREEN);
         eb.addField("Winner", String.format("The winner is %s :partying_face: :partying_face:\nYou win: $%d\nSurvived shots: %d", currentTurn.getName(), moneyPot, currentTurn.getSurvivedShots()), true);
         eb.addField("Congratulations!", "You are one step closer to becoming a true russian!", false);
-        eb.setFooter("Made by Cosmin Ilie");
+
+        eb.setFooter("-----------------------\nCosmin Ilie");
         RussianRouletteEvents.setRussianRoulette(null);
         Database.savePlayersToFile();
         return eb;

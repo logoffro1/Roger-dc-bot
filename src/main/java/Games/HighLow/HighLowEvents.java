@@ -21,11 +21,8 @@ public class HighLowEvents extends ListenerAdapter
         String[] message = e.getMessage().getContentRaw().split(" ");
         if (!e.getMessage().getAuthor().isBot())
         {
-
             if (message[0].charAt(0) == '!')
             {
-                if (e.getChannel().getName().equalsIgnoreCase("bottest"))
-                {
                     if (message.length > 1)
                     {
                         message[1] = message[1].replace("!", "");
@@ -45,9 +42,6 @@ public class HighLowEvents extends ListenerAdapter
                         }
 
                     }
-
-                } else
-                    e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", e.getMessage().getAuthor().getAsMention())).queue();
 
             }
 

@@ -37,7 +37,7 @@ public class CardDeck
         {
             for (CardSuit suit : CardSuit.values())
             {
-                deck.add(new Card(CardSign.values()[i], suit));
+                deck.add(new Card(CardSign.values()[i], suit,""));
             }
         }
     }

@@ -3,8 +3,11 @@ package Events;
 import DAO.Database;
 import Games.HighLow.HighLow;
 import Games.HighLow.HighLowEvents;
+import Games.HorseRacing.HorseRacing;
+import Games.HorseRacing.HorseRacingEvents;
 import Games.RussianRoulette.RussianRoulette;
 import Games.RussianRoulette.RussianRouletteEvents;
+import Model.HorseRacing.Horse;
 import Model.Player.Player;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -16,6 +19,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.RestAction;
 import org.apache.commons.io.input.ObservableInputStream;
 
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,21 +73,19 @@ public class CommandEvent extends ListenerAdapter
 
             if (message[0].charAt(0) == '!')
             {
-                if (this.e.getChannel().getName().equalsIgnoreCase("bottest"))
-                {
                     if (message.length > 1)
                     {
                         message[1] = message[1].replace("!", "");
                         message[1] = message[1].replace("&", "");
                     }
-                    switch (message[0].toLowerCase())
-                    {
+                    switch (message[0].toLowerCase()) {
                         case "!rnd" -> randomCommand(message);
                         case "!roll" -> rollTheDiceCommand();
                         case "!remind" -> remindCommand(message);
                         case "!joke" -> jokeCommand();
                         case "!corona" -> coronaCommand(message);
                         case "!roulette", "!rr" -> russianRouletteCommand(message);
+                        case "!races","!horseracing" -> horseRacingCommand(message);
                         case "!slots" -> slotsCommand(message);
                         case "!highlow" -> highLowCommand(message);
                         case "!roger" -> showHelpPanel();
@@ -97,8 +99,6 @@ public class CommandEvent extends ListenerAdapter
                         case "!opengift" -> openGift();
                         case "!ping" -> getPing();
                     }
-                } else
-                    this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
 
             }
         }
@@ -116,44 +116,30 @@ public class CommandEvent extends ListenerAdapter
     private void sellAll()
     {
         Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
-
+int money = 0;
         if (player != null)
         {
-            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
-            for (int i = 0; i < player.getInventory().getBananas(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getBananas() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
-            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
-            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
-            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
-            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
-            for (int i = 0; i < player.getInventory().getToiletPaper(); i++)
-            {
-                player.getInventory().setCoffee(player.getInventory().getCoffee() - 1);
-                player.setMoney(player.getMoney() + 5);
-            }
+            int startmoney = player.getMoney();
+            player.setMoney(player.getMoney()+ player.getInventory().getToiletPaper() * 25);
+            player.getInventory().setToiletPaper(0);
+
+            player.setMoney(player.getMoney()+ player.getInventory().getBananas() * 3);
+            player.getInventory().setBananas(0);
+
+            player.setMoney(player.getMoney()+ player.getInventory().getCoffee() * 5);
+            player.getInventory().setCoffee(0);
+
+            player.setMoney(player.getMoney()+ player.getInventory().getCigarettes() * 6);
+            player.getInventory().setCigarettes(0);
+
+            player.setMoney(player.getMoney()+ player.getInventory().getBeers() * 10);
+            player.getInventory().setBeers(0);
+
+            player.setMoney(player.getMoney()+ player.getInventory().getGifts() * 38);
+            player.getInventory().setGifts(0);
+            money = player.getMoney() - startmoney;
+            e.getChannel().sendMessage(String.format("%s you sold everything for $%d", player.getName(),money)).queue();
+            Database.savePlayersToFile();
         }
 
     }
@@ -249,7 +235,7 @@ public class CommandEvent extends ListenerAdapter
                         case 4 -> giftMoney(200);
                         case 5 -> giftMoney(20);
                         case 6 -> giftMoney(10);
-                        case 7 -> giftMoney(60);
+                        case 7 -> giftMoney(75);
                         case 8 -> giftMoney(80);
                         case 9 -> giftMoney(150);
                         case 10 -> giftMoney(55);
@@ -257,7 +243,7 @@ public class CommandEvent extends ListenerAdapter
                 } else
                 {
                     int rndItem = getRandomNumber(1, 5);
-                    int rndAmount = getRandomNumber(1, 3);
+                    int rndAmount = getRandomNumber(2, 5);
                     switch (rndItem)
                     {
                         case 1 -> {
@@ -356,8 +342,8 @@ public class CommandEvent extends ListenerAdapter
         eb.setDescription("Use **!buy** [item] to buy an item!");
         eb.setColor(Color.ORANGE);
         eb.setThumbnail("https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-11/512/shop-icon.png");
-        eb.addField("Items", ":coffee: coffee - $10\n\n:smoking: cigarette - $12\n\n:beer: beer - $20\n\n:banana: banana - $5\n\n:roll_of_paper: paper - $50\n\n:gift: gift - $75", true);
-        eb.setFooter("Made by Cosmin Ilie");
+        eb.addField("Items", ":coffee: coffee - $10\n\n:smoking: cigarette - $12\n\n:beer: beer - $20\n\n:banana: banana - $5\n\n:roll_of_paper: paper - $50\n\n:gift: gift - $75\n\n:sparkles: luck - $120", true);
+        eb.setFooter("-----------------------\nCosmin Ilie");
         e.getChannel().sendMessage(eb.build()).queue();
     }
 
@@ -425,6 +411,15 @@ public class CommandEvent extends ListenerAdapter
                         } else
                             e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
                         break;
+                    case "luck":
+                        if (player.getMoney() >= 120)
+                        {
+                            player.getInventory().setWands(player.getInventory().getWands()+1);
+                            player.setMoney(player.getMoney() - 120);
+                            e.getChannel().sendMessage(String.format("%s you purchased some luck for $120\nNext game you play, have higher chance of finding gifts", player.getName())).queue();
+                        } else
+                            e.getChannel().sendMessage(String.format("%s you don't have enough money to buy this.", player.getName())).queue();
+                        break;
                     default:
                         e.getChannel().sendMessage(String.format("%s we don't sell this at the moment!", player.getName())).queue();
                         break;
@@ -465,7 +460,7 @@ public class CommandEvent extends ListenerAdapter
                             eb.addField("Commands", "!high - the next number is higher than the current one" +
                                     "\n!low - the next number is higher than the current one" +
                                     "\n!out - cash out with the current earned amount", true);
-                            eb.setFooter("Made by Cosmin Ilie");
+                            eb.setFooter("-----------------------\nCosmin Ilie");
                             e.getChannel().sendMessage(eb.build()).queue();
                             highLow = new HighLow(player, entryFee, e.getChannel());
                             HighLowEvents.addHighLowGame(highLow);
@@ -516,10 +511,10 @@ public class CommandEvent extends ListenerAdapter
             eb.setTitle("Russian Roulette");
             eb.setThumbnail("https://pngimg.com/uploads/gun/gun_PNG1354.png");
             eb.setColor(Color.BLACK);
-            eb.addField(String.format("%s started a new game of russian roulette!\n```Entry fee: $%d```\nThe answer is: **%d**", e.getAuthor().getAsTag(), entryFee, x), "Below you can find information about how to play", true);
+            eb.addField(String.format("%s started a new game of russian roulette!\n```Entry fee: $%d```", e.getAuthor().getAsTag(), entryFee), "Below you can find information about how to play", true);
             eb.addField("Commands", "```!me [answer]- register to play\n!stop - stop the current game\n!start - start the game\n!shoot - fire the weapon\n!mix - mix the chambers\n!give [player] [amount] - transfer a player money```", false);
             eb.appendDescription("There are 6 chambers, one of them has a bullet in it, the other 5 are empty, shoot and try to outlive your friends!\n **Each player can only mix the chambers once per game**");
-            eb.setFooter("Good luck everyone, may the luckiest one survive!\nMade by Cosmin Ilie");
+            eb.setFooter("Good luck everyone, may the luckiest one survive!\n-----------------------\nCosmin Ilie");
 
             MessageEmbed msgEmbed = eb.build();
             RestAction<Message> ra = e.getChannel().sendMessage(msgEmbed);
@@ -533,7 +528,41 @@ public class CommandEvent extends ListenerAdapter
         }
 
     }
+    private void horseRacingCommand(String[] message)
+    {
+        if (HorseRacingEvents.getHorseRacing() == null)
+        {
 
+            HorseRacing horseRacing = new HorseRacing();
+            List<Horse> horses = horseRacing.getHorses();
+            HorseRacingEvents.setHorseRacing(horseRacing);
+            EmbedBuilder eb = new EmbedBuilder();
+            eb.setTitle("Horse Racing");
+            eb.setThumbnail("https://cdn-icons-png.flaticon.com/512/3205/3205117.png");
+            eb.setColor(Color.BLACK);
+            eb.addField(String.format("The horse racing competition is about to start!\n```Minimum bet: $%d```", 5), "Below you can find information about how to place bets!", true);
+            eb.appendDescription("In the horse racing competition, there can be between 3 and 6 horses racing all at once. Each horse has it's own unique stats, with different advantages and disadvantages on different race courses.\n **Place a bet on your favorite horse and enjoy the race!**");
+            int count = 0;
+            eb.appendDescription("\nHorses in the next race:\n");
+            for(Horse h : horses){
+                count++;
+                eb.appendDescription(String.format("#%d - Name: %s | Age: %d | Speed: %.1f\n",count,h.getName(),h.getAge(),h.getSpeed()));
+            }
+            eb.addField("Commands", "```!bet [horseName] [betAmount] - register a new bet\n!stop - stop the current race```", false);
+            eb.setFooter("Good luck everyone, may the fastest horse win!\n-----------------------\nCosmin Ilie");
+
+            MessageEmbed msgEmbed = eb.build();
+            RestAction<Message> ra = e.getChannel().sendMessage(msgEmbed);
+            Message msg = ra.complete();
+            RussianRouletteEvents.setRouletteMessage(msg);
+
+
+        } else
+        {
+            e.getChannel().sendMessage(String.format("%s a russian roulette game is already in progress.\nType !stop to stop the current game", e.getAuthor().getAsMention())).queue();
+        }
+
+    }
     private void showHelpPanel()
     {
         EmbedBuilder eb = new EmbedBuilder();
@@ -561,7 +590,7 @@ public class CommandEvent extends ListenerAdapter
                 "\n**!highlow** [entryFee] - start a game of High-Low" +
                 "\n**!roulette** [entryFee] - start a game of russian roulette" +
                 "\n----------", true);
-        eb.setFooter("Made by Cosmin Ilie");
+        eb.setFooter("-----------------------\nCosmin Ilie");
         e.getChannel().sendMessage(eb.build()).queue();
     }
 
@@ -606,7 +635,7 @@ public class CommandEvent extends ListenerAdapter
             eb.addField(String.format("#%d ", count), String.format("%s - Games won: **%d**\nRank: **%s**\nMoney: **$%d**", p.getName(), p.getRussianStats().getTotalGamesWon(), p.getRussianStats().getPlayerRank().toString(), p.getMoney()), false);
             count++;
         }
-        eb.setFooter("Made by Cosmin Ilie");
+        eb.setFooter("-----------------------\nCosmin Ilie");
         e.getChannel().sendMessage(eb.build()).queue();
     }
 
@@ -645,16 +674,17 @@ public class CommandEvent extends ListenerAdapter
                     player.getHighLowStats().getMoneyWon(),
                     player.getHighLowStats().getMoneyLost()
             ), true);
-            eb.addField("Inventory", String.format(":coffee: - **%d**\n:beer: - **%d**\n:smoking: - **%d**\n:banana: - **%d**\n:roll_of_paper: - **%d**\n:gift: - **%d**",
+            eb.addField("Inventory", String.format(":coffee: - **%d**\n:beer: - **%d**\n:smoking: - **%d**\n:banana: - **%d**\n:roll_of_paper: - **%d**\n:gift: - **%d**\n:sparkles: - **%d**",
                     player.getInventory().getCoffee(),
                     player.getInventory().getBeers(),
                     player.getInventory().getCigarettes(),
                     player.getInventory().getBananas(),
                     player.getInventory().getToiletPaper(),
-                    player.getInventory().getGifts()
+                    player.getInventory().getGifts(),
+                    player.getInventory().getWands()
             ), false);
 
-            eb.setFooter("Made by Cosmin Ilie");
+            eb.setFooter("-----------------------\nCosmin Ilie");
             e.getChannel().sendMessage(eb.build()).queue();
         }
     }

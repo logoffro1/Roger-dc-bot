@@ -13,7 +13,7 @@ public class HighLow
     private final int max = 100;
     private int currentNumber = 1;
     private int entryFee = 0;
-    private int multiplier = 35;
+    private int multiplier = 30;
     private int moneyPot = 0;
     private int streak = 0;
     private TextChannel channel;

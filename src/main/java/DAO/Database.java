@@ -2,15 +2,18 @@ package DAO;
 ///import Model.Player.Player;
 
 import Model.ChatLog;
+import Model.HorseRacing.Horse;
 import Model.Player.Player;
 import Model.Reminder;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.swing.text.AbstractDocument;
 import java.io.*;
 import java.util.*;
 
@@ -32,7 +35,6 @@ add quizzes to earn money (maybe about programming)
  make it possible so you can buy stuff for other people
  maybe pet store?
  maybe add a bank
- add !sellall command
  */
 /*
 Change log:
@@ -43,6 +45,7 @@ public class Database
     private static final Map<String, String> jokes = new HashMap<>();
     private static final File playersFile = new File("players.dat");
     private static final List<Player> allPlayers = new ArrayList<>();
+    private static final List<Horse> allHorses = new ArrayList<>();
     private static final List<ChatLog> logs = new ArrayList<>();
 
     public static void addLog(ChatLog log)
@@ -328,7 +331,44 @@ public class Database
             e.printStackTrace();
         }
     }
+    public static void initHorses() throws IOException {
+    FileInputStream fileInputStream = new FileInputStream("HorseStats.xlsx");
+    XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
+    Sheet sheet = xssfWorkbook.getSheet("Foaie1");
+    for(int i = 2;i<=sheet.getPhysicalNumberOfRows();i++){
+        Row row = sheet.getRow(i);
 
+        allHorses.add(new Horse(row.getCell(0).toString()
+                ,(int)Double.parseDouble(row.getCell(1).toString())
+                ,row.getCell(2).toString()
+                ,Boolean.parseBoolean(row.getCell(3).toString())
+                ,Double.parseDouble(row.getCell(4).toString())
+                ,Double.parseDouble(row.getCell(5).toString())
+                ,Double.parseDouble(row.getCell(6).toString())));
+    }
+}
+public static boolean doesHorseExist(String horseName){
+        Boolean contains = false;
+        for(Horse h : allHorses){
+            if(h.getName().toLowerCase().equals(horseName.toLowerCase()))
+            {
+                contains = true;
+                break;
+            }
+        }
+        return contains;
+}
+public static Horse getHorseByName(String horseName){
+        if(!doesHorseExist(horseName))
+            return null;
+
+        for(Horse h : allHorses){
+            if(h.getName().toLowerCase().equals(horseName.toLowerCase()))
+                return h;
+        }
+        return null;
+}
+    public static List<Horse> getAllHorses(){return allHorses;}
     public static void initPlayers()
     {
         if (playersFile.exists())

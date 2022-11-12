@@ -116,7 +116,9 @@ public class RussianRouletteStats implements Serializable
             playerRank = PlayerRank.Outlaw;
         else if (totalGamesWon >= 30 && totalGamesWon < 100)
             playerRank = PlayerRank.Gunslinger;
-        else if (totalGamesWon >= 100)
-            playerRank = PlayerRank.Legend;
+        else if (totalGamesWon >= 100 && totalGamesWon<300)
+            playerRank = PlayerRank.Executor;
+        else if(totalGamesWon >=300)
+            playerRank = playerRank.Legend;
     }
 }

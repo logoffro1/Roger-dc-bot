@@ -21,8 +21,6 @@ public class MusicEvents extends Audio
 
             if (message[0].charAt(0) == '!')
             {
-                if (this.e.getChannel().getName().equalsIgnoreCase("bottest"))
-                {
                     if (message.length > 1)
                     {
                         message[1] = message[1].replace("!", "");
@@ -34,8 +32,6 @@ public class MusicEvents extends Audio
                         case "!skip" -> skipMusic();
                         case "!stop" -> stopMusic();
                     }
-                } else
-                    this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
 
             }
         }

@@ -4,11 +4,13 @@ public class Card
 {
     private CardSign cardSign;
     private CardSuit cardSuit;
+    private String emojiCode;
 
-    public Card(CardSign cardSign, CardSuit cardSuit)
+    public Card(CardSign cardSign, CardSuit cardSuit,String emojiCode)
     {
         this.cardSign = cardSign;
         this.cardSuit = cardSuit;
+        this.emojiCode = emojiCode;
     }
 
     @Override

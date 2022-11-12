@@ -4,7 +4,9 @@ import Events.AudioEvents.SoundEvents;
 import Events.CommandEvent;
 import Events.TalkEvent;
 import Games.HighLow.HighLowEvents;
+import Games.HorseRacing.HorseRacingEvents;
 import Games.RussianRoulette.RussianRouletteEvents;
+import Model.HorseRacing.Horse;
 import Model.Reminder;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
@@ -12,7 +14,9 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
+import javax.xml.crypto.Data;
 import java.awt.*;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,24 +24,28 @@ import java.util.concurrent.TimeUnit;
 
 public class Bot
 {
-    public static void main(String[] args) throws LoginException
-    {
+    public static void main(String[] args) throws LoginException, IOException {
         init();
     }
 
-    private static void init() throws LoginException
-    {
+    private static void init() throws LoginException, IOException {
         Database.initJokes();
         Database.initPlayers();
-        final String TOKEN = "Nzc0MTU5NTY1NTA3OTE5ODcz.X6TuRw.zjfCA9qQcCR9BNRMllUmLuVRNo8";
+        Database.initHorses();
+        for (Horse h : Database.getAllHorses()){
+            System.out.printf("\nName: %s | Age: %d | Color: %s | Speed: %.2f | Weight: %.2fkg | Jumpheight: %.2fcm",
+                    h.getName(),h.getAge(),h.getColor(),h.getSpeed(),h.getWeight(),h.getJumpHeight());
+        }
+        final String TOKEN = "Nzc0MTU5NTY1NTA3OTE5ODcz.Gl5FQ4.SCU0mVysYIfcNcxliqBIuMLYZKif_-a-jHYhP0";
         JDA jda = JDABuilder.createDefault(TOKEN).build();
-        jda.getPresence().setPresence(Activity.playing("with Jeff"), true);
+        jda.getPresence().setPresence(Activity.playing("alone"), true);
         jda.addEventListener(new TalkEvent());
         jda.addEventListener(new CommandEvent());
         jda.addEventListener(new RussianRouletteEvents());
         jda.addEventListener(new HighLowEvents());
-        jda.addEventListener(new MusicEvents());
         jda.addEventListener(new SoundEvents());
+        jda.addEventListener(new MusicEvents());
+        jda.addEventListener(new HorseRacingEvents());
         Thread reminders = new Thread(() ->
                 checkReminders());
 
@@ -77,7 +85,9 @@ public class Bot
             if (LocalTime.now().getHour() == 20 && LocalTime.now().getMinute() == 0 && LocalDateTime.now().getSecond() == 0)
             {
 
-                Database.giveEveryoneMoney(50);
+                Database.giveEveryoneMoney(150);
+                Database.giveEveryoneGift();
+                Database.giveEveryoneGift();
                 Database.giveEveryoneGift();
             }
 

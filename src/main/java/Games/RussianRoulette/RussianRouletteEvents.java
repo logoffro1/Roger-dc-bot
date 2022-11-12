@@ -32,8 +32,6 @@ public class RussianRouletteEvents extends ListenerAdapter
 
                 if (message[0].charAt(0) == '!')
                 {
-                    if (this.e.getChannel().getName().equalsIgnoreCase("bottest"))
-                    {
 
                         if (message.length > 1)
                         {
@@ -48,10 +46,6 @@ public class RussianRouletteEvents extends ListenerAdapter
                             case "!shoot", "!s" -> shoot();
                             case "!mix" -> russianRoulette.mix(e);
                         }
-
-                    } else
-                        e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
-
                 }
             }
         }
@@ -109,7 +103,6 @@ public class RussianRouletteEvents extends ListenerAdapter
         } else
         {
             russianRoulette = null;
-            System.out.println("Cheater found: " + e.getAuthor().getAsMention());
             e.getChannel().sendMessage(String.format("%s get outta here, you filthy cheater!", e.getAuthor().getAsMention())).queue();
             Database.getLogs().clear();
         }
@@ -124,9 +117,6 @@ public class RussianRouletteEvents extends ListenerAdapter
         Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
         if (russianRoulette.getCanRegister())
         {
-            if (reactedPlayers.contains(p))
-            {
-                System.out.println("Reacted player contains");
                 if (!russianRoulette.checkIfPlayerExists(e.getAuthor().getAsMention()))
                 {
 
@@ -143,10 +133,6 @@ public class RussianRouletteEvents extends ListenerAdapter
                 {
                     e.getChannel().sendMessage(String.format("%s you are already registered.", e.getAuthor().getAsMention())).queue();
                 }
-            } else
-            {
-                e.getChannel().sendMessage(String.format("%s you must react to the message first.", e.getAuthor().getAsMention())).queue();
-            }
 
         }
     }
@@ -177,8 +163,7 @@ public class RussianRouletteEvents extends ListenerAdapter
         Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
         if (player != null)
         {
-            if (russianRoulette.getPlayers().contains(player))
-            {
+
                 for (Player p : russianRoulette.getPlayers())
                     p.setMoney(p.getMoney() + russianRoulette.getEntryFee());
 
@@ -186,7 +171,6 @@ public class RussianRouletteEvents extends ListenerAdapter
                 e.getChannel().sendMessage(String.format("%s stopped the game.", e.getAuthor().getAsMention())).queue();
 
                 Database.savePlayersToFile();
-            }
         }
     }
 

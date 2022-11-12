@@ -16,8 +16,6 @@ public class SoundEvents extends Audio
         {
             if (message[0].charAt(0) == '!')
             {
-                if (this.e.getChannel().getName().equalsIgnoreCase("bottest"))
-                {
                     if (message.length > 1)
                     {
                         message[1] = message[1].replace("!", "");
@@ -25,29 +23,27 @@ public class SoundEvents extends Audio
                     }
                     switch (message[0].toLowerCase())
                     {
-                        case "!why" -> whyYouRunning();
-                        case "!coffin" -> coffinDance();
-                        case "!bloody" -> fuckenBloody();
-                        case "!fbi" -> fbiOpenUp();
-                        case "!wow" -> woooow();
-                        case "!haha" -> laughter();
-                        case "!wait" -> elevatorMusic();
-                        case "!triple" -> aTriple();
-                        case "!illuminati" -> illuminati();
-                        case "!lying" -> lying();
-                        case "!shots" -> shotsFired();
-                        case "!crickets" -> crickets();
-                        case "!imfine" -> imFine();
-                        case "!sad" -> sadMusic();
-                        case "!passed" -> passed();
-                        case "!leave" -> discordLeave();
-                        case "!cena" -> johnCena();
-                        case "!cheer" -> cheering();
-                        case "!hello" -> indianHello();
-                        case "!boo" -> booing();
+                        case "!why" -> whyYouRunning(); //works
+                        case "!coffin" -> coffinDance(); //works
+                        case "!bloody" -> fuckenBloody(); // DOES NOT WORK
+                        case "!fbi" -> fbiOpenUp(); //works
+                        case "!wow" -> woooow(); //works
+                        case "!haha" -> laughter(); //works
+                        case "!wait" -> elevatorMusic(); //works
+                        case "!triple" -> aTriple(); // works
+                        case "!illuminati" -> illuminati();//works
+                        case "!lying" -> lying();//works
+                        case "!shots" -> shotsFired(); //works
+                        case "!crickets" -> crickets(); //works
+                        case "!imfine" -> imFine(); //works
+                        case "!sad" -> sadMusic(); //works
+                        case "!passed" -> passed(); //works
+                        case "!leave" -> discordLeave(); //works
+                        case "!cena" -> johnCena(); //works
+                        case "!cheer" -> cheering(); //works
+                        case "!hello" -> indianHello(); //works
+                        case "!boo" -> booing(); //works
                     }
-                } else
-                    this.e.getChannel().sendMessage(String.format("%s, use the bot channel you slut!", this.e.getMessage().getAuthor().getAsMention())).queue();
             }
 
         }
@@ -55,7 +51,7 @@ public class SoundEvents extends Audio
 
     private void sadMusic()
     {
-        playAudio("https://www.youtube.com/watch?v=i3MJ5loj0Bg&list=RDCMUCi-xN4ZB6e-0JcXzvBEomlw&index=4", false);
+        playAudio("https://www.youtube.com/watch?v=i3MJ5loj0Bg", false);
     }
 
     private void booing()
@@ -90,52 +86,52 @@ public class SoundEvents extends Audio
 
     private void laughter()
     {
-        playAudio("https://www.youtube.com/watch?v=3IC76o_lhFw&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=19", false);
+        playAudio("https://www.youtube.com/watch?v=3IC76o_lhFw", false);
     }
 
     private void imFine()
     {
-        playAudio("https://www.youtube.com/watch?v=77sS5IuR0Gs&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=34", false);
+        playAudio("https://www.youtube.com/watch?v=77sS5IuR0Gs", false);
     }
 
     private void lying()
     {
-        playAudio("https://www.youtube.com/watch?v=RRq3sdibmuM&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=39", false);
+        playAudio("https://www.youtube.com/watch?v=RRq3sdibmuM", false);
     }
 
     private void shotsFired()
     {
-        playAudio("https://www.youtube.com/watch?v=U76-3RQAHPg&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=38", false);
+        playAudio("https://www.youtube.com/watch?v=U76-3RQAHPg", false);
     }
 
     private void crickets()
     {
-        playAudio("https://www.youtube.com/watch?v=CpGtBnVZLSk&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=37", false);
+        playAudio("https://www.youtube.com/watch?v=CpGtBnVZLSk", false);
     }
 
     private void elevatorMusic()
     {
-        playAudio("https://www.youtube.com/watch?v=xy_NKN75Jhw&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=21", false);
+        playAudio("https://www.youtube.com/watch?v=xy_NKN75Jhw", false);
     }
 
     private void aTriple()
     {
-        playAudio("https://www.youtube.com/watch?v=XlLbsTP0C_U&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=29", false);
+        playAudio("https://www.youtube.com/watch?v=XlLbsTP0C_U", false);
     }
 
     private void illuminati()
     {
-        playAudio("https://www.youtube.com/watch?v=sahAbxq8WPw&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=30", false);
+        playAudio("https://www.youtube.com/watch?v=sahAbxq8WPw", false);
     }
 
     private void woooow()
     {
-        playAudio("https://www.youtube.com/watch?v=OMm1RLF32ig&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=16", false);
+        playAudio("https://www.youtube.com/watch?v=OMm1RLF32ig", false);
     }
 
     private void fbiOpenUp()
     {
-        playAudio("https://www.youtube.com/watch?v=QQR7t712Mhg&list=PLWL3FzHaRRMkQqUhks8Y9l35rqY_kKCto&index=8", false);
+        playAudio("https://www.youtube.com/watch?v=QQR7t712Mhg", false);
     }
 
     private void fuckenBloody()
