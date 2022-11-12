@@ -4,8 +4,8 @@ import DAO.Database;
 import Model.Player.Player;
 import Model.Revolver;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ public class RussianRoulette
 
     private int moneyPot = 0;
     private TextChannel channel;
-
     private final String[] deathText =
             {"DIE, TRASH! :gun:",
                     "blew his brains out :brain::gun:",
@@ -106,14 +105,15 @@ public class RussianRoulette
                     channel.sendMessage(message).queue();
 
                 if (ebDeath != null)
-                    channel.sendMessage(ebDeath.build()).queue();
+                    channel.sendMessageEmbeds(ebDeath.build()).queue();
+
                 message = "";
             }
 
         }
     }
 
-    public void mix(GuildMessageReceivedEvent e)
+    public void mix(MessageReceivedEvent e)
     {
         if (gameStarted)
         {
@@ -245,9 +245,9 @@ if(currentTurn.getInventory().getWands() > 0){
 
     }
 
-    public void play(GuildMessageReceivedEvent e)
+    public void play(MessageReceivedEvent e)
     {
-        channel = e.getChannel();
+        channel = e.getChannel().asTextChannel();
 
         gameStarted = true;
         canRegister = false;
@@ -290,9 +290,9 @@ if(currentTurn.getInventory().getWands() > 0){
         return players;
     }
 
-    public void addPlayer(Player player, GuildMessageReceivedEvent e)
+    public void addPlayer(Player player, TextChannel channel)
     {
-        channel = e.getChannel();
+        this.channel =channel;
         int playerMoney = player.getMoney();
         if (playerMoney < entryFee)
             channel.sendMessage(String.format("%s doesn't have enough money to join. Entry fee: $%d", player.getName(), entryFee)).queue();

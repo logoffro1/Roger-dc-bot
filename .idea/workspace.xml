@@ -23,45 +23,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877f2f21-1dbb-498b-b034-7bc0f96640ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/HorseStats.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacingEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/HorseRacing/Horse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Model/HorseRacing/PlayerBet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_api_1_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__club_minnced_opus_java_natives_1_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_neovisionaries_nv_websocket_client_2_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_13_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_17_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_dv8tion_JDA_4_2_0_214.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_16_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiscordAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DiscordAPI.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/players.dat" beforeDir="false" afterPath="$PROJECT_DIR$/players.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/Audio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/Audio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/MusicEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/MusicEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/SoundEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/AudioEvents/SoundEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/CommandEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events/TalkEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HighLow/HighLowEvents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacingEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/HorseRacing/HorseRacingEvents.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRoulette.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRoulette.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRouletteEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/RussianRoulette/RussianRouletteEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerInventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerRank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/PlayerRank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Player/RussianRouletteStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Player/RussianRouletteStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/CardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/PlayingCards/CardDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Reminder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Reminder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Music/PlayerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/DiscordAPI-1.0-SNAPSHOT.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Bot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DAO/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DAO/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Events/AudioEvents/Audio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/AudioEvents/Audio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Events/AudioEvents/MusicEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/AudioEvents/MusicEvents.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Events/AudioEvents/SoundEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/AudioEvents/SoundEvents.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/CommandEvent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Events/TalkEvent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Games/HighLow/HighLow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HighLow/HighLow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Games/HighLow/HighlowEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HighLow/HighlowEvents.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/HorseRacing/HorseRacing.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HorseRacing/HorseRacing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/HorseRacing/HorseRacingEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/HorseRacing/HorseRacingEvents.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRoulette.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRoulette.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRouletteEvents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/RussianRoulette/RussianRouletteEvents.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/PlayerInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/PlayerInventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/PlayerRank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/PlayerRank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/Player/RussianRouletteStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Player/RussianRouletteStats.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/PlayingCards/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PlayingCards/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Model/PlayingCards/CardDeck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/PlayingCards/CardDeck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Reminder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Reminder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Music/PlayerManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Music/PlayerManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Music/PlayerManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Music/PlayerManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,10 +96,11 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.2\plugins\maven\lib\maven3" />
-      </MavenGeneralSettings>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadAnnotationsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProblemsViewState">
@@ -98,19 +111,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cosmin/Downloads/poi-bin-5.2.3-20220909/poi-bin-5.2.3/poi-scratchpad-5.2.3.jar&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Cosmin/Downloads/JDA-5.0.0-alpha.22.jar",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.50689656",
+    "settings.editor.selected.configurable": "MavenSettings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Cosmin\Desktop\ROGER BOT\Roger-dc-bot\src" />
@@ -176,6 +189,7 @@
       <workItem from="1667817300955" duration="5669000" />
       <workItem from="1667851897870" duration="3413000" />
       <workItem from="1668019469576" duration="3211000" />
+      <workItem from="1668280535037" duration="6939000" />
     </task>
     <servers />
   </component>

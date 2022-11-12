@@ -3,7 +3,7 @@ package Events;
 import DAO.Database;
 import Model.Player.Player;
 import Model.PlayingCards.CardDeck;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class TalkEvent extends ListenerAdapter
     private final String ROGER_MENTION2 = "<@!774159565507919873>";
     private final String ROGER_MENTION3 = "<@&774159565507919873>";
 
-    private GuildMessageReceivedEvent e;
+    private MessageReceivedEvent e;
     private String[] helloWords = {"hey", "hi", "yo", "sup", "wassup", "hello", "hola", "morning", "mornin'", "good morning"};
     private String[] byeWords = {"bye", "cya", "see ya", "goodbye", "pa", "byebye", "byee", "byeee", "night", "gnight", "good night", "sleep tight"};
     private String[] helloResponses =
@@ -50,7 +50,8 @@ public class TalkEvent extends ListenerAdapter
                     "We just need to take a break..."
             };
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e)
+    @Override
+    public void onMessageReceived(MessageReceivedEvent e)
     {
         this.e = e;
         String message = e.getMessage().getContentRaw();

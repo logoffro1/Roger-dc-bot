@@ -6,7 +6,7 @@ import Model.HorseRacing.Horse;
 import Model.HorseRacing.PlayerBet;
 import Model.Player.Player;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,9 +20,10 @@ public class HorseRacingEvents extends ListenerAdapter
     private static HorseRacing horseRacing;
     private static Message horseRacingMessage;
     private static List<Player> reactedPlayers = new ArrayList<>();
-    private GuildMessageReceivedEvent e;
+    private MessageReceivedEvent e;
 
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent e)
+    @Override
+    public void onMessageReceived(@NotNull MessageReceivedEvent e)
     {
         if (horseRacing != null)
         {

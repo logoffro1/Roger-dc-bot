@@ -1,6 +1,8 @@
 package Model;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
+
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.time.LocalTime;
 
@@ -10,10 +12,10 @@ public class Reminder
     private String title;
     private int time;
     private LocalTime reminderDate = LocalTime.now();
-    private GuildMessageReceivedEvent e;
+    private MessageReceivedEvent e;
 
 
-    public Reminder(String user, String title, int time, GuildMessageReceivedEvent e)
+    public Reminder(String user, String title, int time, MessageReceivedEvent e)
     {
         this.user = user;
         this.title = title;
@@ -22,7 +24,7 @@ public class Reminder
         this.reminderDate = this.reminderDate.plusMinutes(time);
     }
 
-    public GuildMessageReceivedEvent getE()
+    public MessageReceivedEvent getE()
     {
         return e;
     }

@@ -14,11 +14,13 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.requests.RestAction;
 import org.apache.commons.io.input.ObservableInputStream;
-
 import javax.xml.crypto.Data;
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import java.util.Random;
 
 public class CommandEvent extends ListenerAdapter
 {
-    GuildMessageReceivedEvent e;
+    MessageReceivedEvent e;
     private final String[] phasmoMaps =
             {
                     "Tanglewood Street House",
@@ -64,7 +66,8 @@ public class CommandEvent extends ListenerAdapter
                     "Tripod"
             };
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e)
+    @Override
+    public void onMessageReceived(MessageReceivedEvent e)
     {
         this.e = e;
         String[] message = e.getMessage().getContentRaw().split(" ");
@@ -344,7 +347,7 @@ int money = 0;
         eb.setThumbnail("https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-11/512/shop-icon.png");
         eb.addField("Items", ":coffee: coffee - $10\n\n:smoking: cigarette - $12\n\n:beer: beer - $20\n\n:banana: banana - $5\n\n:roll_of_paper: paper - $50\n\n:gift: gift - $75\n\n:sparkles: luck - $120", true);
         eb.setFooter("-----------------------\nCosmin Ilie");
-        e.getChannel().sendMessage(eb.build()).queue();
+        e.getChannel().sendMessageEmbeds(eb.build()).queue();
     }
 
     private void buyItem(String[] message)
@@ -461,8 +464,8 @@ int money = 0;
                                     "\n!low - the next number is higher than the current one" +
                                     "\n!out - cash out with the current earned amount", true);
                             eb.setFooter("-----------------------\nCosmin Ilie");
-                            e.getChannel().sendMessage(eb.build()).queue();
-                            highLow = new HighLow(player, entryFee, e.getChannel());
+                            e.getChannel().sendMessageEmbeds(eb.build()).queue();
+                            highLow = new HighLow(player, entryFee, e.getChannel().asTextChannel());
                             HighLowEvents.addHighLowGame(highLow);
                         } else
                             e.getChannel().sendMessage(String.format("%s minimum entry fee is $5", player.getName())).queue();
@@ -505,7 +508,12 @@ int money = 0;
                     }
                 }
             }
+            Button registerButton = Button.primary("registerBtn","REGISTER");
+            Button startButton = Button.success("startBtn","START");
+            Button stopButton = Button.danger("stopBtn","STOP");
+
             RussianRoulette russianRoulette = new RussianRoulette(entryFee, x);
+
             RussianRouletteEvents.setRussianRoulette(russianRoulette);
             EmbedBuilder eb = new EmbedBuilder();
             eb.setTitle("Russian Roulette");
@@ -515,9 +523,8 @@ int money = 0;
             eb.addField("Commands", "```!me [answer]- register to play\n!stop - stop the current game\n!start - start the game\n!shoot - fire the weapon\n!mix - mix the chambers\n!give [player] [amount] - transfer a player money```", false);
             eb.appendDescription("There are 6 chambers, one of them has a bullet in it, the other 5 are empty, shoot and try to outlive your friends!\n **Each player can only mix the chambers once per game**");
             eb.setFooter("Good luck everyone, may the luckiest one survive!\n-----------------------\nCosmin Ilie");
-
             MessageEmbed msgEmbed = eb.build();
-            RestAction<Message> ra = e.getChannel().sendMessage(msgEmbed);
+            RestAction<Message> ra = e.getChannel().sendMessageEmbeds(msgEmbed).setActionRow(ActionRow.of(registerButton,startButton,stopButton).getButtons());
             Message msg = ra.complete();
             RussianRouletteEvents.setRouletteMessage(msg);
 
@@ -528,6 +535,14 @@ int money = 0;
         }
 
     }
+
+    @Override
+    public void onButtonInteraction(ButtonInteractionEvent event) {
+        if(event.getButton().getId().equals("registerBtn")){
+RussianRouletteEvents.registerPlayer(event);
+        }
+    }
+
     private void horseRacingCommand(String[] message)
     {
         if (HorseRacingEvents.getHorseRacing() == null)
@@ -552,7 +567,7 @@ int money = 0;
             eb.setFooter("Good luck everyone, may the fastest horse win!\n-----------------------\nCosmin Ilie");
 
             MessageEmbed msgEmbed = eb.build();
-            RestAction<Message> ra = e.getChannel().sendMessage(msgEmbed);
+            RestAction<Message> ra = e.getChannel().sendMessageEmbeds(msgEmbed);
             Message msg = ra.complete();
             RussianRouletteEvents.setRouletteMessage(msg);
 
@@ -591,7 +606,7 @@ int money = 0;
                 "\n**!roulette** [entryFee] - start a game of russian roulette" +
                 "\n----------", true);
         eb.setFooter("-----------------------\nCosmin Ilie");
-        e.getChannel().sendMessage(eb.build()).queue();
+        e.getChannel().sendMessageEmbeds(eb.build()).queue();
     }
 
     private void showLeaderboards()
@@ -636,7 +651,7 @@ int money = 0;
             count++;
         }
         eb.setFooter("-----------------------\nCosmin Ilie");
-        e.getChannel().sendMessage(eb.build()).queue();
+        e.getChannel().sendMessage(eb.build().toString()).queue();
     }
 
     private void showPlayerProfile(String[] message)
@@ -685,7 +700,7 @@ int money = 0;
             ), false);
 
             eb.setFooter("-----------------------\nCosmin Ilie");
-            e.getChannel().sendMessage(eb.build()).queue();
+            e.getChannel().sendMessageEmbeds(eb.build()).queue();
         }
     }
 

@@ -2,9 +2,7 @@ package Events.AudioEvents;
 
 import DAO.Database;
 import Music.PlayerManager;
-import net.dv8tion.jda.api.entities.VoiceChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ import java.util.List;
 public class MusicEvents extends Audio
 {
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e)
+    public void onGuildMessageReceived(MessageReceivedEvent e)
     {
         this.e = e;
         String[] message = e.getMessage().getContentRaw().split(" ");
@@ -40,13 +38,13 @@ public class MusicEvents extends Audio
     private void stopMusic()
     {
         PlayerManager manager = PlayerManager.getINSTANCE();
-        manager.stopMusic(e.getChannel());
+        manager.stopMusic(e.getChannel().asTextChannel());
     }
 
     private void skipMusic()
     {
         PlayerManager manager = PlayerManager.getINSTANCE();
-        manager.playNextTrack(e.getChannel());
+        manager.playNextTrack(e.getChannel().asTextChannel());
         manager.getGuildMusicManager(e.getGuild()).player.setVolume(10);
     }
 

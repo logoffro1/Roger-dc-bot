@@ -5,8 +5,8 @@ import Model.HorseRacing.Horse;
 import Model.HorseRacing.PlayerBet;
 import Model.Player.Player;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -148,9 +148,9 @@ private void initHorses(){
         return playerBets;
     }
 
-    public void addPlayer(Player player,Horse horse, double playerBet, GuildMessageReceivedEvent e)
+    public void addPlayer(Player player,Horse horse, double playerBet, MessageReceivedEvent e)
     {
-        channel = e.getChannel();
+        channel = e.getChannel().asTextChannel();
         int playerMoney = player.getMoney();
         if (playerMoney < playerBet)
             channel.sendMessage(String.format("%s you don't have enough money for this bet.", player.getName(), playerBet)).queue();

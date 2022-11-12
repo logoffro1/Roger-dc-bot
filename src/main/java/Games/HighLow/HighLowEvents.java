@@ -2,7 +2,8 @@ package Games.HighLow;
 
 import DAO.Database;
 import Model.Player.Player;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,9 +13,10 @@ import java.util.List;
 public class HighLowEvents extends ListenerAdapter
 {
     private static List<HighLow> highLowGames = new ArrayList<>();
-    private GuildMessageReceivedEvent e;
+    private MessageReceivedEvent e;
 
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent e)
+    @Override
+    public void onMessageReceived(@NotNull MessageReceivedEvent e)
     {
         this.e = e;
 

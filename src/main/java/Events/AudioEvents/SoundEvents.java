@@ -1,13 +1,13 @@
 package Events.AudioEvents;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 
 public class SoundEvents extends Audio
 {
 
-    public void onGuildMessageReceived(GuildMessageReceivedEvent e)
+    public void onGuildMessageReceived(MessageReceivedEvent e)
     {
         this.e = e;
         channel = e.getGuild().getVoiceChannels().get(0);

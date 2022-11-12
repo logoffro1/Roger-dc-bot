@@ -4,8 +4,13 @@ import DAO.Database;
 import Model.ChatLog;
 import Model.Player.Player;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.events.Event;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalTime;
@@ -18,9 +23,10 @@ public class RussianRouletteEvents extends ListenerAdapter
     private static RussianRoulette russianRoulette;
     private static Message rouletteMessage;
     private static List<Player> reactedPlayers = new ArrayList<>();
-    private GuildMessageReceivedEvent e;
+    private MessageReceivedEvent e;
 
-    public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent e)
+    @Override
+    public void onMessageReceived(@NotNull MessageReceivedEvent e)
     {
         if (russianRoulette != null)
         {
@@ -40,7 +46,7 @@ public class RussianRouletteEvents extends ListenerAdapter
                         }
                         switch (message[0].toLowerCase())
                         {
-                            case "!me" -> registerPlayer(message);
+                            case "!me" -> registerPlayer(e);
                             case "!stop" -> stopGame();
                             case "!start" -> startGame();
                             case "!shoot", "!s" -> shoot();
@@ -102,36 +108,44 @@ public class RussianRouletteEvents extends ListenerAdapter
             russianRoulette.shoot(e.getAuthor().getAsMention());
         } else
         {
+            Button shootButton = Button.success("shoot","SHOOT");
             russianRoulette = null;
-            e.getChannel().sendMessage(String.format("%s get outta here, you filthy cheater!", e.getAuthor().getAsMention())).queue();
+            e.getChannel().sendMessage(String.format("%s get outta here, you filthy cheater!", e.getAuthor().getAsMention())).setActionRow(shootButton).queue();
+
             Database.getLogs().clear();
         }
     }
 
-    private void registerPlayer(String[] message)
+    public static void registerPlayer(Event btnEvent)
     {
       ///  System.out.println(reactedPlayers.size());
-        setReactedPlayers();
-      //  System.out.println(reactedPlayers.size());
-
-        Player p = Database.getPlayerByName(e.getAuthor().getAsMention());
+        ButtonInteractionEvent event = ButtonInteractionEvent.class.cast(btnEvent);
+        String playerName = event.getUser().getAsMention();
+/*if(btnEvent instanceof ButtonInteractionEvent){
+btnEvent = ButtonInteractionEvent.class.cast(btnEvent);
+playerName = ((ButtonInteractionEvent) btnEvent).getUser().getAsMention();
+}  else {
+    btnEvent = MessageReceivedEvent.class.cast(btnEvent);
+    playerName = ((MessageReceivedEvent) btnEvent).getAuthor().getAsMention();
+}*/
+        Player p = Database.getPlayerByName(playerName);
         if (russianRoulette.getCanRegister())
         {
-                if (!russianRoulette.checkIfPlayerExists(e.getAuthor().getAsMention()))
+                if (!russianRoulette.checkIfPlayerExists(playerName))
                 {
 
-                    Player player = Database.getPlayerByName(e.getAuthor().getAsMention());
+                    Player player = Database.getPlayerByName(playerName);
                     if (player != null)
-                        russianRoulette.addPlayer(player, e);
+                        russianRoulette.addPlayer(player, event.getChannel().asTextChannel());
                     else
                     {
-                        Player newPlayer = new Player(e.getAuthor().getAsMention(), e.getAuthor().getAvatarUrl());
-                        russianRoulette.addPlayer(newPlayer, e);
+                        Player newPlayer = new Player(playerName, event.getUser().getAvatarUrl());
+                        russianRoulette.addPlayer(newPlayer, event.getChannel().asTextChannel());
                         Database.addPlayer(newPlayer);
                     }
                 } else
                 {
-                    e.getChannel().sendMessage(String.format("%s you are already registered.", e.getAuthor().getAsMention())).queue();
+                    event.getChannel().sendMessage(String.format("%s you are already registered.", playerName)).queue();
                 }
 
         }
@@ -142,7 +156,7 @@ public class RussianRouletteEvents extends ListenerAdapter
     {
         Player newPlayer = new Player("<@774159565507919873>", "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/items/553790/b408661ef1867375b47972783f223336302460a4.jpg");
         newPlayer.setMoney(9999999);
-        russianRoulette.addPlayer(newPlayer, e);
+        russianRoulette.addPlayer(newPlayer, e.getChannel().asTextChannel());
         Database.addPlayer(newPlayer);
     }
 

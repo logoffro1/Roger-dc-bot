@@ -12,9 +12,9 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -37,7 +37,7 @@ public class Bot
                     h.getName(),h.getAge(),h.getColor(),h.getSpeed(),h.getWeight(),h.getJumpHeight());
         }
         final String TOKEN = "Nzc0MTU5NTY1NTA3OTE5ODcz.Gl5FQ4.SCU0mVysYIfcNcxliqBIuMLYZKif_-a-jHYhP0";
-        JDA jda = JDABuilder.createDefault(TOKEN).build();
+        JDA jda = JDABuilder.createDefault(TOKEN).enableIntents(GatewayIntent.GUILD_MEMBERS,GatewayIntent.MESSAGE_CONTENT) .build();
         jda.getPresence().setPresence(Activity.playing("alone"), true);
         jda.addEventListener(new TalkEvent());
         jda.addEventListener(new CommandEvent());
@@ -75,7 +75,7 @@ public class Bot
                         eb.addField("Sir, Yes Sir!", "You got it, boss!", false);
 
                     eb.setFooter("Roger, always at your service!");
-                    r.getE().getGuild().getTextChannelsByName("reminders", true).get(0).sendMessage(eb.build()).queue();
+                    r.getE().getGuild().getTextChannelsByName("reminders", true).get(0).sendMessage(eb.build().toString()).queue();
 
                 }
             }
